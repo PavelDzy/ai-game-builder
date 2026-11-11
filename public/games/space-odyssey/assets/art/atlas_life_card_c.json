@@ -1,0 +1,157 @@
+{
+ "frames": {
+  "life_card_stage_animals": {
+   "frame": {
+    "x": 2,
+    "y": 2,
+    "w": 600,
+    "h": 600
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 600,
+    "h": 600
+   },
+   "sourceSize": {
+    "w": 600,
+    "h": 600
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  },
+  "life_card_stage_mind_01": {
+   "frame": {
+    "x": 606,
+    "y": 2,
+    "w": 600,
+    "h": 600
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 600,
+    "h": 600
+   },
+   "sourceSize": {
+    "w": 600,
+    "h": 600
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  },
+  "life_card_stage_mind_02": {
+   "frame": {
+    "x": 1210,
+    "y": 2,
+    "w": 600,
+    "h": 600
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 600,
+    "h": 600
+   },
+   "sourceSize": {
+    "w": 600,
+    "h": 600
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  },
+  "life_card_stage_mind_03": {
+   "frame": {
+    "x": 2,
+    "y": 606,
+    "w": 600,
+    "h": 600
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 600,
+    "h": 600
+   },
+   "sourceSize": {
+    "w": 600,
+    "h": 600
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  },
+  "life_card_stage_mind_04": {
+   "frame": {
+    "x": 606,
+    "y": 606,
+    "w": 600,
+    "h": 600
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 600,
+    "h": 600
+   },
+   "sourceSize": {
+    "w": 600,
+    "h": 600
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  },
+  "life_card_stage_plants": {
+   "frame": {
+    "x": 1210,
+    "y": 606,
+    "w": 600,
+    "h": 600
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 600,
+    "h": 600
+   },
+   "sourceSize": {
+    "w": 600,
+    "h": 600
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  }
+ },
+ "meta": {
+  "image": "atlas_life_card_c.webp",
+  "size": {
+   "w": 1812,
+   "h": 1208
+  },
+  "scale": "1",
+  "format": "RGBA8888"
+ }
+}

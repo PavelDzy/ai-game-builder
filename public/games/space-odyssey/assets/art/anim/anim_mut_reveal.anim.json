@@ -1,0 +1,546 @@
+{
+ "format": "artlab.layer_timeline/1",
+ "type": "fx",
+ "key": "mut_reveal",
+ "duration_s": 1.0,
+ "loop": false,
+ "ref_px": 168,
+ "tint_default": "#5AB8FF",
+ "host_z": 2.5,
+ "tints": {
+  "common": "#5AB8FF",
+  "uncommon": "#B98CFF",
+  "rare": "#FFD23F"
+ },
+ "usage": "life_mut isNew, редкость common|uncommon|rare -> play(o = центр иконки, size 168, tint = rarity_color, tier 0|1|2). Legendary — отдельный клип mut_reveal_legendary. Тап закрывает окно в любой момент.",
+ "layers": [
+  {
+   "id": "rays",
+   "sprite": "mut_reveal_key",
+   "blend": "lighter",
+   "z": 0,
+   "tracks": {
+    "scale": [
+     [
+      0,
+      0.6,
+      "outBack"
+     ],
+     [
+      0.25,
+      1.1,
+      "linear"
+     ],
+     [
+      1.0,
+      1.0
+     ]
+    ],
+    "alpha": [
+     [
+      0,
+      0.9,
+      "linear"
+     ],
+     [
+      0.1,
+      1,
+      "linear"
+     ],
+     [
+      0.7,
+      0.8,
+      "inQuad"
+     ],
+     [
+      1.0,
+      0
+     ]
+    ]
+   },
+   "tint": "@tint",
+   "spin_dps": 30
+  },
+  {
+   "id": "ring",
+   "sprite": "life_scale_step_burst_key",
+   "blend": "lighter",
+   "z": 1,
+   "tracks": {
+    "scale": [
+     [
+      0.05,
+      0.6,
+      "outCubic"
+     ],
+     [
+      0.5,
+      2.0
+     ]
+    ],
+    "alpha": [
+     [
+      0.05,
+      1,
+      "inQuad"
+     ],
+     [
+      0.5,
+      0
+     ]
+    ]
+   },
+   "visible": [
+    0.05,
+    0.6
+   ],
+   "tint": "@tint"
+  },
+  {
+   "id": "core",
+   "sprite": "mut_reveal_key",
+   "blend": "lighter",
+   "z": 3,
+   "tracks": {
+    "scale": [
+     [
+      0,
+      0.25,
+      "outCubic"
+     ],
+     [
+      0.1,
+      0.45,
+      "inQuad"
+     ],
+     [
+      0.3,
+      0.3
+     ]
+    ],
+    "alpha": [
+     [
+      0,
+      1,
+      "linear"
+     ],
+     [
+      0.12,
+      1,
+      "inQuad"
+     ],
+     [
+      0.3,
+      0
+     ]
+    ]
+   }
+  }
+ ],
+ "particles": [
+  {
+   "id": "sparks",
+   "at": "@o",
+   "blend": "lighter",
+   "z": 3,
+   "tint": "@tint",
+   "items": [
+    {
+     "sprite": "mut_dup_spark_key",
+     "t0": 0.1106,
+     "life": 0.7171,
+     "angle": 2.3,
+     "v0": 717.0,
+     "drag": 4.0,
+     "r0": 56.8,
+     "rot0": 102.1,
+     "spin": -181.8,
+     "scale": [
+      1.017,
+      0.4
+     ],
+     "tier": 0
+    },
+    {
+     "sprite": "bio_spore_02",
+     "t0": 0.0801,
+     "life": 0.6146,
+     "angle": 23.08,
+     "v0": 700.6,
+     "drag": 4.0,
+     "r0": 56.6,
+     "rot0": 299.5,
+     "spin": -190.5,
+     "scale": [
+      1.141,
+      0.4
+     ],
+     "tier": 0
+    },
+    {
+     "sprite": "bio_spore_03",
+     "t0": 0.0817,
+     "life": 0.7287,
+     "angle": 43.01,
+     "v0": 914.3,
+     "drag": 4.0,
+     "r0": 61.1,
+     "rot0": 323.6,
+     "spin": -129.6,
+     "scale": [
+      0.97,
+      0.4
+     ],
+     "tier": 0
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.1002,
+     "life": 0.5119,
+     "angle": 53.85,
+     "v0": 861.6,
+     "drag": 4.0,
+     "r0": 53.8,
+     "rot0": 15.5,
+     "spin": 180.9,
+     "scale": [
+      1.121,
+      0.4
+     ],
+     "tier": 0
+    },
+    {
+     "sprite": "mut_dup_spark_key",
+     "t0": 0.1058,
+     "life": 0.6986,
+     "angle": 77.66,
+     "v0": 924.1,
+     "drag": 4.0,
+     "r0": 60.3,
+     "rot0": 267.1,
+     "spin": 198.8,
+     "scale": [
+      1.017,
+      0.4
+     ],
+     "tier": 0
+    },
+    {
+     "sprite": "bio_spore_02",
+     "t0": 0.0809,
+     "life": 0.502,
+     "angle": 104.85,
+     "v0": 869.5,
+     "drag": 4.0,
+     "r0": 63.5,
+     "rot0": 89.3,
+     "spin": 140.0,
+     "scale": [
+      0.914,
+      0.4
+     ],
+     "tier": 0
+    },
+    {
+     "sprite": "bio_spore_03",
+     "t0": 0.0833,
+     "life": 0.79,
+     "angle": 120.16,
+     "v0": 857.5,
+     "drag": 4.0,
+     "r0": 54.0,
+     "rot0": 176.3,
+     "spin": 217.3,
+     "scale": [
+      0.877,
+      0.4
+     ],
+     "tier": 0
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.1213,
+     "life": 0.6374,
+     "angle": 137.84,
+     "v0": 850.8,
+     "drag": 4.0,
+     "r0": 53.8,
+     "rot0": 142.7,
+     "spin": -128.7,
+     "scale": [
+      1.075,
+      0.4
+     ],
+     "tier": 0
+    },
+    {
+     "sprite": "mut_dup_spark_key",
+     "t0": 0.1243,
+     "life": 0.593,
+     "angle": 166.9,
+     "v0": 728.8,
+     "drag": 4.0,
+     "r0": 52.8,
+     "rot0": 105.5,
+     "spin": 157.4,
+     "scale": [
+      0.934,
+      0.4
+     ],
+     "tier": 0
+    },
+    {
+     "sprite": "bio_spore_02",
+     "t0": 0.1315,
+     "life": 0.7816,
+     "angle": 177.43,
+     "v0": 843.1,
+     "drag": 4.0,
+     "r0": 64.4,
+     "rot0": 7.6,
+     "spin": -131.4,
+     "scale": [
+      1.08,
+      0.4
+     ],
+     "tier": 0
+    },
+    {
+     "sprite": "bio_spore_03",
+     "t0": 0.1055,
+     "life": 0.7777,
+     "angle": 193.28,
+     "v0": 744.3,
+     "drag": 4.0,
+     "r0": 64.3,
+     "rot0": 139.2,
+     "spin": 125.6,
+     "scale": [
+      0.86,
+      0.4
+     ],
+     "tier": 1
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.0818,
+     "life": 0.7424,
+     "angle": 222.17,
+     "v0": 796.5,
+     "drag": 4.0,
+     "r0": 65.7,
+     "rot0": 342.6,
+     "spin": -211.9,
+     "scale": [
+      1.143,
+      0.4
+     ],
+     "tier": 1
+    },
+    {
+     "sprite": "mut_dup_spark_key",
+     "t0": 0.1258,
+     "life": 0.6288,
+     "angle": 240.53,
+     "v0": 957.4,
+     "drag": 4.0,
+     "r0": 64.6,
+     "rot0": 50.9,
+     "spin": -160.0,
+     "scale": [
+      0.969,
+      0.4
+     ],
+     "tier": 1
+    },
+    {
+     "sprite": "bio_spore_02",
+     "t0": 0.0923,
+     "life": 0.7883,
+     "angle": 264.05,
+     "v0": 720.8,
+     "drag": 4.0,
+     "r0": 60.9,
+     "rot0": 284.8,
+     "spin": -122.9,
+     "scale": [
+      1.101,
+      0.4
+     ],
+     "tier": 2
+    },
+    {
+     "sprite": "bio_spore_03",
+     "t0": 0.0967,
+     "life": 0.7243,
+     "angle": 275.83,
+     "v0": 725.5,
+     "drag": 4.0,
+     "r0": 62.5,
+     "rot0": 177.7,
+     "spin": -181.2,
+     "scale": [
+      0.971,
+      0.4
+     ],
+     "tier": 2
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.104,
+     "life": 0.6421,
+     "angle": 306.19,
+     "v0": 709.2,
+     "drag": 4.0,
+     "r0": 64.1,
+     "rot0": 253.8,
+     "spin": 211.4,
+     "scale": [
+      0.894,
+      0.4
+     ],
+     "tier": 2
+    },
+    {
+     "sprite": "mut_dup_spark_key",
+     "t0": 0.1301,
+     "life": 0.7903,
+     "angle": 320.76,
+     "v0": 774.1,
+     "drag": 4.0,
+     "r0": 57.4,
+     "rot0": 225.2,
+     "spin": -119.8,
+     "scale": [
+      0.968,
+      0.4
+     ],
+     "tier": 2
+    },
+    {
+     "sprite": "bio_spore_02",
+     "t0": 0.1151,
+     "life": 0.5435,
+     "angle": 345.97,
+     "v0": 915.2,
+     "drag": 4.0,
+     "r0": 55.6,
+     "rot0": 191.3,
+     "spin": -174.8,
+     "scale": [
+      0.866,
+      0.4
+     ],
+     "tier": 2
+    }
+   ]
+  }
+ ],
+ "host": {
+  "frame_scale": {
+   "def": 1,
+   "keys": [
+    [
+     0,
+     0.35,
+     "outBack"
+    ],
+    [
+     0.16,
+     1.12,
+     "inOutQuad"
+    ],
+    [
+     0.28,
+     1
+    ]
+   ],
+   "note": "рамка редкости"
+  },
+  "icon_scale": {
+   "def": 1,
+   "keys": [
+    [
+     0,
+     0,
+     "hold"
+    ],
+    [
+     0.06,
+     0,
+     "outBack"
+    ],
+    [
+     0.26,
+     1.15,
+     "inOutQuad"
+    ],
+    [
+     0.36,
+     1
+    ]
+   ],
+   "note": "иконка мутации"
+  },
+  "title_alpha": {
+   "def": 1,
+   "keys": [
+    [
+     0,
+     0,
+     "hold"
+    ],
+    [
+     0.2,
+     0,
+     "outQuad"
+    ],
+    [
+     0.35,
+     1
+    ]
+   ],
+   "note": "«Новая мутация!» + название (DOM)"
+  },
+  "title_scale": {
+   "def": 1,
+   "keys": [
+    [
+     0.2,
+     0.8,
+     "outBack"
+    ],
+    [
+     0.4,
+     1
+    ]
+   ]
+  }
+ },
+ "events": [
+  {
+   "name": "reveal",
+   "t": 0,
+   "gameplay": false,
+   "note": "звук по редкости"
+  },
+  {
+   "name": "icon_in",
+   "t": 0.06,
+   "gameplay": false,
+   "note": ""
+  },
+  {
+   "name": "title_in",
+   "t": 0.2,
+   "gameplay": false,
+   "note": ""
+  },
+  {
+   "name": "done",
+   "t": 1.0,
+   "gameplay": false,
+   "note": ""
+  }
+ ]
+}

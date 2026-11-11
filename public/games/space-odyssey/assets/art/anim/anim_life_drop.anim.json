@@ -1,0 +1,158 @@
+{
+ "format": "artlab.layer_timeline/1",
+ "type": "fx",
+ "key": "life_drop",
+ "duration_s": 0.75,
+ "loop": false,
+ "ref_px": 64,
+ "usage": "play(o = откуда, to = куда): дуга 500 мс, капля тянется по ходу (мягкая — squash/stretch), на прибытии — всплеск.",
+ "layers": [
+  {
+   "id": "splash",
+   "sprite": "bio_pop_key",
+   "blend": "lighter",
+   "z": 7,
+   "tracks": {
+    "scale": [
+     [
+      0.5,
+      0.55,
+      "outCubic"
+     ],
+     [
+      0.75,
+      1.1
+     ]
+    ],
+    "alpha": [
+     [
+      0.5,
+      1,
+      "linear"
+     ],
+     [
+      0.56,
+      1,
+      "inQuad"
+     ],
+     [
+      0.75,
+      0
+     ]
+    ]
+   },
+   "at": "@to",
+   "k": false,
+   "visible": [
+    0.5,
+    0.75
+   ]
+  }
+ ],
+ "flyers": [
+  {
+   "id": "drop",
+   "from": "@o",
+   "to": "@to",
+   "blend": "source-over",
+   "z": 6,
+   "items": [
+    {
+     "sprite": "life_drop",
+     "t0": 0,
+     "dur": 0.5,
+     "ease": "inOutQuad",
+     "bend": -0.22,
+     "orient": true,
+     "orient_offset_deg": -90,
+     "tracks_u": {
+      "scale": [
+       [
+        0,
+        0.7,
+        "outBack"
+       ],
+       [
+        0.12,
+        1.0,
+        "linear"
+       ],
+       [
+        0.85,
+        0.9,
+        "inQuad"
+       ],
+       [
+        1,
+        0.65
+       ]
+      ],
+      "sy": [
+       [
+        0,
+        0.9,
+        "inOutQuad"
+       ],
+       [
+        0.3,
+        1.2,
+        "linear"
+       ],
+       [
+        0.8,
+        1.12,
+        "inQuad"
+       ],
+       [
+        1,
+        0.85
+       ]
+      ],
+      "sx": [
+       [
+        0,
+        1.05,
+        "inOutQuad"
+       ],
+       [
+        0.3,
+        0.86,
+        "linear"
+       ],
+       [
+        0.8,
+        0.9,
+        "inQuad"
+       ],
+       [
+        1,
+        1.12
+       ]
+      ]
+     }
+    }
+   ]
+  }
+ ],
+ "host": {},
+ "events": [
+  {
+   "name": "launch",
+   "t": 0,
+   "gameplay": false,
+   "note": ""
+  },
+  {
+   "name": "arrive",
+   "t": 0.5,
+   "gameplay": true,
+   "note": "капля в цели: тик счётчика / узел"
+  },
+  {
+   "name": "done",
+   "t": 0.75,
+   "gameplay": false,
+   "note": ""
+  }
+ ]
+}

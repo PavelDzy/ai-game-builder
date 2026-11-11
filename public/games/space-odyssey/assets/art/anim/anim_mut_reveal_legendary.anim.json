@@ -1,0 +1,803 @@
+{
+ "format": "artlab.layer_timeline/1",
+ "type": "fx",
+ "key": "mut_reveal_legendary",
+ "duration_s": 1.2,
+ "loop": false,
+ "ref_px": 168,
+ "tint_default": "#FFD23F",
+ "host_z": 2.5,
+ "usage": "life_mut isNew legendary -> play(o = центр иконки, size 168). Ярче обычной: две радужные короны лучей навстречу, золотое кольцо, белый двойной пик, 28 искр, тряска окна 6 px. После done — цикл mut_frame_legendary 6 fps.",
+ "layers": [
+  {
+   "id": "raysA",
+   "sprite": "mut_reveal_key",
+   "blend": "lighter",
+   "z": 0,
+   "tracks": {
+    "scale": [
+     [
+      0,
+      0.6,
+      "outBack"
+     ],
+     [
+      0.25,
+      1.25,
+      "linear"
+     ],
+     [
+      1.2,
+      1.1
+     ]
+    ],
+    "alpha": [
+     [
+      0,
+      1,
+      "linear"
+     ],
+     [
+      0.85,
+      0.9,
+      "inQuad"
+     ],
+     [
+      1.2,
+      0
+     ]
+    ]
+   },
+   "spin_dps": 30,
+   "tint_cycle": {
+    "colors": [
+     "#FF5AA8",
+     "#FFD23F",
+     "#A6FF3D",
+     "#3DFFD0",
+     "#5AB8FF",
+     "#B98CFF"
+    ],
+    "period_s": 0.6
+   },
+   "note": "радуга: оттенок сменяется каждые 0.1 с (6 запечённых копий)"
+  },
+  {
+   "id": "raysB",
+   "sprite": "mut_reveal_key",
+   "blend": "lighter",
+   "z": 0.5,
+   "tracks": {
+    "scale": [
+     [
+      0,
+      0.45,
+      "outBack"
+     ],
+     [
+      0.3,
+      0.95,
+      "linear"
+     ],
+     [
+      1.2,
+      0.85
+     ]
+    ],
+    "rot": [
+     [
+      0,
+      15
+     ]
+    ],
+    "alpha": [
+     [
+      0,
+      0.7,
+      "linear"
+     ],
+     [
+      0.85,
+      0.65,
+      "inQuad"
+     ],
+     [
+      1.2,
+      0
+     ]
+    ]
+   },
+   "spin_dps": -45,
+   "tint_cycle": {
+    "colors": [
+     "#FF5AA8",
+     "#FFD23F",
+     "#A6FF3D",
+     "#3DFFD0",
+     "#5AB8FF",
+     "#B98CFF"
+    ],
+    "period_s": 0.6,
+    "offset": 3
+   }
+  },
+  {
+   "id": "ring",
+   "sprite": "life_terra_done_key",
+   "blend": "lighter",
+   "z": 1,
+   "tracks": {
+    "scale": [
+     [
+      0.04,
+      0.3,
+      "outCubic"
+     ],
+     [
+      0.7,
+      1.6
+     ]
+    ],
+    "alpha": [
+     [
+      0.04,
+      1,
+      "linear"
+     ],
+     [
+      0.3,
+      0.9,
+      "inQuad"
+     ],
+     [
+      0.7,
+      0
+     ]
+    ]
+   },
+   "visible": [
+    0.04,
+    0.75
+   ],
+   "tint": "#FFD23F"
+  },
+  {
+   "id": "core",
+   "sprite": "mut_reveal_key",
+   "blend": "lighter",
+   "z": 3,
+   "tracks": {
+    "scale": [
+     [
+      0,
+      0.3,
+      "outCubic"
+     ],
+     [
+      0.1,
+      0.48,
+      "inQuad"
+     ],
+     [
+      0.24,
+      0.3,
+      "outCubic"
+     ],
+     [
+      0.34,
+      0.42,
+      "inQuad"
+     ],
+     [
+      0.55,
+      0.25
+     ]
+    ],
+    "alpha": [
+     [
+      0,
+      1,
+      "linear"
+     ],
+     [
+      0.12,
+      1,
+      "linear"
+     ],
+     [
+      0.24,
+      0.6,
+      "linear"
+     ],
+     [
+      0.34,
+      1,
+      "inQuad"
+     ],
+     [
+      0.55,
+      0
+     ]
+    ]
+   },
+   "note": "двойной пик"
+  }
+ ],
+ "particles": [
+  {
+   "id": "sparks",
+   "at": "@o",
+   "blend": "lighter",
+   "z": 3,
+   "items": [
+    {
+     "sprite": "mut_dup_spark_key",
+     "t0": 0.1873,
+     "life": 0.6655,
+     "angle": 3.12,
+     "v0": 1044.2,
+     "drag": 3.8,
+     "r0": 59.8,
+     "rot0": 29.5,
+     "spin": 149.2,
+     "scale": [
+      0.957,
+      0.4
+     ],
+     "tint": "#FF5AA8"
+    },
+    {
+     "sprite": "bio_spore_02",
+     "t0": 0.1842,
+     "life": 0.908,
+     "angle": 8.73,
+     "v0": 1027.5,
+     "drag": 3.8,
+     "r0": 52.8,
+     "rot0": 353.5,
+     "spin": 148.0,
+     "scale": [
+      1.003,
+      0.4
+     ],
+     "tint": "#FFD23F"
+    },
+    {
+     "sprite": "bio_spore_03",
+     "t0": 0.09,
+     "life": 0.7056,
+     "angle": 26.5,
+     "v0": 1064.9,
+     "drag": 3.8,
+     "r0": 62.7,
+     "rot0": 333.9,
+     "spin": 172.0,
+     "scale": [
+      1.015,
+      0.4
+     ],
+     "tint": "#A6FF3D"
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.1144,
+     "life": 0.6189,
+     "angle": 40.25,
+     "v0": 1146.6,
+     "drag": 3.8,
+     "r0": 62.7,
+     "rot0": 123.2,
+     "spin": -213.5,
+     "scale": [
+      1.168,
+      0.4
+     ],
+     "tint": "#3DFFD0"
+    },
+    {
+     "sprite": "mut_dup_spark_key",
+     "t0": 0.2664,
+     "life": 0.9449,
+     "angle": 49.56,
+     "v0": 823.6,
+     "drag": 3.8,
+     "r0": 57.5,
+     "rot0": 347.1,
+     "spin": 133.1,
+     "scale": [
+      1.231,
+      0.4
+     ],
+     "tint": "#5AB8FF"
+    },
+    {
+     "sprite": "bio_spore_02",
+     "t0": 0.084,
+     "life": 0.9235,
+     "angle": 66.27,
+     "v0": 761.3,
+     "drag": 3.8,
+     "r0": 64.1,
+     "rot0": 101.7,
+     "spin": 140.4,
+     "scale": [
+      1.006,
+      0.4
+     ],
+     "tint": "#B98CFF"
+    },
+    {
+     "sprite": "bio_spore_03",
+     "t0": 0.3058,
+     "life": 0.8498,
+     "angle": 75.15,
+     "v0": 905.2,
+     "drag": 3.8,
+     "r0": 63.0,
+     "rot0": 266.3,
+     "spin": -209.1,
+     "scale": [
+      1.206,
+      0.4
+     ],
+     "tint": "#FF5AA8"
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.1949,
+     "life": 0.9111,
+     "angle": 92.88,
+     "v0": 960.6,
+     "drag": 3.8,
+     "r0": 59.9,
+     "rot0": 320.2,
+     "spin": 137.9,
+     "scale": [
+      1.162,
+      0.4
+     ],
+     "tint": "#FFD23F"
+    },
+    {
+     "sprite": "mut_dup_spark_key",
+     "t0": 0.2511,
+     "life": 0.6629,
+     "angle": 100.04,
+     "v0": 1024.6,
+     "drag": 3.8,
+     "r0": 58.8,
+     "rot0": 20.4,
+     "spin": -142.3,
+     "scale": [
+      1.082,
+      0.4
+     ],
+     "tint": "#A6FF3D"
+    },
+    {
+     "sprite": "bio_spore_02",
+     "t0": 0.1681,
+     "life": 0.8249,
+     "angle": 116.2,
+     "v0": 1044.5,
+     "drag": 3.8,
+     "r0": 56.5,
+     "rot0": 85.6,
+     "spin": -198.2,
+     "scale": [
+      1.196,
+      0.4
+     ],
+     "tint": "#3DFFD0"
+    },
+    {
+     "sprite": "bio_spore_03",
+     "t0": 0.3145,
+     "life": 0.7172,
+     "angle": 129.71,
+     "v0": 801.1,
+     "drag": 3.8,
+     "r0": 58.4,
+     "rot0": 223.1,
+     "spin": 164.7,
+     "scale": [
+      1.161,
+      0.4
+     ],
+     "tint": "#5AB8FF"
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.0965,
+     "life": 0.6985,
+     "angle": 145.69,
+     "v0": 1104.1,
+     "drag": 3.8,
+     "r0": 60.8,
+     "rot0": 3.0,
+     "spin": -180.7,
+     "scale": [
+      1.182,
+      0.4
+     ],
+     "tint": "#B98CFF"
+    },
+    {
+     "sprite": "mut_dup_spark_key",
+     "t0": 0.2887,
+     "life": 0.8406,
+     "angle": 156.86,
+     "v0": 784.5,
+     "drag": 3.8,
+     "r0": 63.8,
+     "rot0": 249.1,
+     "spin": 131.2,
+     "scale": [
+      1.118,
+      0.4
+     ],
+     "tint": "#FF5AA8"
+    },
+    {
+     "sprite": "bio_spore_02",
+     "t0": 0.2249,
+     "life": 0.6647,
+     "angle": 164.21,
+     "v0": 850.1,
+     "drag": 3.8,
+     "r0": 60.0,
+     "rot0": 248.8,
+     "spin": -158.4,
+     "scale": [
+      1.121,
+      0.4
+     ],
+     "tint": "#FFD23F"
+    },
+    {
+     "sprite": "bio_spore_03",
+     "t0": 0.2619,
+     "life": 0.6309,
+     "angle": 180.45,
+     "v0": 863.6,
+     "drag": 3.8,
+     "r0": 53.8,
+     "rot0": 273.0,
+     "spin": -213.9,
+     "scale": [
+      1.159,
+      0.4
+     ],
+     "tint": "#A6FF3D"
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.2189,
+     "life": 0.6018,
+     "angle": 189.61,
+     "v0": 1057.6,
+     "drag": 3.8,
+     "r0": 61.0,
+     "rot0": 200.9,
+     "spin": -212.8,
+     "scale": [
+      1.107,
+      0.4
+     ],
+     "tint": "#3DFFD0"
+    },
+    {
+     "sprite": "mut_dup_spark_key",
+     "t0": 0.1819,
+     "life": 0.7509,
+     "angle": 209.8,
+     "v0": 1037.3,
+     "drag": 3.8,
+     "r0": 62.2,
+     "rot0": 190.8,
+     "spin": -199.7,
+     "scale": [
+      1.197,
+      0.4
+     ],
+     "tint": "#5AB8FF"
+    },
+    {
+     "sprite": "bio_spore_02",
+     "t0": 0.3255,
+     "life": 0.6676,
+     "angle": 221.67,
+     "v0": 1028.7,
+     "drag": 3.8,
+     "r0": 58.8,
+     "rot0": 265.9,
+     "spin": 118.2,
+     "scale": [
+      1.088,
+      0.4
+     ],
+     "tint": "#B98CFF"
+    },
+    {
+     "sprite": "bio_spore_03",
+     "t0": 0.1609,
+     "life": 0.6567,
+     "angle": 228.77,
+     "v0": 913.7,
+     "drag": 3.8,
+     "r0": 54.6,
+     "rot0": 165.7,
+     "spin": 219.0,
+     "scale": [
+      1.058,
+      0.4
+     ],
+     "tint": "#FF5AA8"
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.2362,
+     "life": 0.6704,
+     "angle": 242.02,
+     "v0": 1137.5,
+     "drag": 3.8,
+     "r0": 61.3,
+     "rot0": 9.1,
+     "spin": 159.3,
+     "scale": [
+      1.109,
+      0.4
+     ],
+     "tint": "#FFD23F"
+    },
+    {
+     "sprite": "mut_dup_spark_key",
+     "t0": 0.2625,
+     "life": 0.9794,
+     "angle": 254.53,
+     "v0": 1110.2,
+     "drag": 3.8,
+     "r0": 64.8,
+     "rot0": 139.9,
+     "spin": -133.7,
+     "scale": [
+      1.003,
+      0.4
+     ],
+     "tint": "#A6FF3D"
+    },
+    {
+     "sprite": "bio_spore_02",
+     "t0": 0.3122,
+     "life": 0.8923,
+     "angle": 273.15,
+     "v0": 1006.6,
+     "drag": 3.8,
+     "r0": 62.3,
+     "rot0": 324.3,
+     "spin": 198.5,
+     "scale": [
+      1.086,
+      0.4
+     ],
+     "tint": "#3DFFD0"
+    },
+    {
+     "sprite": "bio_spore_03",
+     "t0": 0.2638,
+     "life": 0.9306,
+     "angle": 282.28,
+     "v0": 1074.3,
+     "drag": 3.8,
+     "r0": 51.1,
+     "rot0": 63.5,
+     "spin": -138.5,
+     "scale": [
+      0.949,
+      0.4
+     ],
+     "tint": "#5AB8FF"
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.1586,
+     "life": 0.8989,
+     "angle": 291.55,
+     "v0": 797.9,
+     "drag": 3.8,
+     "r0": 55.2,
+     "rot0": 284.3,
+     "spin": 123.7,
+     "scale": [
+      1.111,
+      0.4
+     ],
+     "tint": "#B98CFF"
+    },
+    {
+     "sprite": "mut_dup_spark_key",
+     "t0": 0.1145,
+     "life": 0.6203,
+     "angle": 309.49,
+     "v0": 937.0,
+     "drag": 3.8,
+     "r0": 55.8,
+     "rot0": 121.4,
+     "spin": 168.9,
+     "scale": [
+      1.17,
+      0.4
+     ],
+     "tint": "#FF5AA8"
+    },
+    {
+     "sprite": "bio_spore_02",
+     "t0": 0.1724,
+     "life": 0.8918,
+     "angle": 317.0,
+     "v0": 1130.9,
+     "drag": 3.8,
+     "r0": 64.0,
+     "rot0": 209.8,
+     "spin": -177.4,
+     "scale": [
+      1.1,
+      0.4
+     ],
+     "tint": "#FFD23F"
+    },
+    {
+     "sprite": "bio_spore_03",
+     "t0": 0.288,
+     "life": 0.9268,
+     "angle": 329.96,
+     "v0": 1033.6,
+     "drag": 3.8,
+     "r0": 56.2,
+     "rot0": 26.6,
+     "spin": 115.9,
+     "scale": [
+      1.134,
+      0.4
+     ],
+     "tint": "#A6FF3D"
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.1447,
+     "life": 0.9985,
+     "angle": 344.22,
+     "v0": 1138.5,
+     "drag": 3.8,
+     "r0": 60.4,
+     "rot0": 290.1,
+     "spin": 191.9,
+     "scale": [
+      1.136,
+      0.4
+     ],
+     "tint": "#3DFFD0"
+    }
+   ]
+  }
+ ],
+ "host": {
+  "frame_scale": {
+   "def": 1,
+   "keys": [
+    [
+     0,
+     0.35,
+     "outBack"
+    ],
+    [
+     0.16,
+     1.15,
+     "inOutQuad"
+    ],
+    [
+     0.3,
+     1
+    ]
+   ]
+  },
+  "icon_scale": {
+   "def": 1,
+   "keys": [
+    [
+     0,
+     0,
+     "hold"
+    ],
+    [
+     0.06,
+     0,
+     "outBack"
+    ],
+    [
+     0.28,
+     1.2,
+     "inOutQuad"
+    ],
+    [
+     0.4,
+     1
+    ]
+   ]
+  },
+  "title_alpha": {
+   "def": 1,
+   "keys": [
+    [
+     0,
+     0,
+     "hold"
+    ],
+    [
+     0.24,
+     0,
+     "outQuad"
+    ],
+    [
+     0.4,
+     1
+    ]
+   ]
+  },
+  "title_scale": {
+   "def": 1,
+   "keys": [
+    [
+     0.24,
+     0.8,
+     "outBack"
+    ],
+    [
+     0.45,
+     1
+    ]
+   ]
+  },
+  "shake_px": {
+   "def": 0,
+   "keys": [
+    [
+     0,
+     6,
+     "outQuad"
+    ],
+    [
+     0.28,
+     0
+    ]
+   ],
+   "note": "амплитуда тряски окна (sin 31/23 Гц по x/y)"
+  }
+ },
+ "events": [
+  {
+   "name": "reveal",
+   "t": 0,
+   "gameplay": false,
+   "note": "звук legendary, вибрация 60 мс"
+  },
+  {
+   "name": "icon_in",
+   "t": 0.06,
+   "gameplay": false,
+   "note": ""
+  },
+  {
+   "name": "title_in",
+   "t": 0.24,
+   "gameplay": false,
+   "note": ""
+  },
+  {
+   "name": "done",
+   "t": 1.2,
+   "gameplay": false,
+   "note": ""
+  }
+ ]
+}

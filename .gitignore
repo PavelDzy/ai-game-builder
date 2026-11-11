@@ -1,0 +1,7 @@
+node_modules/
+dist/
+tools/
+top.png
+NOTES.local.md
+*.log
+.DS_Store

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>solar_relay — превью арта (Canvas, file://)</title>
+<link rel="stylesheet" href="ui_tokens.css">
+<style>html,body{margin:0;background:#04050D;overflow:hidden}canvas{display:block;width:100vw;height:100vh}</style>
+</head><body>
+<canvas id="c"></canvas>
+<script src="art_manifest.js"></script>
+<script>
+/* Пример интеграции: ES5, без fetch (работает двойным кликом). ?bg=bg_violet&n=12&screen=offline|map */
+(function () {
+  var M = window.ART_MANIFEST, T = M.tokens, q = {};
+  location.search.replace(/[?&](\w+)=([^&]*)/g, function (_, k, v) { q[k] = decodeURIComponent(v); });
+  var bgKey = q.bg || 'bg_cyan', NP = +(q.n || 7), screen = q.screen || 'system';
+  var cv = document.getElementById('c'), ctx = cv.getContext('2d');
+  var dpr = window.devicePixelRatio || 1, cssW = window.innerWidth, cssH = window.innerHeight;
+  cv.width = Math.round(cssW * dpr); cv.height = Math.round(cssH * dpr);
+  var s = cv.width / 1080;            // px кадра 1080 → px канваса
+  var IM = {}, need = [];
+  for (var a in M.atlases) need.push([a, M.atlases[a]]);
+  M.groups.bg_by_era.forEach(function (b) { need.push([b, M.assets[b].image]); });
+  var left = need.length;
+  need.forEach(function (n) { var i = new Image(); i.onload = done; i.onerror = done; i.src = n[1]; IM[n[0]] = i; });
+  function done() { if (--left === 0) Promise.all([document.fonts.load("48px 'Russo One'"), document.fonts.load("700 34px 'Exo 2'")]).then(draw, draw); }
+
+  function spr(key, x, y, opt) {      // x,y — точка pivot в кадре 1080
+    opt = opt || {};
+    var k = M.alias[key] || key, e = M.assets[k];
+    var w = opt.w || e.w, h = opt.h || e.h, piv = opt.pivot || e.pivot;
+    ctx.save(); ctx.globalAlpha = opt.alpha == null ? 1 : opt.alpha;
+    ctx.translate(x * s, y * s); if (opt.rot) ctx.rotate(opt.rot);
+    var sw = opt.cropW ? e.w * opt.cropW : e.w;
+    ctx.drawImage(IM[e.atlas], e.x, e.y, sw, e.h, -piv[0] * w * s, -piv[1] * h * s, (opt.cropW ? w * opt.cropW : w) * s, h * s);
+    ctx.restore();
+  }
+  function txt(str, x, y, size, font, color, align, stroke, sc) {
+    ctx.font = font.replace('#', Math.round(size * s) + 'px'); ctx.textAlign = align || 'left'; ctx.textBaseline = 'middle';
+    if (stroke) { ctx.lineJoin = 'round'; ctx.lineWidth = stroke * 2 * s; ctx.strokeStyle = sc || T.color.number_stroke; ctx.strokeText(str, x * s, y * s); }
+    ctx.fillStyle = color; ctx.fillText(str, x * s, y * s);
+  }
+  function neonArc(cx, cy, r, a0, a1, color, w, alpha, blur) {
+    ctx.save(); ctx.globalAlpha = alpha; ctx.strokeStyle = color; ctx.lineWidth = w * s; ctx.lineCap = 'round';
+    ctx.shadowColor = color; ctx.shadowBlur = blur * s; ctx.beginPath(); ctx.arc(cx * s, cy * s, r * s, a0, a1); ctx.stroke(); ctx.restore();
+  }
+
+  function draw() {
+    var C = T.color, O = M.orbit.center, R = M.orbit.radius;
+    // фон: cover, кадр 1080×2400, по центру
+    var bg = IM[bgKey], fh = cv.height / s;
+    ctx.drawImage(bg, 0, (2400 - fh) / 2, 1080, fh, 0, 0, cv.width, cv.height);
+    var oy = O[1];
+    var ring = T.orbit.ring_by_bg[bgKey] || T.orbit.ring;
+    neonArc(O[0], oy, R, 0, Math.PI * 2, ring, T.orbit.ring_width, T.orbit.ring_alpha, T.orbit.ring_glow_blur);
+    var angs = [], gap = 0.6;                        // зазор сверху под шлюз (рад)
+    for (var i = 0; i < NP; i++) angs.push(-Math.PI / 2 + gap + (Math.PI * 2 - 2 * gap) * (i + 0.5) / NP);
+    angs.forEach(function (t, i) {
+      var col = i === 2 ? T.zone.satellite : (i === 4 ? T.zone.missed : T.zone.manual);
+      neonArc(O[0], oy, R, t - 0.20, t - 0.06, col, T.zone.width, i === 1 ? 1 : T.zone.alpha_idle, T.zone.glow_blur);
+    });
+    spr('gate', O[0], oy - R);
+    var tm = 0.35;
+    spr('sun_corona', O[0], oy, { rot: tm });
+    spr('sun_body', O[0], oy);
+    var big = NP > 10, ps = big ? 56 : 84;
+    angs.forEach(function (t, i) {
+      var x = O[0] + R * Math.cos(t), y = oy + R * Math.sin(t);
+      spr('planet_' + ('0' + (i % 8 + 1)).slice(-2), x, y, { w: ps / 84 * 96, h: ps / 84 * 96 });
+      if (i === 2) spr('satellite', O[0] + (R + 56) * Math.cos(t - 0.05), oy + (R + 56) * Math.sin(t - 0.05));
+    });
+    // импульс по часовой между 3-й и 4-й планетой; хвост — назад по касательной
+    var tp = (angs[3] + angs[4]) / 2, px = O[0] + R * Math.cos(tp), py = oy + R * Math.sin(tp);
+    spr('pulse_trail', px, py, { rot: tp + Math.PI / 2 });
+    spr('pulse', px, py);
+    var t1 = angs[1];
+    spr('fx_resonance', O[0] + R * Math.cos(t1), oy + R * Math.sin(t1), { w: 130, h: 130 });
+    txt('×2', O[0] + (R + 70) * Math.cos(t1), oy + (R + 70) * Math.sin(t1) - 30, 52, "#  'Russo One'", C.energy, 'center', 5);
+    txt('12.4K', O[0], oy - 8, T.size_px_1080.number_sun, "#  'Russo One'", C.energy, 'center', 6, C.number_stroke_sun);
+    txt('+318 / с', O[0], oy + 58, 34, "700 # 'Exo 2'", C.text, 'center', 5, C.number_stroke_sun);
+    // HUD
+    spr('ui_hud_plate', 204, 80); spr('ui_hud_energy', 82, 80);
+    txt('12 400', 130, 82, 48, "#  'Russo One'", C.energy);
+    spr('ui_hud_plate', 876, 80); spr('ui_hud_stardust', 754, 80);
+    txt('37', 802, 82, 48, "#  'Russo One'", C.stardust);
+    spr('ui_bar_frame', 540, 182);
+    spr('ui_bar_fill', 540 - 492 + 16, 182, { cropW: 0.64 });
+    txt('до Сверхновой 64 %', 540, 183, 30, "700 # 'Exo 2'", C.text, 'center', 4);
+    // кнопки
+    var B = [['ui_icon_planet', 'Планета', '1.2K', 'ui_btn_frame'], ['ui_icon_wind', 'Ветер', '860', 'ui_btn_frame'],
+      ['ui_icon_satellite', 'Спутник', '4.5K', 'ui_btn_frame_off'], ['ui_icon_pulse2', 'Импульс 2', '25K', 'ui_btn_frame_off'],
+      ['ui_icon_nova', 'Сверхновая', '+3', 'ui_btn_frame_nova']];
+    var top = 1100;
+    B.forEach(function (b, i) {
+      var bx = 33 + (i % 3) * 342, by = top + Math.floor(i / 3) * 222, off = /_off$/.test(b[3]), nova = i === 4;
+      spr(b[3], bx, by, { pivot: [0, 0] });
+      spr(b[0], bx + 22, by + 57, { pivot: [0, 0], alpha: off ? 0.45 : 1 });
+      txt(b[1], bx + 132, by + 66, b[1].length > 8 ? 34 : 40, "800 # 'Exo 2'", off ? C.text_off : C.text);
+      txt(nova ? 'сброс системы' : 'ур. 7', bx + 132, by + 108, 28, "600 # 'Exo 2'", nova ? C.stardust : C.text_muted);
+      spr(nova ? 'ui_hud_stardust' : 'ui_hud_energy', bx + 152, by + 158, { w: 40, h: 40 });
+      txt(b[2], bx + 180, by + 160, 46, "#  'Russo One'", off ? '#8A7440' : (nova ? C.stardust : C.energy));
+    });
+    // нижняя навигация
+    var navY = cv.height / s - 160;
+    spr('ui_tabbar', 540, navY, { pivot: [0.5, 0] });
+    spr('ui_tab_active', 180, navY + 82);
+    [['ui_tab_system', 'Система'], ['ui_tab_starmap_off', 'Звёздная карта'], ['ui_tab_collection_off', 'Коллекция']].forEach(function (t, i) {
+      spr(t[0], 180 + i * 360, navY + 56);
+      txt(t[1], 180 + i * 360, navY + 126, 30, "700 # 'Exo 2'", i ? C.text_off : C.text, 'center');
+    });
+    if (screen === 'offline') {
+      ctx.fillStyle = C.scrim; ctx.fillRect(0, 0, cv.width, cv.height);
+      var my = (cv.height / s) / 2;
+      spr('ui_modal', 540, my);
+      txt('Пока тебя не было', 540, my - 398, 40, "#  'Russo One'", C.text, 'center');
+      txt('Солнце собирало энергию 3 ч 12 мин', 540, my - 250, 34, "600 # 'Exo 2'", C.text_muted, 'center');
+      spr('sun_idle', 540, my - 40, { w: 240, h: 240 });
+      spr('ui_hud_energy', 400, my + 170);
+      txt('+48 200', 450, my + 172, 72, "#  'Russo One'", C.energy);
+      spr('ui_btn_collect', 540, my + 330);
+      txt('Забрать', 540, my + 326, 48, "#  'Russo One'", C.text_on_gold, 'center');
+    }
+    if (screen === 'map') {
+      ctx.fillStyle = C.scrim; ctx.fillRect(0, 0, cv.width, cv.height);
+      var nodes = [[300, 520, 'bought'], [520, 420, 'bought'], [760, 560, 'open'], [600, 760, 'open'], [380, 900, 'locked'], [820, 920, 'locked']];
+      var links = [[0, 1], [1, 2], [1, 3], [3, 4], [2, 5]];
+      links.forEach(function (l) {
+        var a = nodes[l[0]], b = nodes[l[1]], lit = a[2] === 'bought' && b[2] !== 'locked';
+        ctx.save(); ctx.strokeStyle = lit ? C.energy : C.neon_dim; ctx.lineWidth = 4 * s; ctx.shadowColor = ctx.strokeStyle; ctx.shadowBlur = lit ? 10 * s : 0;
+        ctx.beginPath(); ctx.moveTo(a[0] * s, a[1] * s); ctx.lineTo(b[0] * s, b[1] * s); ctx.stroke(); ctx.restore();
+      });
+      nodes.forEach(function (n) { spr('map_node_' + n[2], n[0], n[1]); });
+      spr('card_planet_open', 360, 1260); spr('planet_06', 360, 1230, { w: 168, h: 168 });
+      txt('Решётка', 360, 1390, 32, "700 # 'Exo 2'", C.text, 'center');
+      spr('card_planet_locked', 720, 1260); spr('planet_07_shadow', 720, 1230, { w: 168, h: 168 });
+      txt('Сверхновая ×3', 720, 1390, 28, "700 # 'Exo 2'", C.text_off, 'center');
+      spr('ui_quest_row', 540, 1560); spr('ui_reward_stardust', 940, 1560);
+      txt('Созвездие «Лира»: 5 резонансов', 150, 1540, 32, "700 # 'Exo 2'", C.text);
+      txt('3 / 5', 150, 1584, 28, "600 # 'Exo 2'", C.text_muted);
+      txt('+5', 880, 1562, 40, "#  'Russo One'", C.stardust, 'right');
+    }
+    document.title = 'ready';
+  }
+})();
+</script>
+</body></html>

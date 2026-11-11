@@ -1,0 +1,229 @@
+{
+ "frames": {
+  "life_card_front_02": {
+   "frame": {
+    "x": 2,
+    "y": 2,
+    "w": 600,
+    "h": 600
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 600,
+    "h": 600
+   },
+   "sourceSize": {
+    "w": 600,
+    "h": 600
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  },
+  "life_card_front_03": {
+   "frame": {
+    "x": 606,
+    "y": 2,
+    "w": 600,
+    "h": 600
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 600,
+    "h": 600
+   },
+   "sourceSize": {
+    "w": 600,
+    "h": 600
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  },
+  "life_card_front_07": {
+   "frame": {
+    "x": 1210,
+    "y": 2,
+    "w": 600,
+    "h": 600
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 600,
+    "h": 600
+   },
+   "sourceSize": {
+    "w": 600,
+    "h": 600
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  },
+  "life_card_front_08": {
+   "frame": {
+    "x": 2,
+    "y": 606,
+    "w": 600,
+    "h": 600
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 600,
+    "h": 600
+   },
+   "sourceSize": {
+    "w": 600,
+    "h": 600
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  },
+  "life_card_stage_microbes": {
+   "frame": {
+    "x": 606,
+    "y": 606,
+    "w": 600,
+    "h": 600
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 600,
+    "h": 600
+   },
+   "sourceSize": {
+    "w": 600,
+    "h": 600
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  },
+  "life_card_stage_terra": {
+   "frame": {
+    "x": 1210,
+    "y": 606,
+    "w": 600,
+    "h": 600
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 600,
+    "h": 600
+   },
+   "sourceSize": {
+    "w": 600,
+    "h": 600
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  },
+  "life_layer_air": {
+   "frame": {
+    "x": 2,
+    "y": 1210,
+    "w": 600,
+    "h": 600
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 600,
+    "h": 600
+   },
+   "sourceSize": {
+    "w": 600,
+    "h": 600
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  },
+  "life_layer_heat": {
+   "frame": {
+    "x": 606,
+    "y": 1210,
+    "w": 600,
+    "h": 600
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 600,
+    "h": 600
+   },
+   "sourceSize": {
+    "w": 600,
+    "h": 600
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  },
+  "life_layer_water": {
+   "frame": {
+    "x": 1210,
+    "y": 1210,
+    "w": 600,
+    "h": 600
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 600,
+    "h": 600
+   },
+   "sourceSize": {
+    "w": 600,
+    "h": 600
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  }
+ },
+ "meta": {
+  "image": "atlas_life_card_b.webp",
+  "size": {
+   "w": 1812,
+   "h": 1812
+  },
+  "scale": "1",
+  "format": "RGBA8888"
+ }
+}

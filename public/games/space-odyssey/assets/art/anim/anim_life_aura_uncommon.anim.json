@@ -1,0 +1,21 @@
+{
+ "format": "artlab.layer_timeline/1",
+ "key": "life_aura_uncommon",
+ "type": "frame_swap",
+ "loop": true,
+ "period_s": 0.667,
+ "frames": [
+  "life_aura_uncommon_01",
+  "life_aura_uncommon_02",
+  "life_aura_uncommon_03",
+  "life_aura_uncommon_04"
+ ],
+ "durations_ms": [
+  167,
+  167,
+  167,
+  166
+ ],
+ "fps": 6,
+ "note": "поверх планеты (rect×112/96); фаза планеты = slot mod 4"
+}

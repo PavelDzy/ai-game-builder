@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#10141d">
+<title>IDLE2brothers — v010</title>
+<link rel="stylesheet" href="packs/ui.css">
+<link rel="stylesheet" href="packs/ui_font.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="meta.css">
+</head>
+<body>
+<div id="overscan" hidden></div>
+<canvas id="bg"></canvas>
+<canvas id="game"></canvas>
+<canvas id="post"></canvas>
+<div id="board-safe"></div>
+<div id="frame">
+  <div id="lvl-cover" hidden aria-hidden="true"></div>
+  <div id="menu-bg" hidden><div class="img"></div></div>
+  <div id="hud" hidden>
+    <button id="btn-pause" class="ibtn" data-skin="btn_icon" aria-label="Пауза"><i id="ic-pause" data-skin="icon_pause_ink"></i></button>
+    <div id="hud-center" data-skin="hud_capsule">
+      <span id="hud-level">Уровень 1</span>
+      <div class="prog"><i class="hc" data-skin="icon_head_caterpillar"></i><span class="bar" data-skin="hud_progress_frame"><i id="hud-fill" data-skin="hud_progress_fill"></i><i id="hud-fill-low" data-skin="hud_progress_fill_low"></i></span><span id="hud-head">0 %</span></div>
+    </div>
+    <button id="btn-speed" class="ibtn" data-skin="btn_icon" aria-label="Скорость"><i id="ic-speed" data-skin="icon_speed_x1_ink"></i><b id="speed-badge" data-skin="hud_speed_badge">×1</b></button>
+    <button id="btn-book-hud" class="ibtn" data-skin="btn_icon" aria-label="Коллекция"><i data-skin="icon_book_ink"></i></button>
+  </div>
+
+  <div id="dim" hidden></div>
+  <div id="lvl-banner" hidden aria-hidden="true"><div class="ribbon gold" id="lb-rib" data-skin="ribbon_gold"><span id="lb-t"></span></div><div id="lb-n" data-skin="plate_toast"><span></span></div></div>
+  <div id="curtain" hidden aria-hidden="true"><i class="cl"></i><i class="cr"></i></div>
+
+  <div id="scr-cards" hidden>
+    <div class="ribbon gold small" data-skin="ribbon_gold"><span>Выбери улучшение</span></div>
+    <p class="sub">тап по карточке — взять</p>
+    <div id="card-list"></div>
+  </div>
+
+  <div id="scr-menu" class="scr" hidden>
+    <div id="logo" data-skin="logo_two_brothers"></div>
+    <button id="btn-sound-m" class="ibtn" data-skin="btn_icon" aria-label="Звук"><i id="ic-sound-m" data-skin="icon_sound_on_ink"></i></button>
+    <button id="btn-play" class="b cta" data-skin="btn_cta"><span>Играть</span></button>
+    <button id="btn-levels" class="b nav" data-skin="btn_nav"><span>Уровни</span></button>
+    <button id="btn-book" class="b nav" data-skin="btn_nav"><span>Коллекция</span></button>
+    <button id="btn-settings" class="b sec" data-skin="btn_sec"><span>Настройки</span></button>
+    <p class="note" id="menu-note">Тележка едет и стреляет сама.<br>Перетаскивай предметы с ленты в ячейки братьев.</p>
+  </div>
+
+  <div id="scr-levels" class="scr" hidden>
+    <button id="btn-levels-back" class="ibtn small" data-skin="btn_round" aria-label="Назад"><i data-skin="icon_back_arrow_ink"></i></button>
+    <span id="lv-stars" data-skin="panel_ink"><i data-skin="star_full"></i><b></b></span>
+    <div class="panel" id="levels-panel" data-skin="panel_cream">
+      <div class="ribbon gold" data-skin="ribbon_gold"><span>Уровни</span></div>
+      <div id="level-list"></div>
+      <div id="level-name" data-skin="btn_peach"><span></span></div>
+    </div>
+    <button id="btn-night" class="b sec" data-skin="btn_peach" hidden aria-pressed="false"><span>Ночь</span></button>
+  </div>
+
+  <div id="scr-pause" class="scr" hidden>
+    <div class="panel" id="pause-panel" data-skin="panel_cream">
+      <div class="ribbon gold" data-skin="ribbon_gold"><span>Пауза</span></div>
+      <p class="cap" id="pause-cap">Улучшения:</p>
+      <div id="pause-cards" class="chips"></div>
+      <button id="btn-resume" class="b cta" data-skin="btn_cta"><span>Продолжить</span></button>
+      <div class="row">
+        <button id="btn-settings-p" class="b sec s116" data-skin="btn_sec"><span>Настройки</span></button>
+        <button id="btn-pause-book" class="b sec s116" data-skin="btn_sec"><span>Коллекция</span></button>
+      </div>
+      <div class="row">
+        <button id="btn-restart" class="b danger s116" data-skin="btn_danger"><span>Заново</span></button>
+        <button id="btn-pause-menu" class="b danger s116" data-skin="btn_danger"><span>Меню</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="scr-result" class="scr" hidden>
+    <div class="panel" id="res-panel" data-skin="panel_cream">
+      <div class="ribbon green" id="res-ribbon" data-skin="ribbon_green"><span id="res-title">Итог</span></div>
+      <div id="res-stars" class="stars"></div>
+      <p id="res-reason"></p>
+      <p id="res-info"></p>
+      <div id="res-meta" hidden></div>
+      <button id="btn-next" class="b cta" data-skin="btn_cta"><span>Дальше</span></button>
+      <div class="row">
+        <button id="btn-retry" class="b sec s116" data-skin="btn_sec"><span>Заново</span></button>
+        <button id="btn-res-menu" class="b sec s116" data-skin="btn_sec"><span>Меню</span></button>
+        <button id="btn-res-book" class="b sec s116" data-skin="btn_sec" aria-label="Коллекция"><span>Книга</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="scr-settings" class="scr" hidden>
+    <div class="panel" id="set-panel" data-skin="panel_cream">
+      <div class="ribbon gold" data-skin="ribbon_gold"><span>Настройки</span></div>
+      <button id="btn-set-sound" class="srow" data-skin="settings_row"><i class="ic" data-skin="icon_sound_on_ink"></i><span class="lb">Звук</span><i class="tg" data-skin="toggle_on"></i></button>
+      <button id="btn-set-vol" class="srow" data-skin="settings_row"><i class="ic" data-skin="icon_volume_ink"></i><span class="lb">Громкость</span><span class="vol"><b data-v="1"><i data-skin="slot_vol_full"></i></b><b data-v="2"><i data-skin="slot_vol_full"></i></b><b data-v="3"><i data-skin="slot_vol_full"></i></b><b data-v="4"><i data-skin="slot_vol_empty"></i></b><b data-v="5"><i data-skin="slot_vol_empty"></i></b></span></button>
+      <button id="btn-set-fx" class="srow" data-skin="settings_row"><i class="ic" data-skin="icon_fx_ink"></i><span class="lb">Эффекты</span><i class="tg" data-skin="toggle_on"></i></button>
+      <button id="btn-set-fxq" class="srow" data-skin="settings_row"><i class="ic" data-skin="icon_fx_quality_ink"></i><span class="lb">Качество эффектов</span><i class="tg" data-skin="toggle_on"></i></button>
+      <button id="btn-set-shake" class="srow" data-skin="settings_row"><i class="ic" data-skin="icon_shake_ink"></i><span class="lb">Тряска</span><i class="tg" data-skin="toggle_on"></i></button>
+      <button id="btn-set-replies" class="srow" data-skin="settings_row"><i class="ic" data-skin="icon_reply_bubble_ink"></i><span class="lb">Реплики</span><i class="tg" data-skin="toggle_on"></i></button>
+      <button id="btn-set-hints" class="srow" data-skin="settings_row"><i class="ic" data-skin="icon_hint_bulb_ink"></i><span class="lb">Подсказки</span><i class="tg" data-skin="toggle_on"></i></button>
+      <button id="btn-set-reset" class="srow" data-skin="settings_row"><i class="ic" data-skin="icon_reset_ink"></i><span class="lb">Сбросить прогресс</span></button>
+      <button id="btn-set-back" class="b sec" data-skin="btn_sec"><span>Назад</span></button>
+    </div>
+  </div>
+
+  <div id="scr-book" class="scr" hidden>
+    <div class="panel" id="book-panel" data-skin="panel_cream">
+      <button id="btn-book-x" class="ibtn small" data-skin="btn_round" aria-label="Назад"><i data-skin="icon_back_arrow_ink"></i></button>
+      <div class="ribbon gold small" data-skin="ribbon_gold"><span>Коллекция</span></div>
+      <span id="book-count" data-skin="hud_lives"><b></b></span>
+      <div id="book-list"></div>
+      <button id="btn-book-back" class="b sec" data-skin="btn_peach"><span>Назад</span></button>
+    </div>
+  </div>
+  <div id="debug" hidden>
+    <pre id="dbg-text"></pre>
+    <div class="dbg-row">
+      <button id="dbg-art">Режим</button><button id="dbg-fx">Эффекты</button><button id="dbg-step-mode">Пошагово</button>
+      <button id="dbg-step">Шаг</button><button id="dbg-copy">Скопировать отчёт</button>
+    </div>
+  </div>
+</div>
+<div id="rotate">Поверните телефон вертикально</div>
+
+<script src="packs/list.js"></script>
+<script src="js/engine/packsel.js"></script>
+<script src="js/engine/core.js"></script>
+<script src="js/engine/draw.js"></script>
+<script src="js/engine/settings.js"></script>
+<script src="js/engine/assets.js"></script>
+<script src="js/uikit.js"></script>
+<script src="js/engine/audio.js"></script>
+<script src="js/levels.js"></script>
+<script src="js/data_v07.js"></script>
+<script src="js/data_v08.js"></script>
+<script src="js/data_v09.js"></script>
+<script src="js/data_meta.js"></script>
+<script src="js/rules.js"></script>
+<script src="js/depth.js"></script>
+<script src="js/proj_sim.js"></script>
+<script src="js/autopilot.js"></script>
+<script src="js/generator.js"></script>
+<script src="js/assetmap.js"></script>
+<script src="js/vbus.js"></script>
+<script src="js/vfx.js"></script>
+<script src="js/vfx_map.js"></script>
+<script src="js/fxgov.js"></script>
+<script src="js/postfx_glsl.js"></script>
+<script src="js/postfx.js"></script>
+<script src="js/cardgl.js"></script>
+<script src="js/artdraw.js"></script>
+<script src="js/tween.js"></script>
+<script src="js/art_enemies.js"></script>
+<script src="js/art_cart.js"></script>
+<script src="js/w2_fx.js"></script>
+<script src="js/art_rig.js"></script>
+<script src="js/w1_parts.js"></script>
+<script src="js/w2_env.js"></script>
+<script src="js/w1_env.js"></script>
+<script src="js/w1_numbers.js"></script>
+<script src="js/w1_bed.js"></script>
+<script src="js/cart_view.js"></script>
+<script src="js/projfx.js"></script>
+<script src="js/view.js"></script>
+<script src="js/drag_view.js"></script>
+<script src="js/auto_mark.js"></script>
+<script src="js/depth_view.js"></script>
+<script src="js/reveal_tl.js"></script>
+<script src="js/reveal_fx2d.js"></script>
+<script src="js/cardface.js"></script>
+<script src="js/reveal_info.js"></script>
+<script src="js/reveal.js"></script>
+<script src="js/collection_ui.js"></script>
+<script src="js/w2_result.js"></script>
+<script src="js/w1_screens.js"></script>
+<script src="js/w2_plaque.js"></script>
+<script src="js/scenarios.js"></script>
+<script src="js/solver.js"></script>
+<script src="js/meta.js"></script>
+<script src="js/meta_timers.js"></script>
+<script src="js/meta_tasks.js"></script>
+<script src="js/engine/iap_mock.js"></script>
+<script src="js/meta_assets.js"></script>
+<script src="js/meta_screens.js"></script>
+<script src="js/meta_fx.js"></script>
+<script src="js/meta_hub.js"></script>
+<script src="js/meta_ui.js"></script>
+<script src="js/engine/fullbleed.js"></script>
+<script src="js/engine/engine.js"></script>
+</body>
+</html>

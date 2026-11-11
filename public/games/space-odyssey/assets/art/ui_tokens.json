@@ -1,0 +1,108 @@
+{
+ "color": {
+  "bg": "#04050D",
+  "surface": "#060B18",
+  "surface2": "#0B1428",
+  "scrim": "rgba(4,5,13,0.84)",
+  "neon_cyan": "#2FE0FF",
+  "neon_dim": "#2A3A5C",
+  "magenta": "#FF4FD8",
+  "violet": "#B98CFF",
+  "energy": "#FFD23F",
+  "stardust": "#FF4FD8",
+  "sun": "#FFB338",
+  "sun_hot": "#FFE27A",
+  "sun_deep": "#FF6A1A",
+  "success": "#5CFF8A",
+  "error": "#FF3B5C",
+  "biomass": "#A6FF3D",
+  "life_microbe": "#3DFFD0",
+  "life_mind": "#B98CFF",
+  "life_evo": "#FFC94A",
+  "text_on_bio": "#EAFFD0",
+  "text": "#EAF6FF",
+  "text_muted": "#8CA0C8",
+  "text_off": "#788AA6",
+  "text_on_gold": "#1A0A03",
+  "number_stroke": "#04050D",
+  "number_stroke_sun": "#1A0A03"
+ },
+ "orbit": {
+  "ring": "#2FE0FF",
+  "ring_alpha": 0.55,
+  "ring_width": 4,
+  "ring_glow_blur": 10,
+  "ring_by_bg": {
+   "bg_cyan": "#2FE0FF",
+   "bg_violet": "#9A7BFF",
+   "bg_magenta": "#FF8A3D"
+  }
+ },
+ "zone": {
+  "manual": "#FFD23F",
+  "satellite": "#5CFF8A",
+  "missed": "#FF3B5C",
+  "hit": "#FFF6C2",
+  "width": 12,
+  "alpha_idle": 0.55,
+  "alpha_active": 1.0,
+  "glow_blur": 12,
+  "_note": "ручная зона жёлтая; зона спутника зелёная; сбито — красная (на 400 мс); поймано — вспышка hit + fx_resonance"
+ },
+ "font": {
+  "display": "'Russo One', 'Exo 2', sans-serif",
+  "ui": "'Exo 2', sans-serif",
+  "numbers_feature": "tnum",
+  "_note": "Russo One — числа, заголовки, кнопки; Exo 2 600–800 — подписи, текст"
+ },
+ "size_px_1080": {
+  "number_sun": 92,
+  "number_hud": 48,
+  "button_title": 40,
+  "label": 36,
+  "caption": 36,
+  "min_text": 36,
+  "menu_title": 48,
+  "menu_item": 44,
+  "btn_play": 64
+ },
+ "tap": {
+  "min": 144,
+  "_note": "зона нажатия ≥ 144 px @1080 (48 dp)"
+ },
+ "panel_menu": {
+  "x": 90,
+  "y": 200,
+  "w": 900,
+  "h": 1180,
+  "nine": 48,
+  "row_h": 132,
+  "row_w": 820,
+  "pad_x": 40,
+  "scrim": "rgba(4,5,13,0.72)",
+  "title_color": "#2FE0FF",
+  "danger": "#FF3B5C"
+ },
+ "radius": {
+  "chamfer_btn": 20,
+  "chamfer_panel": 34,
+  "chamfer_small": 12
+ },
+ "glow": {
+  "_note": "glow запечён в спрайты — shadowBlur для спрайтов не использовать; кодом — только орбита/зоны/линии созвездий",
+  "line_blur": 10
+ },
+ "contrast_wcag": {
+  "text/surface": 17.89,
+  "text_muted/surface": 7.46,
+  "text_off/surface": 5.6,
+  "energy/surface": 13.61,
+  "stardust/surface": 6.89,
+  "neon_cyan/surface": 12.38,
+  "success/surface": 15.09,
+  "error/surface": 5.64,
+  "violet/surface": 7.73,
+  "text_on_gold/sun_hot": 15.08,
+  "text_on_gold/sun_deep": 6.73
+ }
+}

@@ -1,0 +1,20 @@
+{
+ "format": "artlab.layer_timeline/1",
+ "key": "mut_frame_legendary",
+ "type": "frame_swap",
+ "loop": true,
+ "period_s": 0.667,
+ "frames": [
+  "mut_frame_legendary",
+  "mut_frame_legendary_02",
+  "mut_frame_legendary_03",
+  "mut_frame_legendary_04"
+ ],
+ "durations_ms": [
+  167,
+  167,
+  167,
+  166
+ ],
+ "fps": 6
+}

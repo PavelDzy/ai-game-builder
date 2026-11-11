@@ -1,0 +1,21 @@
+{
+ "format": "artlab.layer_timeline/1",
+ "key": "life_card_stage_mind",
+ "type": "frame_swap",
+ "loop": true,
+ "period_s": 1.0,
+ "frames": [
+  "life_card_stage_mind_01",
+  "life_card_stage_mind_02",
+  "life_card_stage_mind_03",
+  "life_card_stage_mind_04"
+ ],
+ "durations_ms": [
+  250,
+  250,
+  250,
+  250
+ ],
+ "fps": 4,
+ "note": "карточка"
+}

@@ -1,0 +1,49 @@
+{
+ "format": "artlab.layer_timeline/1",
+ "key": "galaxy_point_done",
+ "type": "frame_swap",
+ "loop": true,
+ "fps": 8,
+ "frames": [
+  "galaxy_point_done",
+  "galaxy_point_done",
+  "galaxy_point_done",
+  "galaxy_point_done_b",
+  "galaxy_point_done",
+  "galaxy_point_done",
+  "galaxy_point_done_b",
+  "galaxy_point_done"
+ ],
+ "period_s": 1.0,
+ "phase": "сдвиг в кадрах = (k*3) % 8 для точки k (разные фазы, без синхронного мигания)",
+ "durations_ms": [
+  125,
+  125,
+  125,
+  125,
+  125,
+  125,
+  125,
+  125
+ ],
+ "blend": "source-over",
+ "alt_tween": {
+  "alpha": [
+   [
+    0,
+    1.0,
+    "inOutSine"
+   ],
+   [
+    0.5,
+    0.85,
+    "inOutSine"
+   ],
+   [
+    1.0,
+    1.0
+   ]
+  ]
+ },
+ "note": "мерцание пройденных звёзд; alt_tween — если смена кадров не нужна"
+}

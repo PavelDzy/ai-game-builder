@@ -1,0 +1,562 @@
+{
+ "format": "artlab.layer_timeline/1",
+ "type": "fx",
+ "key": "bio_spores",
+ "duration_s": 0.983,
+ "loop": false,
+ "ref_px": 84,
+ "usage": "life_catch -> play(o = планета, size = показ планеты, to = центр иконки Биомассы в HUD). 8 спор по дугам (наружу -> в счётчик, ease-in). Лимит: > 32 спор в полёте — играть bio_pop вместо этого клипа.",
+ "layers": [
+  {
+   "id": "pop",
+   "sprite": "bio_pop_key",
+   "blend": "lighter",
+   "z": 0,
+   "tracks": {
+    "scale": [
+     [
+      0,
+      0.5,
+      "outBack"
+     ],
+     [
+      0.12,
+      1.15,
+      "outQuad"
+     ],
+     [
+      0.3,
+      1.3
+     ]
+    ],
+    "alpha": [
+     [
+      0,
+      1,
+      "linear"
+     ],
+     [
+      0.12,
+      1,
+      "inQuad"
+     ],
+     [
+      0.3,
+      0
+     ]
+    ]
+   },
+   "visible": [
+    0,
+    0.3
+   ],
+   "note": "отклик в кадре тапа"
+  },
+  {
+   "id": "hud_pop",
+   "sprite": "bio_pop_key",
+   "blend": "lighter",
+   "z": 7,
+   "tracks": {
+    "scale": [
+     [
+      0.521,
+      0.45,
+      "outCubic"
+     ],
+     [
+      0.983,
+      0.95
+     ]
+    ],
+    "alpha": [
+     [
+      0.521,
+      1,
+      "linear"
+     ],
+     [
+      0.733,
+      0.8,
+      "inQuad"
+     ],
+     [
+      0.983,
+      0
+     ]
+    ]
+   },
+   "at": "@to",
+   "k": false,
+   "visible": [
+    0.521,
+    0.983
+   ]
+  }
+ ],
+ "flyers": [
+  {
+   "id": "spores",
+   "from": "@o",
+   "to": "@to",
+   "blend": "lighter",
+   "z": 6,
+   "items": [
+    {
+     "sprite": "bio_spore_01",
+     "t0": 0.0,
+     "dur": 0.5207,
+     "ease": "inQuad",
+     "angle": 93.1,
+     "angle_rel": true,
+     "kick": 165.8,
+     "spin": 121.2,
+     "tracks_u": {
+      "scale": [
+       [
+        0,
+        0.8,
+        "outBack"
+       ],
+       [
+        0.12,
+        1.4,
+        "linear"
+       ],
+       [
+        1,
+        0.8
+       ]
+      ],
+      "alpha": [
+       [
+        0,
+        1,
+        "linear"
+       ],
+       [
+        0.85,
+        1,
+        "linear"
+       ],
+       [
+        1,
+        0.4
+       ]
+      ]
+     }
+    },
+    {
+     "sprite": "bio_spore_02",
+     "t0": 0.022,
+     "dur": 0.5225,
+     "ease": "inQuad",
+     "angle": -107.0,
+     "angle_rel": true,
+     "kick": 133.8,
+     "spin": -230.1,
+     "tracks_u": {
+      "scale": [
+       [
+        0,
+        0.8,
+        "outBack"
+       ],
+       [
+        0.12,
+        1.4,
+        "linear"
+       ],
+       [
+        1,
+        0.8
+       ]
+      ],
+      "alpha": [
+       [
+        0,
+        1,
+        "linear"
+       ],
+       [
+        0.85,
+        1,
+        "linear"
+       ],
+       [
+        1,
+        0.4
+       ]
+      ]
+     }
+    },
+    {
+     "sprite": "bio_spore_03",
+     "t0": 0.044,
+     "dur": 0.5125,
+     "ease": "inQuad",
+     "angle": 61.8,
+     "angle_rel": true,
+     "kick": 156.0,
+     "spin": 225.3,
+     "tracks_u": {
+      "scale": [
+       [
+        0,
+        0.8,
+        "outBack"
+       ],
+       [
+        0.12,
+        1.4,
+        "linear"
+       ],
+       [
+        1,
+        0.8
+       ]
+      ],
+      "alpha": [
+       [
+        0,
+        1,
+        "linear"
+       ],
+       [
+        0.85,
+        1,
+        "linear"
+       ],
+       [
+        1,
+        0.4
+       ]
+      ]
+     }
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.066,
+     "dur": 0.5695,
+     "ease": "inQuad",
+     "angle": -122.5,
+     "angle_rel": true,
+     "kick": 135.9,
+     "spin": -154.9,
+     "tracks_u": {
+      "scale": [
+       [
+        0,
+        0.8,
+        "outBack"
+       ],
+       [
+        0.12,
+        1.4,
+        "linear"
+       ],
+       [
+        1,
+        0.8
+       ]
+      ],
+      "alpha": [
+       [
+        0,
+        1,
+        "linear"
+       ],
+       [
+        0.85,
+        1,
+        "linear"
+       ],
+       [
+        1,
+        0.4
+       ]
+      ]
+     }
+    },
+    {
+     "sprite": "bio_spore_01",
+     "t0": 0.088,
+     "dur": 0.5267,
+     "ease": "inQuad",
+     "angle": 105.6,
+     "angle_rel": true,
+     "kick": 165.2,
+     "spin": 142.5,
+     "tracks_u": {
+      "scale": [
+       [
+        0,
+        0.8,
+        "outBack"
+       ],
+       [
+        0.12,
+        1.4,
+        "linear"
+       ],
+       [
+        1,
+        0.8
+       ]
+      ],
+      "alpha": [
+       [
+        0,
+        1,
+        "linear"
+       ],
+       [
+        0.85,
+        1,
+        "linear"
+       ],
+       [
+        1,
+        0.4
+       ]
+      ]
+     }
+    },
+    {
+     "sprite": "bio_spore_02",
+     "t0": 0.11,
+     "dur": 0.506,
+     "ease": "inQuad",
+     "angle": -108.8,
+     "angle_rel": true,
+     "kick": 166.1,
+     "spin": -170.5,
+     "tracks_u": {
+      "scale": [
+       [
+        0,
+        0.8,
+        "outBack"
+       ],
+       [
+        0.12,
+        1.4,
+        "linear"
+       ],
+       [
+        1,
+        0.8
+       ]
+      ],
+      "alpha": [
+       [
+        0,
+        1,
+        "linear"
+       ],
+       [
+        0.85,
+        1,
+        "linear"
+       ],
+       [
+        1,
+        0.4
+       ]
+      ]
+     }
+    },
+    {
+     "sprite": "bio_spore_03",
+     "t0": 0.132,
+     "dur": 0.5737,
+     "ease": "inQuad",
+     "angle": 93.8,
+     "angle_rel": true,
+     "kick": 169.4,
+     "spin": 195.7,
+     "tracks_u": {
+      "scale": [
+       [
+        0,
+        0.8,
+        "outBack"
+       ],
+       [
+        0.12,
+        1.4,
+        "linear"
+       ],
+       [
+        1,
+        0.8
+       ]
+      ],
+      "alpha": [
+       [
+        0,
+        1,
+        "linear"
+       ],
+       [
+        0.85,
+        1,
+        "linear"
+       ],
+       [
+        1,
+        0.4
+       ]
+      ]
+     }
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.154,
+     "dur": 0.5793,
+     "ease": "inQuad",
+     "angle": -97.6,
+     "angle_rel": true,
+     "kick": 144.2,
+     "spin": -142.6,
+     "tracks_u": {
+      "scale": [
+       [
+        0,
+        0.8,
+        "outBack"
+       ],
+       [
+        0.12,
+        1.4,
+        "linear"
+       ],
+       [
+        1,
+        0.8
+       ]
+      ],
+      "alpha": [
+       [
+        0,
+        1,
+        "linear"
+       ],
+       [
+        0.85,
+        1,
+        "linear"
+       ],
+       [
+        1,
+        0.4
+       ]
+      ]
+     }
+    }
+   ]
+  }
+ ],
+ "host": {
+  "hud_scale": {
+   "def": 1,
+   "keys": [
+    [
+     0.521,
+     1,
+     "outQuad"
+    ],
+    [
+     0.581,
+     1.18,
+     "inOutQuad"
+    ],
+    [
+     0.853,
+     1
+    ]
+   ],
+   "note": "иконка/счётчик Биомассы"
+  },
+  "text_alpha": {
+   "def": 1,
+   "keys": [
+    [
+     0,
+     1,
+     "linear"
+    ],
+    [
+     0.45,
+     1,
+     "inQuad"
+    ],
+    [
+     0.7,
+     0
+    ]
+   ],
+   "note": "«+N Б» у планеты"
+  },
+  "text_dy": {
+   "def": 0,
+   "keys": [
+    [
+     0,
+     0,
+     "outCubic"
+    ],
+    [
+     0.7,
+     -56
+    ]
+   ],
+   "note": "подъём текста, px кадра 1080"
+  },
+  "text_scale": {
+   "def": 1,
+   "keys": [
+    [
+     0,
+     0.6,
+     "outBack"
+    ],
+    [
+     0.15,
+     1.1,
+     "inOutQuad"
+    ],
+    [
+     0.25,
+     1
+    ]
+   ]
+  }
+ },
+ "events": [
+  {
+   "name": "count",
+   "t": 0,
+   "gameplay": true,
+   "note": "«+N Б» у планеты (Биомасса уже начислена sim)"
+  },
+  {
+   "name": "arrive",
+   "t": 0.521,
+   "gameplay": false,
+   "note": "первая спора в счётчике: bump + тик счётчика"
+  },
+  {
+   "name": "arrive_last",
+   "t": 0.733,
+   "gameplay": false,
+   "note": ""
+  },
+  {
+   "name": "done",
+   "t": 0.983,
+   "gameplay": false,
+   "note": ""
+  }
+ ]
+}

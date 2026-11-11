@@ -1,0 +1,2517 @@
+{
+ "format": "artlab.layer_timeline/1",
+ "key": "galaxy_flow",
+ "game_id": "solar_relay",
+ "task": "T-115",
+ "request": "REQ-20261101-002",
+ "frame": [
+  1080,
+  1920
+ ],
+ "visible_height_max": 2400,
+ "fps_hint": 60,
+ "duration_s": 6.2,
+ "loop": false,
+ "params": {
+  "N": "индекс рождаемой звезды в manifest.galaxy.road (0-based); маркер едет N -> N+1; N=11 -> без marker_move, точка 12 = galaxy_point_big_*"
+ },
+ "parents_draw_order": [
+  "system",
+  "galaxy_far",
+  "galaxy_world",
+  "ui",
+  "overlay",
+  "screen_fx"
+ ],
+ "screen_swap": {
+  "at": "whiteout_full",
+  "t": 0.6,
+  "hide": [
+   "system"
+  ],
+  "show": [
+   "galaxy_far",
+   "galaxy_world",
+   "ui"
+  ]
+ },
+ "skip": {
+  "enabled_after_s": 2.0,
+  "jump_to_s": 6.0,
+  "crossfade_ms": 200,
+  "fire_skipped_events": true,
+  "note": "тап до 2.0 игнорировать; после — перейти в состояние 6.0 (кнопка «ДАЛЬШЕ»), пропущенные gameplay-события вызвать по порядку"
+ },
+ "track_key": "[t_seconds, value, ease_to_next]; до первого ключа — значение первого, после последнего — последнего",
+ "defaults": {
+  "alpha": 1,
+  "scale": 1,
+  "scaleX": 1,
+  "scaleY": 1,
+  "rot": 0,
+  "x": 0,
+  "y": 0,
+  "u": 0
+ },
+ "units": {
+  "rot": "градусы, по часовой",
+  "x/y": "смещение px кадра от anchor",
+  "scale": "множитель к manifest display"
+ },
+ "easings": {
+  "linear": "t",
+  "hold": "0 until next key (step)",
+  "inQuad": "t^2",
+  "outQuad": "1-(1-t)^2",
+  "inOutQuad": "t<.5 ? 2t^2 : 1-(-2t+2)^2/2",
+  "inCubic": "t^3",
+  "outCubic": "1-(1-t)^3",
+  "inOutCubic": "t<.5 ? 4t^3 : 1-(-2t+2)^3/2",
+  "outQuart": "1-(1-t)^4",
+  "outExpo": "t==1 ? 1 : 1-2^(-10t)",
+  "inOutSine": "-(cos(pi*t)-1)/2",
+  "outBack": "c1=1.70158,c3=c1+1: 1+c3*(t-1)^3+c1*(t-1)^2",
+  "inBack": "c1=1.70158,c3=c1+1: c3*t^3-c1*t^2"
+ },
+ "anchors": {
+  "@sun": [
+   540,
+   640
+  ],
+  "@core": [
+   540,
+   960
+  ],
+  "@core_file": "полноэкранный файл 1080x2400: центр файла (540,1200) = ядро (540,960) кадра (y кадра = y файла - 240)",
+  "@road[k]": "manifest.galaxy.road[k] (k = N-1, N, N+1, N+2; 0-based; кадр 1080x1920)",
+  "@bubble[k]": "road[k] + 100 px по направлению к core (правило manifest: медальон к ядру)",
+  "code:*": "позиция/спрайт задаёт код игры (HUD, карточка, кнопка)"
+ },
+ "paths": {
+  "arm": "кривая рукава manifest.galaxy: t = lerp(road_t[from], road_t[to], u); r = arm_a*exp(arm_b*t); v = (r*cos(t)*axis_ratio, r*sin(t)); p = core + R(pa_rad)*v. u<0 и u>1 — продолжение той же кривой",
+  "quad": "квадратичная Безье: P0=from, P2=to, C = mid + perp(P2-P0)*bend (perp = (-dy, dx)); orient=tangent -> rot = atan2 производной"
+ },
+ "cameras": {
+  "system": {
+   "pivot": "@sun",
+   "tracks": {
+    "scale": [
+     [
+      0,
+      1,
+      "linear"
+     ],
+     [
+      0.25,
+      1,
+      "outCubic"
+     ],
+     [
+      0.6,
+      1.05
+     ]
+    ]
+   },
+   "visible": [
+    0,
+    0.6
+   ],
+   "note": "контейнер экрана Система (весь экран кроме HUD-оверлея): толчок камеры 1->1.05"
+  },
+  "galaxy_world": {
+   "focus_world": "@core",
+   "transform": "screen = (540, focus_y) + R(rot) * (p_world - core) * scale",
+   "tracks": {
+    "scale": [
+     [
+      0.6,
+      1.6,
+      "outCubic"
+     ],
+     [
+      2.1,
+      1.0
+     ]
+    ],
+    "focus_y": [
+     [
+      0.6,
+      640,
+      "outCubic"
+     ],
+     [
+      2.1,
+      960
+     ]
+    ],
+    "rot": [
+     [
+      0.6,
+      -10,
+      "outCubic"
+     ],
+     [
+      2.1,
+      0
+     ]
+    ]
+   },
+   "visible": [
+    0.6,
+    null
+   ],
+   "note": "ядро галактики стартует ровно в центре вспышки (540,640), отъезжает к (540,960); диск доворачивается на 10 deg"
+  },
+  "galaxy_far": {
+   "follow": "galaxy_world",
+   "parallax": 0.3,
+   "transform": "scale_f = 1+(scale-1)*0.3; rot_f = rot*0.3; F_f = core + (F - core)*0.3; screen = F_f + R(rot_f)*(p - core)*scale_f"
+  }
+ },
+ "shakes": [
+  {
+   "id": "tremble",
+   "target": "system",
+   "t0": 0.08,
+   "t1": 0.25,
+   "amp_px": 1.5,
+   "amp_ease": "none",
+   "freq_hz": [
+    41,
+    37
+   ],
+   "phase": [
+    0.0,
+    1.1
+   ]
+  },
+  {
+   "id": "shock",
+   "target": "system",
+   "t0": 0.25,
+   "t1": 0.6,
+   "amp_px": 6,
+   "amp_ease": "outQuad",
+   "freq_hz": [
+    28,
+    23
+   ],
+   "phase": [
+    0.0,
+    1.3
+   ]
+  },
+  {
+   "id": "birth_kick",
+   "target": "galaxy_world",
+   "t0": 3.05,
+   "t1": 3.23,
+   "amp_px": 3,
+   "amp_ease": "outQuad",
+   "freq_hz": [
+    30,
+    26
+   ],
+   "phase": [
+    0.4,
+    2.0
+   ]
+  }
+ ],
+ "shake_rule": "A = amp_px * (1 - ease((t-t0)/(t1-t0)))  (amp_ease none -> A = amp_px);  dx = A*sin(2pi*f0*(t-t0)+ph0), dy = A*sin(2pi*f1*(t-t0)+ph1); добавлять к смещению контейнера target",
+ "layers": [
+  {
+   "id": "sun_idle_hide",
+   "sprite": "code:sun_idle",
+   "parent": "system",
+   "blend": "source-over",
+   "z": 10,
+   "anchor": "@sun",
+   "tracks": {
+    "alpha": [
+     [
+      0,
+      1,
+      "linear"
+     ],
+     [
+      0.06,
+      0
+     ]
+    ]
+   },
+   "note": "sun_idle/sun_body/корона игры: только гасим (alpha-множитель), сам спрайт рисует код"
+  },
+  {
+   "id": "sun_compress",
+   "sprite": "sun_nova_01",
+   "parent": "system",
+   "blend": "source-over",
+   "z": 11,
+   "anchor": "@sun",
+   "visible": [
+    0,
+    0.3
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      0,
+      0,
+      "linear"
+     ],
+     [
+      0.06,
+      1,
+      "hold"
+     ],
+     [
+      0.25,
+      1,
+      "linear"
+     ],
+     [
+      0.3,
+      0
+     ]
+    ],
+    "scale": [
+     [
+      0,
+      1.0,
+      "inCubic"
+     ],
+     [
+      0.25,
+      0.85
+     ]
+    ],
+    "rot": [
+     [
+      0,
+      0,
+      "inCubic"
+     ],
+     [
+      0.25,
+      -12
+     ]
+    ]
+   },
+   "note": "антиципация: Солнце сжимается с ускорением и закручивается"
+  },
+  {
+   "id": "implode_ring",
+   "sprite": "nova_shock_ring",
+   "parent": "system",
+   "blend": "lighter",
+   "z": 12,
+   "anchor": "@sun",
+   "visible": [
+    0.04,
+    0.26
+   ],
+   "tracks": {
+    "scale": [
+     [
+      0.04,
+      0.55,
+      "inCubic"
+     ],
+     [
+      0.25,
+      0.12
+     ]
+    ],
+    "alpha": [
+     [
+      0.04,
+      0,
+      "outQuad"
+     ],
+     [
+      0.14,
+      0.7,
+      "linear"
+     ],
+     [
+      0.25,
+      0.9
+     ]
+    ]
+   },
+   "note": "кольцо втягивается в Солнце перед взрывом (имплозия)"
+  },
+  {
+   "id": "flash_core",
+   "sprite": "nova_flash_core",
+   "parent": "system",
+   "blend": "lighter",
+   "z": 13,
+   "anchor": "@sun",
+   "visible": [
+    0.08,
+    0.6
+   ],
+   "tracks": {
+    "scale": [
+     [
+      0.08,
+      0.15,
+      "inQuad"
+     ],
+     [
+      0.25,
+      0.4,
+      "outExpo"
+     ],
+     [
+      0.6,
+      2.2
+     ]
+    ],
+    "alpha": [
+     [
+      0.08,
+      0,
+      "inQuad"
+     ],
+     [
+      0.25,
+      1
+     ]
+    ]
+   },
+   "note": "предсвечение ядра 0.08-0.25, затем взрыв 0.4->2.2"
+  },
+  {
+   "id": "burst_frame",
+   "sprite": "sun_nova_02",
+   "parent": "system",
+   "blend": "source-over",
+   "z": 14,
+   "anchor": "@sun",
+   "visible": [
+    0.25,
+    0.45
+   ],
+   "tracks": {
+    "scale": [
+     [
+      0.25,
+      0.8,
+      "outCubic"
+     ],
+     [
+      0.45,
+      1.4
+     ]
+    ],
+    "alpha": [
+     [
+      0.25,
+      1,
+      "hold"
+     ],
+     [
+      0.33,
+      1,
+      "inQuad"
+     ],
+     [
+      0.45,
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "rays",
+   "sprite": "nova_rays",
+   "parent": "system",
+   "blend": "lighter",
+   "z": 15,
+   "anchor": "@sun",
+   "visible": [
+    0.25,
+    0.6
+   ],
+   "tracks": {
+    "scale": [
+     [
+      0.25,
+      0.5,
+      "outCubic"
+     ],
+     [
+      0.6,
+      1.8
+     ]
+    ],
+    "rot": [
+     [
+      0.25,
+      0,
+      "outCubic"
+     ],
+     [
+      0.6,
+      12
+     ]
+    ],
+    "alpha": [
+     [
+      0.25,
+      0,
+      "outQuad"
+     ],
+     [
+      0.29,
+      1
+     ]
+    ]
+   }
+  },
+  {
+   "id": "flare",
+   "sprite": "nova_flare",
+   "parent": "system",
+   "blend": "lighter",
+   "z": 16,
+   "anchor": "@sun",
+   "visible": [
+    0.26,
+    0.6
+   ],
+   "tracks": {
+    "scaleX": [
+     [
+      0.26,
+      0.3,
+      "outCubic"
+     ],
+     [
+      0.6,
+      1.3
+     ]
+    ],
+    "scaleY": [
+     [
+      0.26,
+      1.0,
+      "linear"
+     ],
+     [
+      0.6,
+      0.7
+     ]
+    ],
+    "alpha": [
+     [
+      0.26,
+      0,
+      "outQuad"
+     ],
+     [
+      0.31,
+      1,
+      "linear"
+     ],
+     [
+      0.6,
+      0.6
+     ]
+    ]
+   }
+  },
+  {
+   "id": "shock_ring",
+   "sprite": "nova_shock_ring",
+   "parent": "system",
+   "blend": "lighter",
+   "z": 17,
+   "anchor": "@sun",
+   "visible": [
+    0.27,
+    0.6
+   ],
+   "tracks": {
+    "scale": [
+     [
+      0.27,
+      0.15,
+      "outCubic"
+     ],
+     [
+      0.6,
+      2.6
+     ]
+    ],
+    "alpha": [
+     [
+      0.27,
+      1,
+      "hold"
+     ],
+     [
+      0.4,
+      1,
+      "inQuad"
+     ],
+     [
+      0.6,
+      0.2
+     ]
+    ]
+   },
+   "note": "ударная волна до краёв экрана за 0.33 с"
+  },
+  {
+   "id": "whiteout_fill",
+   "sprite": "code:fill#E8DCC4",
+   "parent": "overlay",
+   "blend": "source-over",
+   "z": -1,
+   "anchor": [
+    540,
+    960
+   ],
+   "visible": [
+    0.4,
+    1.3
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      0.4,
+      0,
+      "inCubic"
+     ],
+     [
+      0.6,
+      1,
+      "hold"
+     ],
+     [
+      0.72,
+      1,
+      "outQuad"
+     ],
+     [
+      1.3,
+      0
+     ]
+    ]
+   },
+   "note": "fillRect всего видимого кадра цветом #E8DCC4 под overlay: альфа файла overlay 0.81-1.0, без заливки 'белый экран' просвечивает"
+  },
+  {
+   "id": "whiteout",
+   "sprite": "nova_flash_overlay",
+   "parent": "overlay",
+   "blend": "source-over",
+   "z": 0,
+   "anchor": [
+    540,
+    960
+   ],
+   "visible": [
+    0.4,
+    1.3
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      0.4,
+      0,
+      "inCubic"
+     ],
+     [
+      0.6,
+      1,
+      "hold"
+     ],
+     [
+      0.72,
+      1,
+      "outQuad"
+     ],
+     [
+      1.3,
+      0
+     ]
+    ]
+   },
+   "note": "растянуть на весь видимый кадр (display 1080x1920; при высоте 2400 — cover), над system и galaxy, под screen_fx"
+  },
+  {
+   "id": "stars_far",
+   "sprite": "galaxy_stars_far",
+   "parent": "galaxy_far",
+   "blend": "source-over",
+   "z": 0,
+   "anchor": "@core_file",
+   "visible": [
+    0.6,
+    null
+   ],
+   "tracks": {},
+   "note": "непрозрачный, тайлить по x/y; камера galaxy_far (параллакс 0.3)"
+  },
+  {
+   "id": "disk",
+   "sprite": "galaxy_disk",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 0,
+   "anchor": "@core_file",
+   "visible": [
+    0.6,
+    null
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      0.6,
+      1
+     ]
+    ]
+   }
+  },
+  {
+   "id": "core_glow",
+   "sprite": "galaxy_core_glow",
+   "parent": "galaxy_world",
+   "blend": "lighter",
+   "z": 1,
+   "anchor": "@core",
+   "visible": [
+    0.6,
+    null
+   ],
+   "tracks": {
+    "scale": [
+     [
+      0.6,
+      1.5,
+      "outCubic"
+     ],
+     [
+      2.1,
+      1.0
+     ]
+    ]
+   },
+   "loop_after": {
+    "t": 2.1,
+    "loop": "galaxy_core_glow"
+   },
+   "note": "после 2.10 — цикл galaxy_core_glow (фаза 0 = scale 1, alpha 1)"
+  },
+  {
+   "id": "nova_remnant",
+   "sprite": "nova_flash_core",
+   "parent": "galaxy_world",
+   "blend": "lighter",
+   "z": 2,
+   "anchor": "@core",
+   "visible": [
+    0.6,
+    1.6
+   ],
+   "tracks": {
+    "scale": [
+     [
+      0.6,
+      1.6,
+      "outCubic"
+     ],
+     [
+      1.6,
+      0.6
+     ]
+    ],
+    "alpha": [
+     [
+      0.6,
+      1,
+      "inOutSine"
+     ],
+     [
+      1.6,
+      0
+     ]
+    ]
+   },
+   "note": "энергия вспышки стягивается в ядро галактики"
+  },
+  {
+   "id": "arm_marks",
+   "sprite": "galaxy_arm_marks",
+   "parent": "galaxy_world",
+   "blend": "lighter",
+   "z": 0.5,
+   "anchor": "@core_file",
+   "visible": [
+    0.6,
+    null
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      0.6,
+      0.75
+     ]
+    ]
+   },
+   "prebake": "disk",
+   "note": "НЕ отдельный слой кадра: один раз при входе в поток нарисовать в offscreen-холст disk (lighter, alpha 0.75) и дальше рисовать один disk_lit source-over — экономит полноэкранный lighter"
+  },
+  {
+   "id": "hud_galaxy",
+   "sprite": "code:galaxy_hud",
+   "parent": "ui",
+   "blend": "source-over",
+   "z": 0,
+   "anchor": [
+    540,
+    960
+   ],
+   "visible": [
+    1.6,
+    null
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      1.6,
+      0,
+      "outQuad"
+     ],
+     [
+      2.1,
+      1
+     ]
+    ]
+   },
+   "note": "кнопка «Галактика», счётчик, подпись рукава — код"
+  },
+  {
+   "id": "pulse_N_stop",
+   "sprite": "code:galaxy_point_pulse@N",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 10,
+   "anchor": "@road[N]",
+   "tracks": {
+    "alpha": [
+     [
+      2.1,
+      1,
+      "linear"
+     ],
+     [
+      2.4,
+      0
+     ]
+    ]
+   },
+   "note": "множитель alpha цикла пульса на точке N (гасим)"
+  },
+  {
+   "id": "marker_dim",
+   "sprite": "galaxy_marker_system",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 12,
+   "anchor": "@road[N]",
+   "visible": [
+    0.6,
+    3.6
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      2.1,
+      1,
+      "outQuad"
+     ],
+     [
+      2.4,
+      0.5,
+      "hold"
+     ],
+     [
+      3.35,
+      0.5,
+      "outQuad"
+     ],
+     [
+      3.55,
+      1
+     ]
+    ],
+    "scale": [
+     [
+      2.1,
+      1,
+      "outQuad"
+     ],
+     [
+      2.4,
+      0.85,
+      "hold"
+     ],
+     [
+      3.35,
+      0.85,
+      "outBack"
+     ],
+     [
+      3.55,
+      1
+     ]
+    ]
+   },
+   "note": "маркер «вы здесь» на N приглушается на время рождения (под слоями рождения)"
+  },
+  {
+   "id": "spark",
+   "sprite": "galaxy_spark",
+   "parent": "galaxy_world",
+   "blend": "lighter",
+   "z": 20,
+   "visible": [
+    2.1,
+    2.58
+   ],
+   "tracks": {
+    "u": [
+     [
+      2.1,
+      0,
+      "inQuad"
+     ],
+     [
+      2.55,
+      1
+     ]
+    ],
+    "scale": [
+     [
+      2.1,
+      0.6,
+      "outQuad"
+     ],
+     [
+      2.25,
+      1.2,
+      "linear"
+     ],
+     [
+      2.55,
+      1.0
+     ]
+    ],
+    "alpha": [
+     [
+      2.1,
+      0,
+      "linear"
+     ],
+     [
+      2.16,
+      1,
+      "hold"
+     ],
+     [
+      2.52,
+      1,
+      "linear"
+     ],
+     [
+      2.58,
+      0
+     ]
+    ]
+   },
+   "path": {
+    "type": "quad",
+    "from": "@core",
+    "to": "@road[N]",
+    "bend": 0.22
+   },
+   "orient": "tangent",
+   "trail": {
+    "sprite": "galaxy_spark_b",
+    "count": 5,
+    "dt": 0.03,
+    "alpha_mul": [
+     0.7,
+     0.55,
+     0.42,
+     0.3,
+     0.18
+    ],
+    "scale_mul": [
+     0.9,
+     0.8,
+     0.7,
+     0.6,
+     0.5
+    ]
+   },
+   "note": "искра от ядра к точке N по дуге; хвост — 5 копий galaxy_spark_b с отставанием 0.03 с"
+  },
+  {
+   "id": "birth_cloud",
+   "sprite": "galaxy_star_birth_01",
+   "parent": "galaxy_world",
+   "blend": "lighter",
+   "z": 21,
+   "anchor": "@road[N]",
+   "visible": [
+    2.35,
+    2.92
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      2.35,
+      0,
+      "outQuad"
+     ],
+     [
+      2.5,
+      1,
+      "hold"
+     ],
+     [
+      2.82,
+      1,
+      "linear"
+     ],
+     [
+      2.92,
+      0
+     ]
+    ],
+    "scale": [
+     [
+      2.35,
+      1.2,
+      "inCubic"
+     ],
+     [
+      2.9,
+      0.55
+     ]
+    ],
+    "rot": [
+     [
+      2.35,
+      0,
+      "inQuad"
+     ],
+     [
+      2.9,
+      -30
+     ]
+    ]
+   },
+   "note": "облако сжимается и раскручивается (сохранение момента)"
+  },
+  {
+   "id": "path_reveal",
+   "sprite": "code:path_lit",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 5,
+   "anchor": "@road[N]",
+   "tracks": {
+    "u": [
+     [
+      2.8,
+      0,
+      "inOutCubic"
+     ],
+     [
+      3.05,
+      1
+     ]
+    ]
+   },
+   "path": {
+    "type": "arm",
+    "from": "N-1",
+    "to": "N"
+   },
+   "note": "lit-штрих дорисовывается от N-1 к N (u = доля по road_t); при N=0 пропустить"
+  },
+  {
+   "id": "ignite",
+   "sprite": "galaxy_star_birth_02",
+   "parent": "galaxy_world",
+   "blend": "lighter",
+   "z": 22,
+   "anchor": "@road[N]",
+   "visible": [
+    2.85,
+    3.08
+   ],
+   "tracks": {
+    "scale": [
+     [
+      2.85,
+      0.3,
+      "outBack"
+     ],
+     [
+      3.0,
+      1.0
+     ]
+    ],
+    "rot": [
+     [
+      2.85,
+      0,
+      "linear"
+     ],
+     [
+      3.08,
+      8
+     ]
+    ],
+    "alpha": [
+     [
+      2.85,
+      0,
+      "linear"
+     ],
+     [
+      2.88,
+      1,
+      "hold"
+     ],
+     [
+      3.03,
+      1,
+      "linear"
+     ],
+     [
+      3.08,
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "point_current_N_out",
+   "sprite": "galaxy_point_current",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 9,
+   "anchor": "@road[N]",
+   "visible": [
+    0.6,
+    3.05
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      2.85,
+      1,
+      "outQuad"
+     ],
+     [
+      3.05,
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "birth_peak",
+   "sprite": "galaxy_star_birth_03",
+   "parent": "galaxy_world",
+   "blend": "lighter",
+   "z": 23,
+   "anchor": "@road[N]",
+   "visible": [
+    3.03,
+    3.35
+   ],
+   "tracks": {
+    "scale": [
+     [
+      3.03,
+      0.7,
+      "outCubic"
+     ],
+     [
+      3.15,
+      1.15,
+      "inOutSine"
+     ],
+     [
+      3.35,
+      1.0
+     ]
+    ],
+    "rot": [
+     [
+      3.03,
+      0,
+      "outCubic"
+     ],
+     [
+      3.35,
+      10
+     ]
+    ],
+    "alpha": [
+     [
+      3.03,
+      0,
+      "linear"
+     ],
+     [
+      3.06,
+      1,
+      "hold"
+     ],
+     [
+      3.22,
+      1,
+      "inQuad"
+     ],
+     [
+      3.35,
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "birth_ring",
+   "sprite": "galaxy_birth_ring",
+   "parent": "galaxy_world",
+   "blend": "lighter",
+   "z": 24,
+   "anchor": "@road[N]",
+   "visible": [
+    3.05,
+    3.55
+   ],
+   "tracks": {
+    "scale": [
+     [
+      3.05,
+      0.2,
+      "outCubic"
+     ],
+     [
+      3.55,
+      1.2
+     ]
+    ],
+    "alpha": [
+     [
+      3.05,
+      1,
+      "inQuad"
+     ],
+     [
+      3.55,
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "birth_flare",
+   "sprite": "nova_flare",
+   "parent": "galaxy_world",
+   "blend": "lighter",
+   "z": 25,
+   "anchor": "@road[N]",
+   "visible": [
+    3.05,
+    3.4
+   ],
+   "tracks": {
+    "scaleX": [
+     [
+      3.05,
+      0.15,
+      "outCubic"
+     ],
+     [
+      3.4,
+      0.55
+     ]
+    ],
+    "scaleY": [
+     [
+      3.05,
+      0.8,
+      "linear"
+     ],
+     [
+      3.4,
+      0.5
+     ]
+    ],
+    "alpha": [
+     [
+      3.05,
+      0,
+      "linear"
+     ],
+     [
+      3.08,
+      1,
+      "inQuad"
+     ],
+     [
+      3.4,
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "birth_settle",
+   "sprite": "galaxy_star_birth_04",
+   "parent": "galaxy_world",
+   "blend": "lighter",
+   "z": 26,
+   "anchor": "@road[N]",
+   "visible": [
+    3.25,
+    3.8
+   ],
+   "tracks": {
+    "scale": [
+     [
+      3.25,
+      1.0,
+      "outCubic"
+     ],
+     [
+      3.8,
+      0.6
+     ]
+    ],
+    "alpha": [
+     [
+      3.25,
+      0,
+      "linear"
+     ],
+     [
+      3.33,
+      1,
+      "hold"
+     ],
+     [
+      3.45,
+      1,
+      "inOutSine"
+     ],
+     [
+      3.8,
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "point_done_N",
+   "sprite": "galaxy_point_done",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 8,
+   "anchor": "@road[N]",
+   "visible": [
+    3.35,
+    null
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      3.35,
+      0,
+      "outQuad"
+     ],
+     [
+      3.7,
+      1
+     ]
+    ],
+    "scale": [
+     [
+      3.35,
+      1.3,
+      "outBack"
+     ],
+     [
+      3.7,
+      1.0
+     ]
+    ]
+   },
+   "loop_after": {
+    "t": 3.7,
+    "loop": "galaxy_point_done"
+   },
+   "note": "новая звезда; после 3.70 — цикл мерцания galaxy_point_done"
+  },
+  {
+   "id": "hud_counter_bump",
+   "sprite": "code:hud_counter",
+   "parent": "ui",
+   "blend": "source-over",
+   "z": 0,
+   "anchor": [
+    540,
+    960
+   ],
+   "visible": [
+    3.05,
+    3.4
+   ],
+   "tracks": {
+    "scale": [
+     [
+      3.05,
+      1,
+      "outQuad"
+     ],
+     [
+      3.15,
+      1.2,
+      "inOutSine"
+     ],
+     [
+      3.4,
+      1
+     ]
+    ]
+   },
+   "note": "счётчик звёзд +1 на star_born"
+  },
+  {
+   "id": "bubble_N1_close",
+   "sprite": "group:reward_bubble@N+1",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 30,
+   "anchor": "@bubble[N+1]",
+   "visible": [
+    0.6,
+    3.8
+   ],
+   "tracks": {
+    "scale": [
+     [
+      3.55,
+      1,
+      "inBack"
+     ],
+     [
+      3.8,
+      0
+     ]
+    ],
+    "alpha": [
+     [
+      3.7,
+      1,
+      "linear"
+     ],
+     [
+      3.8,
+      0
+     ]
+    ]
+   },
+   "note": "медальон над N+1 (galaxy_reward_bubble + reward_icon_* + galaxy_reward_pointer) складывается перед приездом маркера"
+  },
+  {
+   "id": "marker",
+   "sprite": "galaxy_marker_system",
+   "parent": "galaxy_world",
+   "blend": null,
+   "z": 31,
+   "visible": [
+    3.6,
+    null
+   ],
+   "tracks": {
+    "u": [
+     [
+      3.6,
+      0,
+      "inOutSine"
+     ],
+     [
+      3.72,
+      -0.04,
+      "inOutCubic"
+     ],
+     [
+      4.4,
+      1.05,
+      "inOutSine"
+     ],
+     [
+      4.52,
+      0.985,
+      "inOutSine"
+     ],
+     [
+      4.62,
+      1.0
+     ]
+    ],
+    "scale": [
+     [
+      3.6,
+      1.0,
+      "inOutSine"
+     ],
+     [
+      3.72,
+      0.88,
+      "outCubic"
+     ],
+     [
+      4.05,
+      1.06,
+      "inOutSine"
+     ],
+     [
+      4.4,
+      1.0,
+      "outQuad"
+     ],
+     [
+      4.46,
+      1.18,
+      "inOutSine"
+     ],
+     [
+      4.56,
+      0.94,
+      "inOutSine"
+     ],
+     [
+      4.66,
+      1.0
+     ]
+    ],
+    "rot": [
+     [
+      3.6,
+      0,
+      "inOutSine"
+     ],
+     [
+      3.72,
+      4,
+      "inOutSine"
+     ],
+     [
+      3.95,
+      -6,
+      "inOutSine"
+     ],
+     [
+      4.3,
+      -4,
+      "outQuad"
+     ],
+     [
+      4.46,
+      5,
+      "inOutSine"
+     ],
+     [
+      4.6,
+      0
+     ]
+    ]
+   },
+   "path": {
+    "type": "arm",
+    "from": "N",
+    "to": "N+1"
+   },
+   "note": "замах назад (u -0.04), разгон по рукаву, перелёт 5 % и упругий возврат; наклон по скорости"
+  },
+  {
+   "id": "arrive_ring",
+   "sprite": "galaxy_point_pulse",
+   "parent": "galaxy_world",
+   "blend": "lighter",
+   "z": 29,
+   "anchor": "@road[N+1]",
+   "visible": [
+    4.4,
+    4.8
+   ],
+   "tracks": {
+    "scale": [
+     [
+      4.4,
+      0.6,
+      "outCubic"
+     ],
+     [
+      4.8,
+      1.6
+     ]
+    ],
+    "alpha": [
+     [
+      4.4,
+      1,
+      "inQuad"
+     ],
+     [
+      4.8,
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "point_next_N1_out",
+   "sprite": "galaxy_point_next",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 8,
+   "anchor": "@road[N+1]",
+   "visible": [
+    0.6,
+    4.5
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      4.4,
+      1,
+      "linear"
+     ],
+     [
+      4.5,
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "point_current_N1_in",
+   "sprite": "galaxy_point_current",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 9,
+   "anchor": "@road[N+1]",
+   "visible": [
+    4.4,
+    null
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      4.4,
+      0,
+      "outQuad"
+     ],
+     [
+      4.52,
+      1
+     ]
+    ],
+    "scale": [
+     [
+      4.4,
+      1.25,
+      "outBack"
+     ],
+     [
+      4.6,
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "pulse_N1",
+   "sprite": "galaxy_point_pulse",
+   "parent": "galaxy_world",
+   "blend": "lighter",
+   "z": 10,
+   "anchor": "@road[N+1]",
+   "visible": [
+    4.8,
+    null
+   ],
+   "tracks": {},
+   "loop_after": {
+    "t": 4.8,
+    "loop": "galaxy_point_pulse"
+   },
+   "note": "цикл пульса на новой текущей точке с 4.80"
+  },
+  {
+   "id": "point_locked_N2_out",
+   "sprite": "galaxy_point_locked",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 8,
+   "anchor": "@road[N+2]",
+   "visible": [
+    0.6,
+    4.65
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      4.5,
+      1,
+      "linear"
+     ],
+     [
+      4.65,
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "point_next_N2_in",
+   "sprite": "galaxy_point_next",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 8,
+   "anchor": "@road[N+2]",
+   "visible": [
+    4.5,
+    null
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      4.5,
+      0,
+      "linear"
+     ],
+     [
+      4.6,
+      1
+     ]
+    ],
+    "scale": [
+     [
+      4.5,
+      0.6,
+      "outBack"
+     ],
+     [
+      4.75,
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "bubble_N2_open",
+   "sprite": "group:reward_bubble@N+2",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 30,
+   "anchor": "@bubble[N+2]",
+   "visible": [
+    4.6,
+    null
+   ],
+   "tracks": {
+    "scale": [
+     [
+      4.6,
+      0,
+      "outBack"
+     ],
+     [
+      4.95,
+      1
+     ]
+    ],
+    "alpha": [
+     [
+      4.6,
+      0,
+      "linear"
+     ],
+     [
+      4.7,
+      1
+     ]
+    ]
+   },
+   "children": {
+    "icon": {
+     "sprite": "reward_icon_*",
+     "tracks": {
+      "scale": [
+       [
+        4.75,
+        0,
+        "outBack"
+       ],
+       [
+        5.05,
+        1
+       ]
+      ]
+     }
+    },
+    "pointer": {
+     "sprite": "galaxy_reward_pointer",
+     "tracks": {
+      "alpha": [
+       [
+        4.85,
+        0,
+        "linear"
+       ],
+       [
+        5.0,
+        1
+       ]
+      ]
+     }
+    }
+   },
+   "note": "медальон следующей награды раскрывается у N+2"
+  },
+  {
+   "id": "card",
+   "sprite": "ui_galaxy_card",
+   "parent": "ui",
+   "blend": "source-over",
+   "z": 40,
+   "anchor": "code:card_rest",
+   "visible": [
+    4.75,
+    null
+   ],
+   "tracks": {
+    "y": [
+     [
+      4.75,
+      320,
+      "outBack"
+     ],
+     [
+      5.15,
+      0
+     ]
+    ],
+    "alpha": [
+     [
+      4.75,
+      0,
+      "outQuad"
+     ],
+     [
+      4.95,
+      1
+     ]
+    ]
+   },
+   "children": {
+    "icon": {
+     "sprite": "reward_icon_*_160",
+     "tracks": {
+      "scale": [
+       [
+        5.05,
+        0,
+        "outBack"
+       ],
+       [
+        5.35,
+        1
+       ]
+      ]
+     }
+    }
+   },
+   "note": "карточка «Родилась звезда · N» выезжает снизу; y — смещение от позиции покоя в px"
+  },
+  {
+   "id": "btn_next",
+   "sprite": "code:btn_next",
+   "parent": "ui",
+   "blend": "source-over",
+   "z": 41,
+   "anchor": "code:btn_rest",
+   "visible": [
+    5.7,
+    null
+   ],
+   "tracks": {
+    "scale": [
+     [
+      5.7,
+      0.6,
+      "outBack"
+     ],
+     [
+      6.0,
+      1.0
+     ]
+    ],
+    "alpha": [
+     [
+      5.7,
+      0,
+      "linear"
+     ],
+     [
+      5.8,
+      1
+     ]
+    ]
+   },
+   "note": "кнопка «ДАЛЬШЕ»; клик принимать с button_ready"
+  }
+ ],
+ "particles": [
+  {
+   "id": "nova_debris",
+   "parent": "screen_fx",
+   "blend": "lighter",
+   "origin": "@sun",
+   "items": [
+    {
+     "sprite": "nova_debris_01",
+     "t0": 0.284,
+     "life": 1.128,
+     "angle": 3.3,
+     "v0": 669,
+     "drag": 1.58,
+     "r0": 39,
+     "rot0": 119,
+     "spin": -258,
+     "scale": [
+      1.29,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_02",
+     "t0": 0.265,
+     "life": 1.214,
+     "angle": 19.7,
+     "v0": 1102,
+     "drag": 1.5,
+     "r0": 31,
+     "rot0": 140,
+     "spin": -3,
+     "scale": [
+      1.27,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_03",
+     "t0": 0.267,
+     "life": 0.982,
+     "angle": 32.6,
+     "v0": 1169,
+     "drag": 2.79,
+     "r0": 37,
+     "rot0": null,
+     "spin": 0,
+     "scale": [
+      1.03,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_04",
+     "t0": 0.285,
+     "life": 0.986,
+     "angle": 38.4,
+     "v0": 1059,
+     "drag": 2.19,
+     "r0": 65,
+     "rot0": 186,
+     "spin": 73,
+     "scale": [
+      1.08,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_01",
+     "t0": 0.308,
+     "life": 1.049,
+     "angle": 55.2,
+     "v0": 990,
+     "drag": 2.19,
+     "r0": 45,
+     "rot0": 51,
+     "spin": 38,
+     "scale": [
+      1.22,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_02",
+     "t0": 0.313,
+     "life": 1.134,
+     "angle": 74.9,
+     "v0": 982,
+     "drag": 1.51,
+     "r0": 35,
+     "rot0": 54,
+     "spin": 182,
+     "scale": [
+      0.96,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_03",
+     "t0": 0.289,
+     "life": 0.921,
+     "angle": 96.4,
+     "v0": 1068,
+     "drag": 1.82,
+     "r0": 51,
+     "rot0": null,
+     "spin": 0,
+     "scale": [
+      0.97,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_04",
+     "t0": 0.291,
+     "life": 1.017,
+     "angle": 110.2,
+     "v0": 836,
+     "drag": 2.66,
+     "r0": 44,
+     "rot0": 44,
+     "spin": -178,
+     "scale": [
+      1.26,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_01",
+     "t0": 0.281,
+     "life": 0.988,
+     "angle": 117.5,
+     "v0": 938,
+     "drag": 2.89,
+     "r0": 47,
+     "rot0": 308,
+     "spin": -83,
+     "scale": [
+      1.04,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_02",
+     "t0": 0.286,
+     "life": 1.027,
+     "angle": 138.6,
+     "v0": 928,
+     "drag": 2.48,
+     "r0": 50,
+     "rot0": 303,
+     "spin": 7,
+     "scale": [
+      1.11,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_03",
+     "t0": 0.3,
+     "life": 1.102,
+     "angle": 145.2,
+     "v0": 1154,
+     "drag": 2.87,
+     "r0": 58,
+     "rot0": null,
+     "spin": 0,
+     "scale": [
+      0.97,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_04",
+     "t0": 0.316,
+     "life": 0.985,
+     "angle": 159.0,
+     "v0": 966,
+     "drag": 2.21,
+     "r0": 53,
+     "rot0": 65,
+     "spin": -228,
+     "scale": [
+      1.29,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_01",
+     "t0": 0.27,
+     "life": 1.084,
+     "angle": 186.0,
+     "v0": 840,
+     "drag": 2.92,
+     "r0": 59,
+     "rot0": 348,
+     "spin": 339,
+     "scale": [
+      1.14,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_02",
+     "t0": 0.288,
+     "life": 1.228,
+     "angle": 197.8,
+     "v0": 854,
+     "drag": 2.27,
+     "r0": 36,
+     "rot0": 233,
+     "spin": -339,
+     "scale": [
+      1.05,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_03",
+     "t0": 0.26,
+     "life": 1.126,
+     "angle": 215.9,
+     "v0": 1048,
+     "drag": 2.61,
+     "r0": 33,
+     "rot0": null,
+     "spin": 0,
+     "scale": [
+      1.16,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_04",
+     "t0": 0.298,
+     "life": 1.11,
+     "angle": 224.7,
+     "v0": 1105,
+     "drag": 2.48,
+     "r0": 58,
+     "rot0": 101,
+     "spin": 29,
+     "scale": [
+      1.28,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_01",
+     "t0": 0.274,
+     "life": 1.178,
+     "angle": 238.4,
+     "v0": 645,
+     "drag": 2.23,
+     "r0": 30,
+     "rot0": 77,
+     "spin": -254,
+     "scale": [
+      0.92,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_02",
+     "t0": 0.27,
+     "life": 1.039,
+     "angle": 260.1,
+     "v0": 832,
+     "drag": 2.9,
+     "r0": 46,
+     "rot0": 147,
+     "spin": -158,
+     "scale": [
+      1.1,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_03",
+     "t0": 0.298,
+     "life": 1.148,
+     "angle": 276.8,
+     "v0": 1029,
+     "drag": 1.75,
+     "r0": 59,
+     "rot0": null,
+     "spin": 0,
+     "scale": [
+      1.13,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_04",
+     "t0": 0.296,
+     "life": 1.198,
+     "angle": 287.1,
+     "v0": 1136,
+     "drag": 2.23,
+     "r0": 31,
+     "rot0": 21,
+     "spin": -245,
+     "scale": [
+      1.22,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_01",
+     "t0": 0.269,
+     "life": 1.043,
+     "angle": 302.0,
+     "v0": 1117,
+     "drag": 2.47,
+     "r0": 61,
+     "rot0": 243,
+     "spin": -174,
+     "scale": [
+      1.01,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_02",
+     "t0": 0.283,
+     "life": 1.027,
+     "angle": 321.8,
+     "v0": 1200,
+     "drag": 2.66,
+     "r0": 68,
+     "rot0": 330,
+     "spin": 0,
+     "scale": [
+      1.19,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_03",
+     "t0": 0.299,
+     "life": 1.217,
+     "angle": 335.6,
+     "v0": 1151,
+     "drag": 1.82,
+     "r0": 66,
+     "rot0": null,
+     "spin": 0,
+     "scale": [
+      1.03,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_04",
+     "t0": 0.28,
+     "life": 0.876,
+     "angle": 345.0,
+     "v0": 844,
+     "drag": 1.59,
+     "r0": 59,
+     "rot0": 242,
+     "spin": 37,
+     "scale": [
+      0.91,
+      0.35
+     ]
+    }
+   ],
+   "note": "24 осколка над whiteout: на белом не видны, проявляются над галактикой (инерция, затухание по drag)"
+  },
+  {
+   "id": "birth_sparks",
+   "parent": "galaxy_world",
+   "blend": "lighter",
+   "origin": "@road[N]",
+   "items": [
+    {
+     "sprite": "galaxy_spark_b",
+     "t0": 3.057,
+     "life": 0.586,
+     "angle": -3.1,
+     "v0": 357,
+     "drag": 3.2,
+     "r0": 20,
+     "rot0": null,
+     "spin": 0,
+     "scale": [
+      0.66,
+      0.2
+     ]
+    },
+    {
+     "sprite": "nova_debris_04",
+     "t0": 3.052,
+     "life": 0.453,
+     "angle": 44.1,
+     "v0": 301,
+     "drag": 3.2,
+     "r0": 20,
+     "rot0": 84,
+     "spin": 198,
+     "scale": [
+      0.62,
+      0.2
+     ]
+    },
+    {
+     "sprite": "galaxy_spark_b",
+     "t0": 3.075,
+     "life": 0.569,
+     "angle": 75.3,
+     "v0": 284,
+     "drag": 3.2,
+     "r0": 20,
+     "rot0": null,
+     "spin": 0,
+     "scale": [
+      0.66,
+      0.2
+     ]
+    },
+    {
+     "sprite": "nova_debris_04",
+     "t0": 3.076,
+     "life": 0.581,
+     "angle": 113.8,
+     "v0": 367,
+     "drag": 3.2,
+     "r0": 20,
+     "rot0": 23,
+     "spin": 103,
+     "scale": [
+      0.65,
+      0.2
+     ]
+    },
+    {
+     "sprite": "galaxy_spark_b",
+     "t0": 3.059,
+     "life": 0.458,
+     "angle": 152.8,
+     "v0": 336,
+     "drag": 3.2,
+     "r0": 20,
+     "rot0": null,
+     "spin": 0,
+     "scale": [
+      0.68,
+      0.2
+     ]
+    },
+    {
+     "sprite": "nova_debris_04",
+     "t0": 3.076,
+     "life": 0.629,
+     "angle": 190.1,
+     "v0": 323,
+     "drag": 3.2,
+     "r0": 20,
+     "rot0": 288,
+     "spin": -22,
+     "scale": [
+      0.73,
+      0.2
+     ]
+    },
+    {
+     "sprite": "galaxy_spark_b",
+     "t0": 3.076,
+     "life": 0.474,
+     "angle": 207.3,
+     "v0": 295,
+     "drag": 3.2,
+     "r0": 20,
+     "rot0": null,
+     "spin": 0,
+     "scale": [
+      0.74,
+      0.2
+     ]
+    },
+    {
+     "sprite": "nova_debris_04",
+     "t0": 3.063,
+     "life": 0.607,
+     "angle": 247.2,
+     "v0": 341,
+     "drag": 3.2,
+     "r0": 20,
+     "rot0": 139,
+     "spin": -60,
+     "scale": [
+      0.65,
+      0.2
+     ]
+    },
+    {
+     "sprite": "galaxy_spark_b",
+     "t0": 3.068,
+     "life": 0.676,
+     "angle": 292.4,
+     "v0": 409,
+     "drag": 3.2,
+     "r0": 20,
+     "rot0": null,
+     "spin": 0,
+     "scale": [
+      0.71,
+      0.2
+     ]
+    },
+    {
+     "sprite": "nova_debris_04",
+     "t0": 3.08,
+     "life": 0.618,
+     "angle": 315.9,
+     "v0": 398,
+     "drag": 3.2,
+     "r0": 20,
+     "rot0": 347,
+     "spin": 162,
+     "scale": [
+      0.64,
+      0.2
+     ]
+    }
+   ]
+  }
+ ],
+ "particle_rules": {
+  "position": "p = origin + dir(angle) * (r0 + v0/drag * (1 - exp(-drag*tau)))  ; tau = t - t0, 0 <= tau <= life",
+  "rotation": "rot0 == null -> поворот по скорости (angle, deg; спрайт смотрит вправо); иначе rot0 + spin*tau",
+  "alpha": "1 до 0.55*life, затем линейно до 0 к life",
+  "scale": "lerp(scale[0], scale[1], outQuad(tau/life))",
+  "angle": "градусы, 0 = вправо (+x), по часовой (y вниз)"
+ },
+ "events": [
+  {
+   "name": "anticipation_start",
+   "t": 0.0,
+   "gameplay": false,
+   "note": "звук всасывания"
+  },
+  {
+   "name": "burst",
+   "t": 0.25,
+   "gameplay": false,
+   "note": "взрыв: звук удара, вибрация 40 мс"
+  },
+  {
+   "name": "flash_peak",
+   "t": 0.35,
+   "gameplay": false,
+   "note": "пик вспышки (заявка)"
+  },
+  {
+   "name": "whiteout_full",
+   "t": 0.6,
+   "gameplay": true,
+   "note": "экран полностью белый: сменить экран Система -> Галактика, применить сброс престижа"
+  },
+  {
+   "name": "skip_enabled",
+   "t": 2.0,
+   "gameplay": false,
+   "note": "с этого момента тап = пропуск"
+  },
+  {
+   "name": "star_born",
+   "t": 3.05,
+   "gameplay": true,
+   "note": "звезда N зажглась: счётчик +1, точка N -> done, награда N выдана"
+  },
+  {
+   "name": "marker_arrived",
+   "t": 4.4,
+   "gameplay": true,
+   "note": "маркер на N+1: точка N+1 -> current, N+2 -> next"
+  },
+  {
+   "name": "card_in",
+   "t": 4.75,
+   "gameplay": false,
+   "note": "карточка награды выезжает"
+  },
+  {
+   "name": "button_ready",
+   "t": 6.0,
+   "gameplay": true,
+   "note": "кнопка «ДАЛЬШЕ» принимает тап"
+  }
+ ],
+ "clips": {
+  "nova_flash": [
+   0.0,
+   0.6
+  ],
+  "galaxy_zoom": [
+   0.6,
+   2.1
+  ],
+  "star_birth": [
+   2.1,
+   3.6
+  ],
+  "marker_move": [
+   3.6,
+   4.6
+  ],
+  "reward_ui": [
+   4.6,
+   6.0
+  ]
+ },
+ "budget": {
+  "particles_max_alive": 40,
+  "large_lighter_max": 3,
+  "large_def": "lighter-слой с видимой площадью bbox >= 400x400 px кадра (или полноэкранный файл) и alpha > 0.02"
+ },
+ "loops": {
+  "galaxy_point_done": "anim_galaxy_point_done.anim.json",
+  "galaxy_point_pulse": "anim_galaxy_point_pulse.anim.json",
+  "galaxy_core_glow": "anim_galaxy_core_glow.anim.json"
+ }
+}

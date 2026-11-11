@@ -1,0 +1,77 @@
+{
+ "format": "artlab.layer_timeline/1",
+ "type": "fx",
+ "key": "mut_dup_spark",
+ "duration_s": 0.4,
+ "loop": false,
+ "ref_px": 64,
+ "usage": "life_mut isNew=false -> play(o = иконка мутации, size 64); в том же кадре запустить bio_spores(o -> HUD Биомассы) — count там.",
+ "layers": [
+  {
+   "id": "spark",
+   "sprite": "mut_dup_spark_key",
+   "blend": "lighter",
+   "z": 0,
+   "tracks": {
+    "scale": [
+     [
+      0,
+      0.6,
+      "outBack"
+     ],
+     [
+      0.1,
+      1.4,
+      "inQuad"
+     ],
+     [
+      0.35,
+      0.3
+     ]
+    ],
+    "rot": [
+     [
+      0,
+      0,
+      "outCubic"
+     ],
+     [
+      0.35,
+      120
+     ]
+    ],
+    "alpha": [
+     [
+      0,
+      1,
+      "linear"
+     ],
+     [
+      0.2,
+      1,
+      "inQuad"
+     ],
+     [
+      0.35,
+      0
+     ]
+    ]
+   }
+  }
+ ],
+ "host": {},
+ "events": [
+  {
+   "name": "dup",
+   "t": 0,
+   "gameplay": false,
+   "note": "звук «повтор»"
+  },
+  {
+   "name": "done",
+   "t": 0.4,
+   "gameplay": false,
+   "note": ""
+  }
+ ]
+}

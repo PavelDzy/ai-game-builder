@@ -1,0 +1,44 @@
+{
+ "format": "artlab.layer_timeline/1",
+ "key": "galaxy_core_glow",
+ "type": "tween",
+ "loop": true,
+ "period_s": 3.0,
+ "sprite": "galaxy_core_glow",
+ "blend": "lighter",
+ "tracks": {
+  "scale": [
+   [
+    0,
+    1.0,
+    "inOutSine"
+   ],
+   [
+    1.5,
+    1.06,
+    "inOutSine"
+   ],
+   [
+    3.0,
+    1.0
+   ]
+  ],
+  "alpha": [
+   [
+    0,
+    1.0,
+    "inOutSine"
+   ],
+   [
+    1.5,
+    0.8,
+    "inOutSine"
+   ],
+   [
+    3.0,
+    1.0
+   ]
+  ]
+ },
+ "note": "ядро «дышит»: расширяется и тускнеет; фаза 0 совпадает с концом galaxy_zoom (scale 1, alpha 1)"
+}

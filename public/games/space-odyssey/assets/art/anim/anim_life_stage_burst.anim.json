@@ -1,0 +1,490 @@
+{
+ "format": "artlab.layer_timeline/1",
+ "type": "fx",
+ "key": "life_stage_burst",
+ "duration_s": 0.8,
+ "loop": false,
+ "ref_px": 600,
+ "tint_default": "#3DFFD0",
+ "tints": {
+  "terra": "#5AB8FF",
+  "microbes": "#3DFFD0",
+  "plants": "#A6FF3D",
+  "animals": "#FF9A4A",
+  "mind": "#B98CFF"
+ },
+ "usage": "tap «Эволюция» -> play(o = центр диска/планеты, size = её размер на экране, tint = tints[новая стадия]). Кадр 0 = белая вспышка в кадре тапа; stage_swap 0.125 — под пиком вспышки код меняет слой стадии (или кроссфейд по host old/new_stage_alpha).",
+ "layers": [
+  {
+   "id": "core",
+   "sprite": "life_stage_burst_key",
+   "blend": "lighter",
+   "z": 2,
+   "tracks": {
+    "scale": [
+     [
+      0,
+      0.42,
+      "outCubic"
+     ],
+     [
+      0.07,
+      0.34,
+      "outCubic"
+     ],
+     [
+      0.125,
+      0.7,
+      "outCubic"
+     ],
+     [
+      0.45,
+      0.9
+     ]
+    ],
+    "alpha": [
+     [
+      0,
+      1,
+      "linear"
+     ],
+     [
+      0.125,
+      1,
+      "inQuad"
+     ],
+     [
+      0.45,
+      0
+     ]
+    ]
+   },
+   "spin_dps": 40,
+   "kscale_min": 0.22,
+   "note": "белый пик; 0–0.07 — сжатие (anticipation), 0.125 — пик"
+  },
+  {
+   "id": "halo",
+   "sprite": "life_stage_burst_key",
+   "blend": "lighter",
+   "z": 1,
+   "tracks": {
+    "scale": [
+     [
+      0.06,
+      0.4,
+      "outCubic"
+     ],
+     [
+      0.6,
+      1.7
+     ]
+    ],
+    "rot": [
+     [
+      0.06,
+      0,
+      "outCubic"
+     ],
+     [
+      0.6,
+      -25
+     ]
+    ],
+    "alpha": [
+     [
+      0.06,
+      0,
+      "linear"
+     ],
+     [
+      0.125,
+      1,
+      "linear"
+     ],
+     [
+      0.25,
+      0.9,
+      "inQuad"
+     ],
+     [
+      0.6,
+      0
+     ]
+    ]
+   },
+   "visible": [
+    0.06,
+    0.8
+   ],
+   "tint": "@tint",
+   "kscale_min": 0.22,
+   "note": "цвет новой стадии"
+  },
+  {
+   "id": "ring",
+   "sprite": "life_scale_step_burst_key",
+   "blend": "lighter",
+   "z": 0,
+   "tracks": {
+    "scale": [
+     [
+      0.1,
+      1.2,
+      "outCubic"
+     ],
+     [
+      0.7,
+      3.2
+     ]
+    ],
+    "alpha": [
+     [
+      0.1,
+      0,
+      "linear"
+     ],
+     [
+      0.14,
+      1,
+      "inQuad"
+     ],
+     [
+      0.7,
+      0
+     ]
+    ]
+   },
+   "visible": [
+    0.1,
+    0.8
+   ],
+   "tint": "@tint",
+   "kscale_min": 0.22,
+   "note": "ударное кольцо от края диска"
+  }
+ ],
+ "particles": [
+  {
+   "id": "seeds",
+   "at": "@o",
+   "blend": "lighter",
+   "z": 3,
+   "kscale_min": 0.4,
+   "items": [
+    {
+     "sprite": "bio_spore_01",
+     "t0": 0.1261,
+     "life": 0.4979,
+     "angle": 356.0,
+     "v0": 1188.8,
+     "drag": 5.0,
+     "r0": 219.6,
+     "rot0": 87.9,
+     "spin": 167.3,
+     "scale": [
+      1.403,
+      0.7
+     ]
+    },
+    {
+     "sprite": "bio_spore_02",
+     "t0": 0.1468,
+     "life": 0.541,
+     "angle": 24.41,
+     "v0": 902.6,
+     "drag": 5.0,
+     "r0": 215.0,
+     "rot0": 274.6,
+     "spin": -202.8,
+     "scale": [
+      1.252,
+      0.7
+     ]
+    },
+    {
+     "sprite": "bio_spore_03",
+     "t0": 0.1314,
+     "life": 0.5698,
+     "angle": 49.89,
+     "v0": 1290.6,
+     "drag": 5.0,
+     "r0": 214.6,
+     "rot0": 166.0,
+     "spin": -132.9,
+     "scale": [
+      1.489,
+      0.7
+     ]
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.1444,
+     "life": 0.5028,
+     "angle": 85.49,
+     "v0": 1313.3,
+     "drag": 5.0,
+     "r0": 199.3,
+     "rot0": 194.3,
+     "spin": 168.9,
+     "scale": [
+      1.427,
+      0.7
+     ]
+    },
+    {
+     "sprite": "mut_dup_spark_key",
+     "t0": 0.1308,
+     "life": 0.5026,
+     "angle": 99.05,
+     "v0": 1114.7,
+     "drag": 5.0,
+     "r0": 199.8,
+     "rot0": 336.0,
+     "spin": -168.1,
+     "scale": [
+      1.245,
+      0.7
+     ]
+    },
+    {
+     "sprite": "bio_spore_01",
+     "t0": 0.1352,
+     "life": 0.5135,
+     "angle": 133.01,
+     "v0": 1247.7,
+     "drag": 5.0,
+     "r0": 182.7,
+     "rot0": 129.2,
+     "spin": 199.6,
+     "scale": [
+      1.542,
+      0.7
+     ]
+    },
+    {
+     "sprite": "bio_spore_02",
+     "t0": 0.1279,
+     "life": 0.4707,
+     "angle": 146.32,
+     "v0": 911.4,
+     "drag": 5.0,
+     "r0": 172.9,
+     "rot0": 235.3,
+     "spin": 185.7,
+     "scale": [
+      1.565,
+      0.7
+     ]
+    },
+    {
+     "sprite": "bio_spore_03",
+     "t0": 0.1421,
+     "life": 0.451,
+     "angle": 182.93,
+     "v0": 916.4,
+     "drag": 5.0,
+     "r0": 200.6,
+     "rot0": 110.1,
+     "spin": -132.5,
+     "scale": [
+      1.341,
+      0.7
+     ]
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.1232,
+     "life": 0.4533,
+     "angle": 203.43,
+     "v0": 1114.1,
+     "drag": 5.0,
+     "r0": 192.1,
+     "rot0": 192.3,
+     "spin": 172.1,
+     "scale": [
+      1.311,
+      0.7
+     ]
+    },
+    {
+     "sprite": "mut_dup_spark_key",
+     "t0": 0.1492,
+     "life": 0.4585,
+     "angle": 234.77,
+     "v0": 1356.2,
+     "drag": 5.0,
+     "r0": 171.1,
+     "rot0": 259.8,
+     "spin": 200.7,
+     "scale": [
+      1.33,
+      0.7
+     ]
+    },
+    {
+     "sprite": "bio_spore_01",
+     "t0": 0.1247,
+     "life": 0.4671,
+     "angle": 256.38,
+     "v0": 919.7,
+     "drag": 5.0,
+     "r0": 188.6,
+     "rot0": 47.5,
+     "spin": -147.1,
+     "scale": [
+      1.303,
+      0.7
+     ]
+    },
+    {
+     "sprite": "bio_spore_02",
+     "t0": 0.1221,
+     "life": 0.5951,
+     "angle": 280.06,
+     "v0": 923.1,
+     "drag": 5.0,
+     "r0": 179.5,
+     "rot0": 342.1,
+     "spin": -141.8,
+     "scale": [
+      1.315,
+      0.7
+     ]
+    },
+    {
+     "sprite": "bio_spore_03",
+     "t0": 0.1394,
+     "life": 0.4685,
+     "angle": 300.04,
+     "v0": 1205.4,
+     "drag": 5.0,
+     "r0": 181.6,
+     "rot0": 80.6,
+     "spin": -141.1,
+     "scale": [
+      1.341,
+      0.7
+     ]
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.1383,
+     "life": 0.4758,
+     "angle": 327.98,
+     "v0": 1027.3,
+     "drag": 5.0,
+     "r0": 177.5,
+     "rot0": 124.0,
+     "spin": -123.8,
+     "scale": [
+      1.208,
+      0.7
+     ]
+    }
+   ]
+  }
+ ],
+ "host": {
+  "planet_scale": {
+   "def": 1,
+   "keys": [
+    [
+     0,
+     1,
+     "outQuad"
+    ],
+    [
+     0.07,
+     0.95,
+     "outBack"
+    ],
+    [
+     0.125,
+     1.07,
+     "outQuad"
+    ],
+    [
+     0.4,
+     1
+    ]
+   ],
+   "note": "масштаб диска/планеты (сжатие -> отскок)"
+  },
+  "old_stage_alpha": {
+   "def": 1,
+   "keys": [
+    [
+     0.125,
+     1,
+     "linear"
+    ],
+    [
+     0.425,
+     0
+    ]
+   ],
+   "note": "старый слой стадии (кроссфейд 300 мс под вспышкой)"
+  },
+  "new_stage_alpha": {
+   "def": 0,
+   "keys": [
+    [
+     0,
+     0,
+     "hold"
+    ],
+    [
+     0.125,
+     0,
+     "outQuad"
+    ],
+    [
+     0.425,
+     1
+    ]
+   ],
+   "note": "новый слой стадии"
+  },
+  "chip_scale": {
+   "def": 1,
+   "keys": [
+    [
+     0.125,
+     0.6,
+     "outBack"
+    ],
+    [
+     0.35,
+     1.15,
+     "inOutQuad"
+    ],
+    [
+     0.5,
+     1
+    ]
+   ],
+   "note": "значок стадии (новая иконка с 0.125)"
+  }
+ },
+ "events": [
+  {
+   "name": "stage_fx_start",
+   "t": 0,
+   "gameplay": false,
+   "note": "звук «эволюция», вибрация 30 мс"
+  },
+  {
+   "name": "stage_swap",
+   "t": 0.125,
+   "gameplay": true,
+   "note": "сменить слой/значок стадии (sim уже применил в кадре тапа)"
+  },
+  {
+   "name": "done",
+   "t": 0.8,
+   "gameplay": false,
+   "note": ""
+  }
+ ]
+}

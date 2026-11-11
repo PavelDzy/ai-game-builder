@@ -1,0 +1,39 @@
+{
+ "format": "artlab.layer_timeline/1",
+ "key": "galaxy_point_pulse",
+ "type": "tween",
+ "loop": true,
+ "period_s": 1.2,
+ "sprite": "galaxy_point_pulse",
+ "blend": "lighter",
+ "tracks": {
+  "scale": [
+   [
+    0,
+    0.6,
+    "outCubic"
+   ],
+   [
+    1.2,
+    1.15
+   ]
+  ],
+  "alpha": [
+   [
+    0,
+    0,
+    "linear"
+   ],
+   [
+    0.08,
+    1,
+    "inQuad"
+   ],
+   [
+    1.2,
+    0
+   ]
+  ]
+ },
+ "note": "кольцо текущей точки; начинается с alpha 0 — без щелчка на шве цикла"
+}

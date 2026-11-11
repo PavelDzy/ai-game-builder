@@ -1,0 +1,118 @@
+{
+ "_comment": "audio-director T-126. Пути .ogg; для Safari/iOS без Vorbis заменить расширение на .m4a (оба лежат рядом). Подробности: studio/audio_bible.md, studio/handoff/REQ-006.",
+ "tonality": "D major pentatonic: D E F# A B",
+ "events": {
+  "ui_tap": [
+   "sfx/ui_tap_01.ogg",
+   "sfx/ui_tap_02.ogg",
+   "sfx/ui_tap_03.ogg"
+  ],
+  "ui_open": [
+   "sfx/ui_open_01.ogg",
+   "sfx/ui_open_02.ogg"
+  ],
+  "ui_close": [
+   "sfx/ui_close_01.ogg",
+   "sfx/ui_close_02.ogg"
+  ],
+  "buy_denied": [
+   "sfx/buy_denied_01.ogg",
+   "sfx/buy_denied_02.ogg"
+  ]
+ },
+ "eventMeta": {
+  "ui_tap": {
+   "gain": 0.5,
+   "group": "ui",
+   "minGapMs": 60
+  },
+  "ui_open": {
+   "gain": 0.5,
+   "group": "ui",
+   "minGapMs": 80
+  },
+  "ui_close": {
+   "gain": 0.5,
+   "group": "ui",
+   "minGapMs": 80
+  },
+  "buy_denied": {
+   "gain": 0.5,
+   "group": "ui",
+   "minGapMs": 150
+  }
+ },
+ "music": {
+  "menu_galaxy": "music/menu_galaxy.ogg",
+  "play_base": "music/play_base.ogg",
+  "play_shimmer": "music/play_shimmer.ogg",
+  "nova_stinger": "music/nova_stinger.ogg"
+ },
+ "musicMeta": {
+  "menu_galaxy": {
+   "gain": 0.42,
+   "loop": true,
+   "fadeInMs": 2000
+  },
+  "play_base": {
+   "gain": 0.4,
+   "loop": true,
+   "fadeInMs": 2000
+  },
+  "play_shimmer": {
+   "gain": 0.4,
+   "loop": true,
+   "fadeInMs": 8000
+  },
+  "nova_stinger": {
+   "gain": 0.5,
+   "loop": false,
+   "fadeInMs": 2000
+  }
+ },
+ "layers": {
+  "play_shimmer": {
+   "with": "play_base",
+   "when": "eraIndex>=3 || nova>=1",
+   "fadeInMs": 8000
+  }
+ },
+ "duck": {
+  "events": [
+   "flash_peak",
+   "whiteout_full"
+  ],
+  "musicDb": -12,
+  "attackMs": 300,
+  "releaseMs": 2000
+ },
+ "rules": {
+  "maxVoices": 6,
+  "groups": {
+   "tap": {
+    "maxVoices": 3
+   },
+   "ui": {
+    "maxVoices": 2
+   },
+   "big": {
+    "maxVoices": 2
+   }
+  },
+  "pitchJitter": 0.03,
+  "stealOldest": true,
+  "stealFadeMs": 30,
+  "masterCompressor": {
+   "thresholdDb": -14,
+   "ratio": 3
+  },
+  "muted": [
+   "pass",
+   "lap"
+  ]
+ },
+ "volume": {
+  "music": 0.4,
+  "sfx": 1
+ }
+}

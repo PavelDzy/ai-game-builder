@@ -1,0 +1,1749 @@
+{
+ "_comment": "solar_relay анимации (T-115). type=timeline: слои/твины по artlab.layer_timeline/1, код воспроизводит ключи; кадровых атласов нет (спрайты — web/atlas_galaxy, atlas_novafx, atlas_nova, отдельные webp по web/manifest.json). | T-125: + эффекты Жизни type=fx (см. _life_fx).",
+ "_format": "artlab.layer_timeline/1",
+ "_sampler": "handoff/deliveries/REQ-20261101-002/timeline_sampler.ts (эталон функций ease/sample/arm/quad/shake/particle)",
+ "galaxy_flow": {
+  "type": "timeline",
+  "anim_json": "anim/anim_galaxy_flow.timeline.json",
+  "atlas": null,
+  "fps": 60,
+  "loop": false,
+  "duration_s": 6.2,
+  "frames": null,
+  "display_px": [
+   1080,
+   1920
+  ],
+  "pivot": null,
+  "events": [
+   {
+    "name": "anticipation_start",
+    "t": 0.0,
+    "gameplay": false,
+    "note": "звук всасывания"
+   },
+   {
+    "name": "burst",
+    "t": 0.25,
+    "gameplay": false,
+    "note": "взрыв: звук удара, вибрация 40 мс"
+   },
+   {
+    "name": "flash_peak",
+    "t": 0.35,
+    "gameplay": false,
+    "note": "пик вспышки (заявка)"
+   },
+   {
+    "name": "whiteout_full",
+    "t": 0.6,
+    "gameplay": true,
+    "note": "экран полностью белый: сменить экран Система -> Галактика, применить сброс престижа"
+   },
+   {
+    "name": "skip_enabled",
+    "t": 2.0,
+    "gameplay": false,
+    "note": "с этого момента тап = пропуск"
+   },
+   {
+    "name": "star_born",
+    "t": 3.05,
+    "gameplay": true,
+    "note": "звезда N зажглась: счётчик +1, точка N -> done, награда N выдана"
+   },
+   {
+    "name": "marker_arrived",
+    "t": 4.4,
+    "gameplay": true,
+    "note": "маркер на N+1: точка N+1 -> current, N+2 -> next"
+   },
+   {
+    "name": "card_in",
+    "t": 4.75,
+    "gameplay": false,
+    "note": "карточка награды выезжает"
+   },
+   {
+    "name": "button_ready",
+    "t": 6.0,
+    "gameplay": true,
+    "note": "кнопка «ДАЛЬШЕ» принимает тап"
+   }
+  ],
+  "skip": {
+   "enabled_after_s": 2.0,
+   "jump_to_s": 6.0,
+   "crossfade_ms": 200,
+   "fire_skipped_events": true,
+   "note": "тап до 2.0 игнорировать; после — перейти в состояние 6.0 (кнопка «ДАЛЬШЕ»), пропущенные gameplay-события вызвать по порядку"
+  },
+  "clips": {
+   "nova_flash": [
+    0.0,
+    0.6
+   ],
+   "galaxy_zoom": [
+    0.6,
+    2.1
+   ],
+   "star_birth": [
+    2.1,
+    3.6
+   ],
+   "marker_move": [
+    3.6,
+    4.6
+   ],
+   "reward_ui": [
+    4.6,
+    6.0
+   ]
+  },
+  "params": {
+   "N": "индекс рождаемой звезды в manifest.galaxy.road (0-based); маркер едет N -> N+1; N=11 -> без marker_move, точка 12 = galaxy_point_big_*"
+  },
+  "budget": {
+   "particles_max": 24,
+   "large_lighter_max": 3
+  },
+  "run": "anim/galaxy_flow",
+  "qa_verdict": "technical_pass+visual_review_pass(frames)"
+ },
+ "nova_flash": {
+  "type": "timeline_clip",
+  "anim_json": "anim/anim_nova_flash.anim.json",
+  "part_of": "galaxy_flow",
+  "offset_s": 0.0,
+  "duration_s": 0.6,
+  "fps": 60,
+  "loop": false,
+  "atlas": null,
+  "events": [
+   {
+    "name": "anticipation_start",
+    "t": 0.0,
+    "gameplay": false,
+    "note": "звук всасывания"
+   },
+   {
+    "name": "burst",
+    "t": 0.25,
+    "gameplay": false,
+    "note": "взрыв: звук удара, вибрация 40 мс"
+   },
+   {
+    "name": "flash_peak",
+    "t": 0.35,
+    "gameplay": false,
+    "note": "пик вспышки (заявка)"
+   },
+   {
+    "name": "whiteout_full",
+    "t": 0.6,
+    "gameplay": true,
+    "note": "экран полностью белый: сменить экран Система -> Галактика, применить сброс престижа"
+   }
+  ],
+  "run": "anim/galaxy_flow",
+  "qa_verdict": "technical_pass+visual_review_pass(frames)"
+ },
+ "galaxy_zoom": {
+  "type": "timeline_clip",
+  "anim_json": "anim/anim_galaxy_zoom.anim.json",
+  "part_of": "galaxy_flow",
+  "offset_s": 0.6,
+  "duration_s": 1.5,
+  "fps": 60,
+  "loop": false,
+  "atlas": null,
+  "events": [
+   {
+    "name": "skip_enabled",
+    "t": 2.0,
+    "gameplay": false,
+    "note": "с этого момента тап = пропуск"
+   }
+  ],
+  "run": "anim/galaxy_flow",
+  "qa_verdict": "technical_pass+visual_review_pass(frames)"
+ },
+ "star_birth": {
+  "type": "timeline_clip",
+  "anim_json": "anim/anim_star_birth.anim.json",
+  "part_of": "galaxy_flow",
+  "offset_s": 2.1,
+  "duration_s": 1.5,
+  "fps": 60,
+  "loop": false,
+  "atlas": null,
+  "events": [
+   {
+    "name": "star_born",
+    "t": 3.05,
+    "gameplay": true,
+    "note": "звезда N зажглась: счётчик +1, точка N -> done, награда N выдана"
+   }
+  ],
+  "run": "anim/galaxy_flow",
+  "qa_verdict": "technical_pass+visual_review_pass(frames)"
+ },
+ "marker_move": {
+  "type": "timeline_clip",
+  "anim_json": "anim/anim_marker_move.anim.json",
+  "part_of": "galaxy_flow",
+  "offset_s": 3.6,
+  "duration_s": 1.0,
+  "fps": 60,
+  "loop": false,
+  "atlas": null,
+  "events": [
+   {
+    "name": "marker_arrived",
+    "t": 4.4,
+    "gameplay": true,
+    "note": "маркер на N+1: точка N+1 -> current, N+2 -> next"
+   }
+  ],
+  "run": "anim/galaxy_flow",
+  "qa_verdict": "technical_pass+visual_review_pass(frames)"
+ },
+ "reward_ui": {
+  "type": "timeline_clip",
+  "anim_json": "anim/anim_reward_ui.anim.json",
+  "part_of": "galaxy_flow",
+  "offset_s": 4.6,
+  "duration_s": 1.4,
+  "fps": 60,
+  "loop": false,
+  "atlas": null,
+  "events": [
+   {
+    "name": "card_in",
+    "t": 4.75,
+    "gameplay": false,
+    "note": "карточка награды выезжает"
+   },
+   {
+    "name": "button_ready",
+    "t": 6.0,
+    "gameplay": true,
+    "note": "кнопка «ДАЛЬШЕ» принимает тап"
+   }
+  ],
+  "run": "anim/galaxy_flow",
+  "qa_verdict": "technical_pass+visual_review_pass(frames)"
+ },
+ "galaxy_point_done": {
+  "type": "frame_swap",
+  "anim_json": "anim/anim_galaxy_point_done.anim.json",
+  "loop": true,
+  "period_s": 1.0,
+  "atlas": "atlas_galaxy",
+  "blend": "source-over",
+  "events": [],
+  "run": "anim/galaxy_flow",
+  "qa_verdict": "technical_pass+visual_review_pass(frames)",
+  "fps": 8,
+  "frames": [
+   "galaxy_point_done",
+   "galaxy_point_done",
+   "galaxy_point_done",
+   "galaxy_point_done_b",
+   "galaxy_point_done",
+   "galaxy_point_done",
+   "galaxy_point_done_b",
+   "galaxy_point_done"
+  ],
+  "durations_ms": [
+   125,
+   125,
+   125,
+   125,
+   125,
+   125,
+   125,
+   125
+  ],
+  "display_px": [
+   96,
+   96
+  ],
+  "pivot": [
+   0.5,
+   0.5
+  ]
+ },
+ "galaxy_point_pulse": {
+  "type": "tween",
+  "anim_json": "anim/anim_galaxy_point_pulse.anim.json",
+  "loop": true,
+  "period_s": 1.2,
+  "atlas": "atlas_galaxy",
+  "blend": "lighter",
+  "events": [],
+  "run": "anim/galaxy_flow",
+  "qa_verdict": "technical_pass+visual_review_pass(frames)",
+  "fps": 60,
+  "sprite": "galaxy_point_pulse"
+ },
+ "galaxy_core_glow": {
+  "type": "tween",
+  "anim_json": "anim/anim_galaxy_core_glow.anim.json",
+  "loop": true,
+  "period_s": 3.0,
+  "atlas": "atlas_galaxy",
+  "blend": "lighter",
+  "events": [],
+  "run": "anim/galaxy_flow",
+  "qa_verdict": "technical_pass+visual_review_pass(frames)",
+  "fps": 60,
+  "sprite": "galaxy_core_glow"
+ },
+ "bio_pop": {
+  "type": "fx",
+  "format": "artlab.layer_timeline/1",
+  "anim_json": "anim/anim_bio_pop.anim.json",
+  "atlas": [
+   "atlas_life"
+  ],
+  "fps": 60,
+  "loop": false,
+  "duration_s": 0.3,
+  "frames": null,
+  "ref_px": 96,
+  "display_px": null,
+  "pivot": "манифест спрайта (tree_grow 0.5,0.78; life_ship_trail 1,0.5; прочие 0.5,0.5)",
+  "tints": null,
+  "tint_default": null,
+  "host_z": null,
+  "host": {
+   "text_scale": "«+N Б» (подъём −56 px за 0.7 с — код)"
+  },
+  "events": [
+   {
+    "name": "count",
+    "t": 0,
+    "gameplay": true,
+    "note": "показать «+N Б» у планеты (Биомасса уже начислена sim)"
+   },
+   {
+    "name": "done",
+    "t": 0.3,
+    "gameplay": false,
+    "note": ""
+   }
+  ],
+  "usage": "ручной Резонанс на живой планете, когда споры не летят (лимит частиц) -> play(o = планета). Число «+N Б» — код по count.",
+  "budget": {
+   "bio_pop": {
+    "particles_max": 0,
+    "large_lighter_max": 0
+   }
+  },
+  "preview": [
+   "handoff/deliveries/REQ-20261101-003/bio_pop_540.gif"
+  ],
+  "run": "anim/life_fx",
+  "qa_verdict": "technical_pass+visual_review_pass(frames, 100% crops)"
+ },
+ "bio_spores": {
+  "type": "fx",
+  "format": "artlab.layer_timeline/1",
+  "anim_json": "anim/anim_bio_spores.anim.json",
+  "atlas": [
+   "atlas_life"
+  ],
+  "fps": 60,
+  "loop": false,
+  "duration_s": 0.983,
+  "frames": null,
+  "ref_px": 84,
+  "display_px": null,
+  "pivot": "манифест спрайта (tree_grow 0.5,0.78; life_ship_trail 1,0.5; прочие 0.5,0.5)",
+  "tints": null,
+  "tint_default": null,
+  "host_z": null,
+  "host": {
+   "hud_scale": "иконка/счётчик Биомассы",
+   "text_alpha": "«+N Б» у планеты",
+   "text_dy": "подъём текста, px кадра 1080",
+   "text_scale": ""
+  },
+  "events": [
+   {
+    "name": "count",
+    "t": 0,
+    "gameplay": true,
+    "note": "«+N Б» у планеты (Биомасса уже начислена sim)"
+   },
+   {
+    "name": "arrive",
+    "t": 0.521,
+    "gameplay": false,
+    "note": "первая спора в счётчике: bump + тик счётчика"
+   },
+   {
+    "name": "arrive_last",
+    "t": 0.733,
+    "gameplay": false,
+    "note": ""
+   },
+   {
+    "name": "done",
+    "t": 0.983,
+    "gameplay": false,
+    "note": ""
+   }
+  ],
+  "usage": "life_catch -> play(o = планета, size = показ планеты, to = центр иконки Биомассы в HUD). 8 спор по дугам (наружу -> в счётчик, ease-in). Лимит: > 32 спор в полёте — играть bio_pop вместо этого клипа.",
+  "budget": {
+   "bio_spores": {
+    "particles_max": 8,
+    "large_lighter_max": 0
+   }
+  },
+  "preview": [
+   "handoff/deliveries/REQ-20261101-003/bio_spores_540.gif"
+  ],
+  "run": "anim/life_fx",
+  "qa_verdict": "technical_pass+visual_review_pass(frames, 100% crops)"
+ },
+ "life_aura_common": {
+  "type": "frame_swap",
+  "format": "artlab.layer_timeline/1",
+  "anim_json": "anim/anim_life_aura_common.anim.json",
+  "loop": true,
+  "period_s": 0.667,
+  "events": [],
+  "run": "anim/life_fx",
+  "qa_verdict": "technical_pass (только тайминг, кадры art-director)",
+  "note": "поверх планеты (rect×112/96); фаза планеты = slot mod 4",
+  "fps": 6,
+  "frames": [
+   "life_aura_common_01",
+   "life_aura_common_02",
+   "life_aura_common_03",
+   "life_aura_common_04"
+  ],
+  "durations_ms": [
+   167,
+   167,
+   167,
+   166
+  ],
+  "atlas": [
+   "atlas_life"
+  ],
+  "display_px": [
+   112,
+   112
+  ],
+  "pivot": [
+   0.5,
+   0.5
+  ]
+ },
+ "life_aura_legendary": {
+  "type": "frame_swap",
+  "format": "artlab.layer_timeline/1",
+  "anim_json": "anim/anim_life_aura_legendary.anim.json",
+  "loop": true,
+  "period_s": 0.667,
+  "events": [],
+  "run": "anim/life_fx",
+  "qa_verdict": "technical_pass (только тайминг, кадры art-director)",
+  "note": "поверх планеты (rect×112/96); фаза планеты = slot mod 4",
+  "fps": 6,
+  "frames": [
+   "life_aura_legendary_01",
+   "life_aura_legendary_02",
+   "life_aura_legendary_03",
+   "life_aura_legendary_04"
+  ],
+  "durations_ms": [
+   167,
+   167,
+   167,
+   166
+  ],
+  "atlas": [
+   "atlas_life"
+  ],
+  "display_px": [
+   112,
+   112
+  ],
+  "pivot": [
+   0.5,
+   0.5
+  ]
+ },
+ "life_aura_rare": {
+  "type": "frame_swap",
+  "format": "artlab.layer_timeline/1",
+  "anim_json": "anim/anim_life_aura_rare.anim.json",
+  "loop": true,
+  "period_s": 0.667,
+  "events": [],
+  "run": "anim/life_fx",
+  "qa_verdict": "technical_pass (только тайминг, кадры art-director)",
+  "note": "поверх планеты (rect×112/96); фаза планеты = slot mod 4",
+  "fps": 6,
+  "frames": [
+   "life_aura_rare_01",
+   "life_aura_rare_02",
+   "life_aura_rare_03",
+   "life_aura_rare_04"
+  ],
+  "durations_ms": [
+   167,
+   167,
+   167,
+   166
+  ],
+  "atlas": [
+   "atlas_life"
+  ],
+  "display_px": [
+   112,
+   112
+  ],
+  "pivot": [
+   0.5,
+   0.5
+  ]
+ },
+ "life_aura_uncommon": {
+  "type": "frame_swap",
+  "format": "artlab.layer_timeline/1",
+  "anim_json": "anim/anim_life_aura_uncommon.anim.json",
+  "loop": true,
+  "period_s": 0.667,
+  "events": [],
+  "run": "anim/life_fx",
+  "qa_verdict": "technical_pass (только тайминг, кадры art-director)",
+  "note": "поверх планеты (rect×112/96); фаза планеты = slot mod 4",
+  "fps": 6,
+  "frames": [
+   "life_aura_uncommon_01",
+   "life_aura_uncommon_02",
+   "life_aura_uncommon_03",
+   "life_aura_uncommon_04"
+  ],
+  "durations_ms": [
+   167,
+   167,
+   167,
+   166
+  ],
+  "atlas": [
+   "atlas_life"
+  ],
+  "display_px": [
+   112,
+   112
+  ],
+  "pivot": [
+   0.5,
+   0.5
+  ]
+ },
+ "life_card_stage_mind": {
+  "type": "frame_swap",
+  "format": "artlab.layer_timeline/1",
+  "anim_json": "anim/anim_life_card_stage_mind.anim.json",
+  "loop": true,
+  "period_s": 1.0,
+  "events": [],
+  "run": "anim/life_fx",
+  "qa_verdict": "technical_pass (только тайминг, кадры art-director)",
+  "note": "карточка",
+  "fps": 4,
+  "frames": [
+   "life_card_stage_mind_01",
+   "life_card_stage_mind_02",
+   "life_card_stage_mind_03",
+   "life_card_stage_mind_04"
+  ],
+  "durations_ms": [
+   250,
+   250,
+   250,
+   250
+  ],
+  "atlas": [
+   "atlas_life_card_c"
+  ],
+  "display_px": [
+   600,
+   600
+  ],
+  "pivot": [
+   0.5,
+   0.5
+  ]
+ },
+ "life_drop": {
+  "type": "fx",
+  "format": "artlab.layer_timeline/1",
+  "anim_json": "anim/anim_life_drop.anim.json",
+  "atlas": [
+   "atlas_life"
+  ],
+  "fps": 60,
+  "loop": false,
+  "duration_s": 0.75,
+  "frames": null,
+  "ref_px": 64,
+  "display_px": null,
+  "pivot": "манифест спрайта (tree_grow 0.5,0.78; life_ship_trail 1,0.5; прочие 0.5,0.5)",
+  "tints": null,
+  "tint_default": null,
+  "host_z": null,
+  "host": {},
+  "events": [
+   {
+    "name": "launch",
+    "t": 0,
+    "gameplay": false,
+    "note": ""
+   },
+   {
+    "name": "arrive",
+    "t": 0.5,
+    "gameplay": true,
+    "note": "капля в цели: тик счётчика / узел"
+   },
+   {
+    "name": "done",
+    "t": 0.75,
+    "gameplay": false,
+    "note": ""
+   }
+  ],
+  "usage": "play(o = откуда, to = куда): дуга 500 мс, капля тянется по ходу (мягкая — squash/stretch), на прибытии — всплеск.",
+  "budget": {
+   "drop": {
+    "particles_max": 1,
+    "large_lighter_max": 0
+   }
+  },
+  "preview": [
+   "handoff/deliveries/REQ-20261101-003/drop_540.gif"
+  ],
+  "run": "anim/life_fx",
+  "qa_verdict": "technical_pass+visual_review_pass(frames, 100% crops)"
+ },
+ "life_scale_step": {
+  "type": "fx",
+  "format": "artlab.layer_timeline/1",
+  "anim_json": "anim/anim_life_scale_step.anim.json",
+  "atlas": [
+   "atlas_life",
+   "atlas_life_fx"
+  ],
+  "fps": 60,
+  "loop": false,
+  "duration_s": 0.5,
+  "frames": null,
+  "ref_px": 36,
+  "display_px": null,
+  "pivot": "манифест спрайта (tree_grow 0.5,0.78; life_ship_trail 1,0.5; прочие 0.5,0.5)",
+  "tints": {
+   "heat": "#FF6A1A",
+   "water": "#3B8BFF",
+   "air": "#BFF6FF"
+  },
+  "tint_default": "#3B8BFF",
+  "host_z": null,
+  "host": {
+   "pip_scale": "новое деление шкалы",
+   "layer_u": "доля перехода α слоя шкалы на диске: α = lerp(old, new, layer_u)"
+  },
+  "events": [
+   {
+    "name": "level_up",
+    "t": 0,
+    "gameplay": true,
+    "note": "звук шага шкалы; уровень уже применён sim"
+   },
+   {
+    "name": "done",
+    "t": 0.5,
+    "gameplay": false,
+    "note": ""
+   }
+  ],
+  "usage": "tap «+ цена» шкалы -> play(o = новое деление, size 36, tint = tints[heat|water|air]); host layer_u ведёт α слоя шкалы на диске от (L−1)/5 к L/5 — планета меняется на глазах. Орбита: o = планета, size = 0.4·показ.",
+  "budget": {
+   "scale_step": {
+    "particles_max": 6,
+    "large_lighter_max": 0
+   },
+   "scale_orbit": {
+    "particles_max": 6,
+    "large_lighter_max": 0
+   }
+  },
+  "preview": [
+   "handoff/deliveries/REQ-20261101-003/scale_step_540.gif",
+   "handoff/deliveries/REQ-20261101-003/scale_orbit_540.gif"
+  ],
+  "run": "anim/life_fx",
+  "qa_verdict": "technical_pass+visual_review_pass(frames, 100% crops)"
+ },
+ "life_ship_flight": {
+  "type": "fx",
+  "format": "artlab.layer_timeline/1",
+  "anim_json": "anim/anim_life_ship_flight.anim.json",
+  "atlas": [
+   "atlas_life",
+   "atlas_life_ui"
+  ],
+  "fps": 60,
+  "loop": false,
+  "duration_s": 1.15,
+  "frames": null,
+  "ref_px": 128,
+  "display_px": null,
+  "pivot": "манифест спрайта (tree_grow 0.5,0.78; life_ship_trail 1,0.5; прочие 0.5,0.5)",
+  "tints": null,
+  "tint_default": null,
+  "host_z": null,
+  "host": {},
+  "events": [
+   {
+    "name": "launch",
+    "t": 0,
+    "gameplay": false,
+    "note": "звук старта"
+   },
+   {
+    "name": "arrive",
+    "t": 0.95,
+    "gameplay": true,
+    "note": "корабль у цели: «+N ✦»"
+   },
+   {
+    "name": "done",
+    "t": 1.15,
+    "gameplay": false,
+    "note": ""
+   }
+  ],
+  "usage": "life_ship -> play(o = точка вылета, to = точка прибытия). В galaxy_flow: старт в t = 3.45, o = @road[N], to = @road[N+1] (слой galaxy_world, камера потока) -> arrive 4.40 = marker_arrived. Пыль «+N ✦» — код по arrive.",
+  "budget": {
+   "ship": {
+    "particles_max": 2,
+    "large_lighter_max": 0
+   }
+  },
+  "preview": [
+   "handoff/deliveries/REQ-20261101-003/ship_540.gif"
+  ],
+  "run": "anim/life_fx",
+  "qa_verdict": "technical_pass+visual_review_pass(frames, 100% crops)"
+ },
+ "life_stage_burst": {
+  "type": "fx",
+  "format": "artlab.layer_timeline/1",
+  "anim_json": "anim/anim_life_stage_burst.anim.json",
+  "atlas": [
+   "atlas_life",
+   "atlas_life_fx"
+  ],
+  "fps": 60,
+  "loop": false,
+  "duration_s": 0.8,
+  "frames": null,
+  "ref_px": 600,
+  "display_px": null,
+  "pivot": "манифест спрайта (tree_grow 0.5,0.78; life_ship_trail 1,0.5; прочие 0.5,0.5)",
+  "tints": {
+   "terra": "#5AB8FF",
+   "microbes": "#3DFFD0",
+   "plants": "#A6FF3D",
+   "animals": "#FF9A4A",
+   "mind": "#B98CFF"
+  },
+  "tint_default": "#3DFFD0",
+  "host_z": null,
+  "host": {
+   "planet_scale": "масштаб диска/планеты (сжатие -> отскок)",
+   "old_stage_alpha": "старый слой стадии (кроссфейд 300 мс под вспышкой)",
+   "new_stage_alpha": "новый слой стадии",
+   "chip_scale": "значок стадии (новая иконка с 0.125)"
+  },
+  "events": [
+   {
+    "name": "stage_fx_start",
+    "t": 0,
+    "gameplay": false,
+    "note": "звук «эволюция», вибрация 30 мс"
+   },
+   {
+    "name": "stage_swap",
+    "t": 0.125,
+    "gameplay": true,
+    "note": "сменить слой/значок стадии (sim уже применил в кадре тапа)"
+   },
+   {
+    "name": "done",
+    "t": 0.8,
+    "gameplay": false,
+    "note": ""
+   }
+  ],
+  "usage": "tap «Эволюция» -> play(o = центр диска/планеты, size = её размер на экране, tint = tints[новая стадия]). Кадр 0 = белая вспышка в кадре тапа; stage_swap 0.125 — под пиком вспышки код меняет слой стадии (или кроссфейд по host old/new_stage_alpha).",
+  "budget": {
+   "stage_card": {
+    "particles_max": 14,
+    "large_lighter_max": 3
+   },
+   "stage_orbit": {
+    "particles_max": 14,
+    "large_lighter_max": 0
+   }
+  },
+  "preview": [
+   "handoff/deliveries/REQ-20261101-003/stage_card_540.gif",
+   "handoff/deliveries/REQ-20261101-003/stage_orbit_540.gif"
+  ],
+  "run": "anim/life_fx",
+  "qa_verdict": "technical_pass+visual_review_pass(frames, 100% crops)"
+ },
+ "life_stage_mind": {
+  "type": "frame_swap",
+  "format": "artlab.layer_timeline/1",
+  "anim_json": "anim/anim_life_stage_mind.anim.json",
+  "loop": true,
+  "period_s": 1.0,
+  "events": [],
+  "run": "anim/life_fx",
+  "qa_verdict": "technical_pass (только тайминг, кадры art-director)",
+  "note": "орбита; фаза планеты = slot mod 4 кадров",
+  "fps": 4,
+  "frames": [
+   "life_stage_mind_01",
+   "life_stage_mind_02",
+   "life_stage_mind_03",
+   "life_stage_mind_04"
+  ],
+  "durations_ms": [
+   250,
+   250,
+   250,
+   250
+  ],
+  "atlas": [
+   "atlas_life"
+  ],
+  "display_px": [
+   124,
+   124
+  ],
+  "pivot": [
+   0.5,
+   0.5
+  ]
+ },
+ "life_terra_done": {
+  "type": "fx",
+  "format": "artlab.layer_timeline/1",
+  "anim_json": "anim/anim_life_terra_done.anim.json",
+  "atlas": [
+   "atlas_life",
+   "atlas_life_fx"
+  ],
+  "fps": 60,
+  "loop": false,
+  "duration_s": 1.2,
+  "frames": null,
+  "ref_px": 600,
+  "display_px": null,
+  "pivot": "манифест спрайта (tree_grow 0.5,0.78; life_ship_trail 1,0.5; прочие 0.5,0.5)",
+  "tints": null,
+  "tint_default": null,
+  "host_z": null,
+  "host": {
+   "planet_scale": ""
+  },
+  "events": [
+   {
+    "name": "terra_fx_start",
+    "t": 0,
+    "gameplay": false,
+    "note": "звук «мир готов» (ниже по тону, длиннее)"
+   },
+   {
+    "name": "stage_swap",
+    "t": 0.12,
+    "gameplay": true,
+    "note": "слой terra на диске"
+   },
+   {
+    "name": "toast",
+    "t": 0.15,
+    "gameplay": false,
+    "note": "показать life.terraDone"
+   },
+   {
+    "name": "done",
+    "t": 1.2,
+    "gameplay": false,
+    "note": ""
+   }
+  ],
+  "usage": "стадия terra достигнута (life_stage stage=terra) -> play(o = центр диска, size 600) ВМЕСТО life_stage_burst; на орбите size = показ планеты. Текст life.terraDone — DOM по событию toast.",
+  "budget": {
+   "terra_done": {
+    "particles_max": 18,
+    "large_lighter_max": 3
+   }
+  },
+  "preview": [
+   "handoff/deliveries/REQ-20261101-003/terra_done_540.gif"
+  ],
+  "run": "anim/life_fx",
+  "qa_verdict": "technical_pass+visual_review_pass(frames, 100% crops)"
+ },
+ "mut_dup_spark": {
+  "type": "fx",
+  "format": "artlab.layer_timeline/1",
+  "anim_json": "anim/anim_mut_dup_spark.anim.json",
+  "atlas": [
+   "atlas_life"
+  ],
+  "fps": 60,
+  "loop": false,
+  "duration_s": 0.4,
+  "frames": null,
+  "ref_px": 64,
+  "display_px": null,
+  "pivot": "манифест спрайта (tree_grow 0.5,0.78; life_ship_trail 1,0.5; прочие 0.5,0.5)",
+  "tints": null,
+  "tint_default": null,
+  "host_z": null,
+  "host": {},
+  "events": [
+   {
+    "name": "dup",
+    "t": 0,
+    "gameplay": false,
+    "note": "звук «повтор»"
+   },
+   {
+    "name": "done",
+    "t": 0.4,
+    "gameplay": false,
+    "note": ""
+   }
+  ],
+  "usage": "life_mut isNew=false -> play(o = иконка мутации, size 64); в том же кадре запустить bio_spores(o -> HUD Биомассы) — count там.",
+  "budget": {
+   "mut_dup": {
+    "particles_max": 0,
+    "large_lighter_max": 0
+   }
+  },
+  "preview": [
+   "handoff/deliveries/REQ-20261101-003/mut_dup_540.gif"
+  ],
+  "run": "anim/life_fx",
+  "qa_verdict": "technical_pass+visual_review_pass(frames, 100% crops)"
+ },
+ "mut_frame_legendary": {
+  "type": "frame_swap",
+  "format": "artlab.layer_timeline/1",
+  "anim_json": "anim/anim_mut_frame_legendary.anim.json",
+  "loop": true,
+  "period_s": 0.667,
+  "events": [],
+  "run": "anim/life_fx",
+  "qa_verdict": "technical_pass (только тайминг, кадры art-director)",
+  "note": "",
+  "fps": 6,
+  "frames": [
+   "mut_frame_legendary",
+   "mut_frame_legendary_02",
+   "mut_frame_legendary_03",
+   "mut_frame_legendary_04"
+  ],
+  "durations_ms": [
+   167,
+   167,
+   167,
+   166
+  ],
+  "atlas": [
+   "atlas_life_tree"
+  ],
+  "display_px": [
+   168,
+   168
+  ],
+  "pivot": [
+   0.5,
+   0.5
+  ]
+ },
+ "mut_reveal": {
+  "type": "fx",
+  "format": "artlab.layer_timeline/1",
+  "anim_json": "anim/anim_mut_reveal.anim.json",
+  "atlas": [
+   "atlas_life",
+   "atlas_life_fx"
+  ],
+  "fps": 60,
+  "loop": false,
+  "duration_s": 1.0,
+  "frames": null,
+  "ref_px": 168,
+  "display_px": null,
+  "pivot": "манифест спрайта (tree_grow 0.5,0.78; life_ship_trail 1,0.5; прочие 0.5,0.5)",
+  "tints": {
+   "common": "#5AB8FF",
+   "uncommon": "#B98CFF",
+   "rare": "#FFD23F"
+  },
+  "tint_default": "#5AB8FF",
+  "host_z": 2.5,
+  "host": {
+   "frame_scale": "рамка редкости",
+   "icon_scale": "иконка мутации",
+   "title_alpha": "«Новая мутация!» + название (DOM)",
+   "title_scale": ""
+  },
+  "events": [
+   {
+    "name": "reveal",
+    "t": 0,
+    "gameplay": false,
+    "note": "звук по редкости"
+   },
+   {
+    "name": "icon_in",
+    "t": 0.06,
+    "gameplay": false,
+    "note": ""
+   },
+   {
+    "name": "title_in",
+    "t": 0.2,
+    "gameplay": false,
+    "note": ""
+   },
+   {
+    "name": "done",
+    "t": 1.0,
+    "gameplay": false,
+    "note": ""
+   }
+  ],
+  "usage": "life_mut isNew, редкость common|uncommon|rare -> play(o = центр иконки, size 168, tint = rarity_color, tier 0|1|2). Legendary — отдельный клип mut_reveal_legendary. Тап закрывает окно в любой момент.",
+  "budget": {
+   "mut_common": {
+    "particles_max": 10,
+    "large_lighter_max": 2
+   },
+   "mut_uncommon": {
+    "particles_max": 13,
+    "large_lighter_max": 2
+   },
+   "mut_rare": {
+    "particles_max": 18,
+    "large_lighter_max": 2
+   }
+  },
+  "preview": [
+   "handoff/deliveries/REQ-20261101-003/mut_common_540.gif",
+   "handoff/deliveries/REQ-20261101-003/mut_uncommon_540.gif",
+   "handoff/deliveries/REQ-20261101-003/mut_rare_540.gif"
+  ],
+  "run": "anim/life_fx",
+  "qa_verdict": "technical_pass+visual_review_pass(frames, 100% crops)"
+ },
+ "mut_reveal_legendary": {
+  "type": "fx",
+  "format": "artlab.layer_timeline/1",
+  "anim_json": "anim/anim_mut_reveal_legendary.anim.json",
+  "atlas": [
+   "atlas_life",
+   "atlas_life_fx"
+  ],
+  "fps": 60,
+  "loop": false,
+  "duration_s": 1.2,
+  "frames": null,
+  "ref_px": 168,
+  "display_px": null,
+  "pivot": "манифест спрайта (tree_grow 0.5,0.78; life_ship_trail 1,0.5; прочие 0.5,0.5)",
+  "tints": null,
+  "tint_default": "#FFD23F",
+  "host_z": 2.5,
+  "host": {
+   "frame_scale": "",
+   "icon_scale": "",
+   "title_alpha": "",
+   "title_scale": "",
+   "shake_px": "амплитуда тряски окна (sin 31/23 Гц по x/y)"
+  },
+  "events": [
+   {
+    "name": "reveal",
+    "t": 0,
+    "gameplay": false,
+    "note": "звук legendary, вибрация 60 мс"
+   },
+   {
+    "name": "icon_in",
+    "t": 0.06,
+    "gameplay": false,
+    "note": ""
+   },
+   {
+    "name": "title_in",
+    "t": 0.24,
+    "gameplay": false,
+    "note": ""
+   },
+   {
+    "name": "done",
+    "t": 1.2,
+    "gameplay": false,
+    "note": ""
+   }
+  ],
+  "usage": "life_mut isNew legendary -> play(o = центр иконки, size 168). Ярче обычной: две радужные короны лучей навстречу, золотое кольцо, белый двойной пик, 28 искр, тряска окна 6 px. После done — цикл mut_frame_legendary 6 fps.",
+  "budget": {
+   "mut_legendary": {
+    "particles_max": 28,
+    "large_lighter_max": 3
+   }
+  },
+  "preview": [
+   "handoff/deliveries/REQ-20261101-003/mut_legendary_540.gif"
+  ],
+  "run": "anim/life_fx",
+  "qa_verdict": "technical_pass+visual_review_pass(frames, 100% crops)"
+ },
+ "tree_buy": {
+  "type": "fx",
+  "format": "artlab.layer_timeline/1",
+  "anim_json": "anim/anim_tree_buy.anim.json",
+  "atlas": [
+   "atlas_life",
+   "atlas_life_fx"
+  ],
+  "fps": 60,
+  "loop": false,
+  "duration_s": 0.7,
+  "frames": null,
+  "ref_px": 168,
+  "display_px": null,
+  "pivot": "манифест спрайта (tree_grow 0.5,0.78; life_ship_trail 1,0.5; прочие 0.5,0.5)",
+  "tints": {
+   "trunk": "#A6FF3D",
+   "sea": "#5AB8FF",
+   "land": "#FF9A4A",
+   "sky": "#3DFFD0",
+   "mind": "#B98CFF"
+  },
+  "tint_default": "#A6FF3D",
+  "host_z": 2.5,
+  "host": {
+   "node_scale": "",
+   "owned_alpha": "рамка owned поверх locked; иконка вида _off -> цветная тем же α",
+   "select_alpha": "золотое выделение гаснет",
+   "edge_u": "ребро lit от родителя к узлу: длина = edge_u × путь"
+  },
+  "events": [
+   {
+    "name": "owned",
+    "t": 0,
+    "gameplay": true,
+    "note": "звук покупки; узел уже куплен sim"
+   },
+   {
+    "name": "edge_done",
+    "t": 0.35,
+    "gameplay": false,
+    "note": ""
+   },
+   {
+    "name": "done",
+    "t": 0.7,
+    "gameplay": false,
+    "note": ""
+   }
+  ],
+  "usage": "tap «Открыть» -> play(o = центр узла, size 168|216, tint = branch_color[ветка]); host owned_alpha — кроссфейд рамки locked->owned, edge_u — доля ребра от родителя (рисует код), node_scale — узел.",
+  "budget": {
+   "tree_buy": {
+    "particles_max": 8,
+    "large_lighter_max": 1
+   }
+  },
+  "preview": [
+   "handoff/deliveries/REQ-20261101-003/tree_buy_540.gif"
+  ],
+  "run": "anim/life_fx",
+  "qa_verdict": "technical_pass+visual_review_pass(frames, 100% crops)"
+ },
+ "tree_grow": {
+  "type": "fx",
+  "format": "artlab.layer_timeline/1",
+  "anim_json": "anim/anim_tree_grow.anim.json",
+  "atlas": [
+   "atlas_life",
+   "atlas_life_tree"
+  ],
+  "fps": 60,
+  "loop": false,
+  "duration_s": 1.0,
+  "frames": null,
+  "ref_px": 256,
+  "display_px": null,
+  "pivot": "манифест спрайта (tree_grow 0.5,0.78; life_ship_trail 1,0.5; прочие 0.5,0.5)",
+  "tints": null,
+  "tint_default": null,
+  "host_z": null,
+  "host": {},
+  "events": [
+   {
+    "name": "sprout",
+    "t": 0,
+    "gameplay": false,
+    "note": ""
+   },
+   {
+    "name": "grown",
+    "t": 0.8,
+    "gameplay": false,
+    "note": "звук «плоды»"
+   },
+   {
+    "name": "done",
+    "t": 1.0,
+    "gameplay": false,
+    "note": ""
+   }
+  ],
+  "usage": "рост дерева (вид растений открыт / стадия plants): play(o = точка земли, size = высота показа). Спрайты рисовать от pivot (0.5, 0.78). Поза 4 остаётся после done.",
+  "budget": {
+   "tree_grow": {
+    "particles_max": 6,
+    "large_lighter_max": 0
+   }
+  },
+  "preview": [
+   "handoff/deliveries/REQ-20261101-003/tree_grow_540.gif"
+  ],
+  "run": "anim/life_fx",
+  "qa_verdict": "technical_pass+visual_review_pass(frames, 100% crops)"
+ },
+ "tree_node_available": {
+  "type": "tween",
+  "format": "artlab.layer_timeline/1",
+  "anim_json": "anim/anim_tree_node_available.anim.json",
+  "loop": true,
+  "period_s": 1.2,
+  "events": [],
+  "run": "anim/life_fx",
+  "qa_verdict": "technical_pass (только тайминг, кадры art-director)",
+  "note": "твин вместо 6 кадров (подтверждено): α 0.75↔1, 1.2 с; фаза узла = (col·0.17 + row·0.11) mod 1.2 — соседи не мигают хором",
+  "fps": 60,
+  "sprite": "tree_node_frame_available",
+  "alt_sprites": [
+   "tree_node_frame_big_available"
+  ],
+  "tracks": {
+   "alpha": [
+    [
+     0,
+     0.75,
+     "inOutSine"
+    ],
+    [
+     0.6,
+     1,
+     "inOutSine"
+    ],
+    [
+     1.2,
+     0.75
+    ]
+   ]
+  },
+  "blend": "source-over",
+  "atlas": [
+   "atlas_life_tree"
+  ]
+ },
+ "_life_fx": {
+  "_comment": "T-125 / REQ-20261101-003: эффекты слоя «Жизнь» — type=fx (artlab.layer_timeline/1): слои-твины ключей art-director + частицы + полёты по дугам; кадровых атласов нет. Проигрыватель: handoff/deliveries/REQ-20261101-003/fx_player.ts (fxFrame/fxEvents/fxSprites/bakeTint) поверх timeline_sampler.ts игры.",
+  "rules": [
+   "кадр тапа: play() и первый draw в том же кадре (t = 0 всегда что-то рисует; события с t = 0 — fxEvents(clip, -1, 0))",
+   "ввод не блокируется; повторный тап — новый экземпляр (или перезапуск того же o), очередь не нужна",
+   "tint — только запечённые копии (bakeTint при загрузке), никакого ctx.filter / покадровой перекраски",
+   "лимит: живых частиц слоя Жизни (kind particle|flyer|trail) ≤ 40; перед bio_spores проверить активные + 8 ≤ 40, иначе bio_pop",
+   "крупных слоёв lighter (≥ 256 px на экране) ≤ 3 одновременно: life_stage_burst/life_terra_done/mut_reveal_legendary не запускать вместе (второй — после done первого или bio_pop вместо)",
+   "env.size — размер объекта на экране; k = size / ref_px; на орбите life_scale_step size = 0.4 × показ планеты",
+   "host_z: код рисует свои объекты (рамка+иконка мутации, узел древа) между слоями z < host_z и z ≥ host_z"
+  ],
+  "predecode_ImageBitmap": [
+   {
+    "sprite": "bio_pop_key",
+    "atlas": "atlas_life",
+    "w": 96,
+    "h": 96,
+    "plain": true,
+    "tints": [
+     "#3DFFD0",
+     "#5AB8FF",
+     "#A6FF3D",
+     "#B98CFF",
+     "#FF9A4A"
+    ]
+   },
+   {
+    "sprite": "bio_spore_01",
+    "atlas": "atlas_life",
+    "w": 32,
+    "h": 32,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "bio_spore_02",
+    "atlas": "atlas_life",
+    "w": 32,
+    "h": 32,
+    "plain": true,
+    "tints": [
+     "#3DFFD0",
+     "#5AB8FF",
+     "#B98CFF",
+     "#FFD23F"
+    ]
+   },
+   {
+    "sprite": "bio_spore_03",
+    "atlas": "atlas_life",
+    "w": 32,
+    "h": 32,
+    "plain": true,
+    "tints": [
+     "#5AB8FF",
+     "#A6FF3D",
+     "#B98CFF",
+     "#FF5AA8",
+     "#FFD23F"
+    ]
+   },
+   {
+    "sprite": "bio_spore_04",
+    "atlas": "atlas_life",
+    "w": 32,
+    "h": 32,
+    "plain": true,
+    "tints": [
+     "#3B8BFF",
+     "#3DFFD0",
+     "#5AB8FF",
+     "#B98CFF",
+     "#BFF6FF",
+     "#FF6A1A",
+     "#FFD23F"
+    ]
+   },
+   {
+    "sprite": "life_aura_common_01",
+    "atlas": "atlas_life",
+    "w": 112,
+    "h": 112,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_aura_common_02",
+    "atlas": "atlas_life",
+    "w": 112,
+    "h": 112,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_aura_common_03",
+    "atlas": "atlas_life",
+    "w": 112,
+    "h": 112,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_aura_common_04",
+    "atlas": "atlas_life",
+    "w": 112,
+    "h": 112,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_aura_legendary_01",
+    "atlas": "atlas_life",
+    "w": 112,
+    "h": 112,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_aura_legendary_02",
+    "atlas": "atlas_life",
+    "w": 112,
+    "h": 112,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_aura_legendary_03",
+    "atlas": "atlas_life",
+    "w": 112,
+    "h": 112,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_aura_legendary_04",
+    "atlas": "atlas_life",
+    "w": 112,
+    "h": 112,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_aura_rare_01",
+    "atlas": "atlas_life",
+    "w": 112,
+    "h": 112,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_aura_rare_02",
+    "atlas": "atlas_life",
+    "w": 112,
+    "h": 112,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_aura_rare_03",
+    "atlas": "atlas_life",
+    "w": 112,
+    "h": 112,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_aura_rare_04",
+    "atlas": "atlas_life",
+    "w": 112,
+    "h": 112,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_aura_uncommon_01",
+    "atlas": "atlas_life",
+    "w": 112,
+    "h": 112,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_aura_uncommon_02",
+    "atlas": "atlas_life",
+    "w": 112,
+    "h": 112,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_aura_uncommon_03",
+    "atlas": "atlas_life",
+    "w": 112,
+    "h": 112,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_aura_uncommon_04",
+    "atlas": "atlas_life",
+    "w": 112,
+    "h": 112,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_card_stage_mind_01",
+    "atlas": "atlas_life_card_c",
+    "w": 600,
+    "h": 600,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_card_stage_mind_02",
+    "atlas": "atlas_life_card_c",
+    "w": 600,
+    "h": 600,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_card_stage_mind_03",
+    "atlas": "atlas_life_card_c",
+    "w": 600,
+    "h": 600,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_card_stage_mind_04",
+    "atlas": "atlas_life_card_c",
+    "w": 600,
+    "h": 600,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_drop",
+    "atlas": "atlas_life",
+    "w": 64,
+    "h": 64,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_scale_step_burst_key",
+    "atlas": "atlas_life_fx",
+    "w": 256,
+    "h": 256,
+    "plain": false,
+    "tints": [
+     "#3B8BFF",
+     "#3DFFD0",
+     "#5AB8FF",
+     "#A6FF3D",
+     "#B98CFF",
+     "#BFF6FF",
+     "#FF6A1A",
+     "#FF9A4A",
+     "#FFD23F"
+    ]
+   },
+   {
+    "sprite": "life_ship",
+    "atlas": "atlas_life_ui",
+    "w": 128,
+    "h": 128,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_ship_trail",
+    "atlas": "atlas_life_ui",
+    "w": 128,
+    "h": 64,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_stage_burst_key",
+    "atlas": "atlas_life_fx",
+    "w": 512,
+    "h": 512,
+    "plain": true,
+    "tints": [
+     "#3DFFD0",
+     "#5AB8FF",
+     "#A6FF3D",
+     "#B98CFF",
+     "#FF9A4A"
+    ],
+    "tint_res": 0.5
+   },
+   {
+    "sprite": "life_stage_mind_01",
+    "atlas": "atlas_life",
+    "w": 128,
+    "h": 128,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_stage_mind_02",
+    "atlas": "atlas_life",
+    "w": 128,
+    "h": 128,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_stage_mind_03",
+    "atlas": "atlas_life",
+    "w": 128,
+    "h": 128,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_stage_mind_04",
+    "atlas": "atlas_life",
+    "w": 128,
+    "h": 128,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "life_terra_done_key",
+    "atlas": "atlas_life_fx",
+    "w": 512,
+    "h": 512,
+    "plain": true,
+    "tints": [
+     "#A6FF3D",
+     "#FFD23F"
+    ],
+    "tint_res": 0.5
+   },
+   {
+    "sprite": "mut_dup_spark_key",
+    "atlas": "atlas_life",
+    "w": 64,
+    "h": 64,
+    "plain": true,
+    "tints": [
+     "#5AB8FF",
+     "#A6FF3D",
+     "#B98CFF",
+     "#FF5AA8",
+     "#FFD23F"
+    ]
+   },
+   {
+    "sprite": "mut_frame_legendary",
+    "atlas": "atlas_life_tree",
+    "w": 168,
+    "h": 168,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "mut_frame_legendary_02",
+    "atlas": "atlas_life_tree",
+    "w": 168,
+    "h": 168,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "mut_frame_legendary_03",
+    "atlas": "atlas_life_tree",
+    "w": 168,
+    "h": 168,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "mut_frame_legendary_04",
+    "atlas": "atlas_life_tree",
+    "w": 168,
+    "h": 168,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "mut_reveal_key",
+    "atlas": "atlas_life_fx",
+    "w": 512,
+    "h": 512,
+    "plain": true,
+    "tints": [
+     "#3DFFD0",
+     "#5AB8FF",
+     "#A6FF3D",
+     "#B98CFF",
+     "#FF5AA8",
+     "#FFD23F"
+    ],
+    "tint_res": 0.5
+   },
+   {
+    "sprite": "tree_buy_flash_key",
+    "atlas": "atlas_life_fx",
+    "w": 256,
+    "h": 256,
+    "plain": false,
+    "tints": [
+     "#3DFFD0",
+     "#5AB8FF",
+     "#A6FF3D",
+     "#B98CFF",
+     "#FF9A4A"
+    ]
+   },
+   {
+    "sprite": "tree_grow_01",
+    "atlas": "atlas_life_tree",
+    "w": 192,
+    "h": 256,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "tree_grow_02",
+    "atlas": "atlas_life_tree",
+    "w": 192,
+    "h": 256,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "tree_grow_03",
+    "atlas": "atlas_life_tree",
+    "w": 192,
+    "h": 256,
+    "plain": true,
+    "tints": []
+   },
+   {
+    "sprite": "tree_grow_04",
+    "atlas": "atlas_life_tree",
+    "w": 192,
+    "h": 256,
+    "plain": true,
+    "tints": []
+   }
+  ],
+  "predecode_atlases": [
+   "atlas_life",
+   "atlas_life_card_c",
+   "atlas_life_fx",
+   "atlas_life_tree",
+   "atlas_life_ui"
+  ],
+  "predecode_bitmap_mem_mb": {
+   "fx_keys_and_tints": 11.0,
+   "loop_frames_art_director": 6.9,
+   "note": "циклы (ауры, Разум, легендарная рамка) игра декодирует и так; tint_res 0.5 — копия вдвое меньше, рисовать в размер w×h"
+  },
+  "stress": {
+   "parts": 46,
+   "big": 0
+  }
+ }
+}

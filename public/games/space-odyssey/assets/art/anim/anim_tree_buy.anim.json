@@ -1,0 +1,358 @@
+{
+ "format": "artlab.layer_timeline/1",
+ "type": "fx",
+ "key": "tree_buy",
+ "duration_s": 0.7,
+ "loop": false,
+ "ref_px": 168,
+ "tint_default": "#A6FF3D",
+ "host_z": 2.5,
+ "tints": {
+  "trunk": "#A6FF3D",
+  "sea": "#5AB8FF",
+  "land": "#FF9A4A",
+  "sky": "#3DFFD0",
+  "mind": "#B98CFF"
+ },
+ "usage": "tap «Открыть» -> play(o = центр узла, size 168|216, tint = branch_color[ветка]); host owned_alpha — кроссфейд рамки locked->owned, edge_u — доля ребра от родителя (рисует код), node_scale — узел.",
+ "layers": [
+  {
+   "id": "flash",
+   "sprite": "tree_buy_flash_key",
+   "blend": "lighter",
+   "z": 1,
+   "tracks": {
+    "scale": [
+     [
+      0,
+      0.55,
+      "outCubic"
+     ],
+     [
+      0.3,
+      1.35
+     ]
+    ],
+    "alpha": [
+     [
+      0,
+      1,
+      "linear"
+     ],
+     [
+      0.1,
+      1,
+      "inQuad"
+     ],
+     [
+      0.3,
+      0
+     ]
+    ]
+   },
+   "tint": "@tint"
+  },
+  {
+   "id": "core",
+   "sprite": "bio_pop_key",
+   "blend": "lighter",
+   "z": 2,
+   "tracks": {
+    "scale": [
+     [
+      0,
+      1.2,
+      "outBack"
+     ],
+     [
+      0.1,
+      2.2,
+      "inQuad"
+     ],
+     [
+      0.22,
+      1.6
+     ]
+    ],
+    "alpha": [
+     [
+      0,
+      1,
+      "linear"
+     ],
+     [
+      0.1,
+      1,
+      "inQuad"
+     ],
+     [
+      0.22,
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "edge_pop",
+   "sprite": "bio_pop_key",
+   "blend": "lighter",
+   "z": 2,
+   "tracks": {
+    "scale": [
+     [
+      0.35,
+      1.0,
+      "outCubic"
+     ],
+     [
+      0.6,
+      1.9
+     ]
+    ],
+    "alpha": [
+     [
+      0.35,
+      0.9,
+      "inQuad"
+     ],
+     [
+      0.6,
+      0
+     ]
+    ]
+   },
+   "visible": [
+    0.35,
+    0.6
+   ],
+   "tint": "@tint",
+   "note": "ребро дошло: вторая волна"
+  }
+ ],
+ "particles": [
+  {
+   "id": "spores",
+   "at": "@o",
+   "blend": "lighter",
+   "z": 3,
+   "items": [
+    {
+     "sprite": "bio_spore_01",
+     "t0": 0.0495,
+     "life": 0.5192,
+     "angle": 357.4,
+     "v0": 697.7,
+     "drag": 5.0,
+     "r0": 60.8,
+     "rot0": 197.0,
+     "spin": 115.7,
+     "scale": [
+      0.939,
+      0.5
+     ]
+    },
+    {
+     "sprite": "bio_spore_02",
+     "t0": 0.0347,
+     "life": 0.5466,
+     "angle": 43.0,
+     "v0": 712.8,
+     "drag": 5.0,
+     "r0": 75.3,
+     "rot0": 202.7,
+     "spin": 116.6,
+     "scale": [
+      1.157,
+      0.5
+     ]
+    },
+    {
+     "sprite": "bio_spore_03",
+     "t0": 0.024,
+     "life": 0.4775,
+     "angle": 90.69,
+     "v0": 706.2,
+     "drag": 5.0,
+     "r0": 66.4,
+     "rot0": 138.2,
+     "spin": -181.0,
+     "scale": [
+      1.231,
+      0.5
+     ]
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.0221,
+     "life": 0.5313,
+     "angle": 148.86,
+     "v0": 650.8,
+     "drag": 5.0,
+     "r0": 68.4,
+     "rot0": 47.4,
+     "spin": 177.0,
+     "scale": [
+      1.22,
+      0.5
+     ]
+    },
+    {
+     "sprite": "bio_spore_01",
+     "t0": 0.0473,
+     "life": 0.5257,
+     "angle": 178.6,
+     "v0": 661.2,
+     "drag": 5.0,
+     "r0": 60.4,
+     "rot0": 5.8,
+     "spin": -119.6,
+     "scale": [
+      1.03,
+      0.5
+     ]
+    },
+    {
+     "sprite": "bio_spore_02",
+     "t0": 0.023,
+     "life": 0.5329,
+     "angle": 222.89,
+     "v0": 622.5,
+     "drag": 5.0,
+     "r0": 74.8,
+     "rot0": 4.3,
+     "spin": -183.0,
+     "scale": [
+      1.214,
+      0.5
+     ]
+    },
+    {
+     "sprite": "bio_spore_03",
+     "t0": 0.0239,
+     "life": 0.5058,
+     "angle": 255.11,
+     "v0": 607.7,
+     "drag": 5.0,
+     "r0": 69.7,
+     "rot0": 81.3,
+     "spin": 118.8,
+     "scale": [
+      1.192,
+      0.5
+     ]
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.0232,
+     "life": 0.497,
+     "angle": 316.1,
+     "v0": 654.3,
+     "drag": 5.0,
+     "r0": 71.2,
+     "rot0": 187.2,
+     "spin": -191.8,
+     "scale": [
+      1.244,
+      0.5
+     ]
+    }
+   ]
+  }
+ ],
+ "host": {
+  "node_scale": {
+   "def": 1,
+   "keys": [
+    [
+     0,
+     1,
+     "outQuad"
+    ],
+    [
+     0.05,
+     0.9,
+     "outBack"
+    ],
+    [
+     0.18,
+     1.1,
+     "inOutQuad"
+    ],
+    [
+     0.34,
+     1
+    ]
+   ]
+  },
+  "owned_alpha": {
+   "def": 1,
+   "keys": [
+    [
+     0,
+     0,
+     "linear"
+    ],
+    [
+     0.2,
+     1
+    ]
+   ],
+   "note": "рамка owned поверх locked; иконка вида _off -> цветная тем же α"
+  },
+  "select_alpha": {
+   "def": 0,
+   "keys": [
+    [
+     0,
+     1,
+     "linear"
+    ],
+    [
+     0.15,
+     0
+    ]
+   ],
+   "note": "золотое выделение гаснет"
+  },
+  "edge_u": {
+   "def": 1,
+   "keys": [
+    [
+     0,
+     0,
+     "hold"
+    ],
+    [
+     0.05,
+     0,
+     "inOutQuad"
+    ],
+    [
+     0.35,
+     1
+    ]
+   ],
+   "note": "ребро lit от родителя к узлу: длина = edge_u × путь"
+  }
+ },
+ "events": [
+  {
+   "name": "owned",
+   "t": 0,
+   "gameplay": true,
+   "note": "звук покупки; узел уже куплен sim"
+  },
+  {
+   "name": "edge_done",
+   "t": 0.35,
+   "gameplay": false,
+   "note": ""
+  },
+  {
+   "name": "done",
+   "t": 0.7,
+   "gameplay": false,
+   "note": ""
+  }
+ ]
+}

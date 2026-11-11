@@ -1,0 +1,256 @@
+{
+ "format": "artlab.layer_timeline/1",
+ "type": "fx",
+ "key": "life_scale_step",
+ "duration_s": 0.5,
+ "loop": false,
+ "ref_px": 36,
+ "tint_default": "#3B8BFF",
+ "tints": {
+  "heat": "#FF6A1A",
+  "water": "#3B8BFF",
+  "air": "#BFF6FF"
+ },
+ "usage": "tap «+ цена» шкалы -> play(o = новое деление, size 36, tint = tints[heat|water|air]); host layer_u ведёт α слоя шкалы на диске от (L−1)/5 к L/5 — планета меняется на глазах. Орбита: o = планета, size = 0.4·показ.",
+ "layers": [
+  {
+   "id": "ring",
+   "sprite": "life_scale_step_burst_key",
+   "blend": "lighter",
+   "z": 0,
+   "tracks": {
+    "scale": [
+     [
+      0,
+      0.16,
+      "outCubic"
+     ],
+     [
+      0.4,
+      0.62
+     ]
+    ],
+    "alpha": [
+     [
+      0,
+      1,
+      "linear"
+     ],
+     [
+      0.12,
+      1,
+      "inQuad"
+     ],
+     [
+      0.4,
+      0
+     ]
+    ]
+   },
+   "tint": "@tint"
+  },
+  {
+   "id": "spark",
+   "sprite": "mut_dup_spark_key",
+   "blend": "lighter",
+   "z": 2,
+   "tracks": {
+    "scale": [
+     [
+      0,
+      0.9,
+      "outBack"
+     ],
+     [
+      0.08,
+      1.5,
+      "inQuad"
+     ],
+     [
+      0.3,
+      0.4
+     ]
+    ],
+    "rot": [
+     [
+      0,
+      0,
+      "outCubic"
+     ],
+     [
+      0.3,
+      90
+     ]
+    ],
+    "alpha": [
+     [
+      0,
+      1,
+      "linear"
+     ],
+     [
+      0.18,
+      1,
+      "inQuad"
+     ],
+     [
+      0.3,
+      0
+     ]
+    ]
+   }
+  }
+ ],
+ "particles": [
+  {
+   "id": "sparks",
+   "at": "@o",
+   "blend": "lighter",
+   "z": 1,
+   "tint": "@tint",
+   "items": [
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.0352,
+     "life": 0.3594,
+     "angle": 3.96,
+     "v0": 508.4,
+     "drag": 6.0,
+     "r0": 9.7,
+     "rot0": 330.4,
+     "spin": -204.2,
+     "scale": [
+      0.708,
+      0.35
+     ]
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.0335,
+     "life": 0.3484,
+     "angle": 52.14,
+     "v0": 550.8,
+     "drag": 6.0,
+     "r0": 8.8,
+     "rot0": 42.0,
+     "spin": 194.2,
+     "scale": [
+      0.755,
+      0.35
+     ]
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.0331,
+     "life": 0.3381,
+     "angle": 123.44,
+     "v0": 427.7,
+     "drag": 6.0,
+     "r0": 10.1,
+     "rot0": 162.2,
+     "spin": -205.9,
+     "scale": [
+      0.749,
+      0.35
+     ]
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.036,
+     "life": 0.318,
+     "angle": 175.65,
+     "v0": 462.9,
+     "drag": 6.0,
+     "r0": 10.4,
+     "rot0": 202.4,
+     "spin": 171.3,
+     "scale": [
+      0.689,
+      0.35
+     ]
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.0371,
+     "life": 0.3175,
+     "angle": 243.29,
+     "v0": 524.6,
+     "drag": 6.0,
+     "r0": 10.9,
+     "rot0": 195.9,
+     "spin": 201.2,
+     "scale": [
+      0.788,
+      0.35
+     ]
+    },
+    {
+     "sprite": "bio_spore_04",
+     "t0": 0.0309,
+     "life": 0.3707,
+     "angle": 306.23,
+     "v0": 459.6,
+     "drag": 6.0,
+     "r0": 10.0,
+     "rot0": 117.9,
+     "spin": 169.9,
+     "scale": [
+      0.771,
+      0.35
+     ]
+    }
+   ]
+  }
+ ],
+ "host": {
+  "pip_scale": {
+   "def": 1,
+   "keys": [
+    [
+     0,
+     0.5,
+     "outBack"
+    ],
+    [
+     0.18,
+     1.25,
+     "inOutQuad"
+    ],
+    [
+     0.32,
+     1
+    ]
+   ],
+   "note": "новое деление шкалы"
+  },
+  "layer_u": {
+   "def": 1,
+   "keys": [
+    [
+     0,
+     0,
+     "outCubic"
+    ],
+    [
+     0.4,
+     1
+    ]
+   ],
+   "note": "доля перехода α слоя шкалы на диске: α = lerp(old, new, layer_u)"
+  }
+ },
+ "events": [
+  {
+   "name": "level_up",
+   "t": 0,
+   "gameplay": true,
+   "note": "звук шага шкалы; уровень уже применён sim"
+  },
+  {
+   "name": "done",
+   "t": 0.5,
+   "gameplay": false,
+   "note": ""
+  }
+ ]
+}

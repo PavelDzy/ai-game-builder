@@ -1,0 +1,611 @@
+{
+ "format": "artlab.layer_timeline/1",
+ "key": "reward_ui",
+ "part_of": "galaxy_flow",
+ "offset_s": 4.6,
+ "duration_s": 1.4,
+ "loop": false,
+ "note": "время ключей — от начала клипа; в мастер-таймлайне t = offset_s + t",
+ "layers": [
+  {
+   "id": "stars_far",
+   "sprite": "galaxy_stars_far",
+   "parent": "galaxy_far",
+   "blend": "source-over",
+   "z": 0,
+   "anchor": "@core_file",
+   "visible": [
+    -4.0,
+    null
+   ],
+   "tracks": {},
+   "note": "непрозрачный, тайлить по x/y; камера galaxy_far (параллакс 0.3)"
+  },
+  {
+   "id": "disk",
+   "sprite": "galaxy_disk",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 0,
+   "anchor": "@core_file",
+   "visible": [
+    -4.0,
+    null
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      -4.0,
+      1
+     ]
+    ]
+   }
+  },
+  {
+   "id": "core_glow",
+   "sprite": "galaxy_core_glow",
+   "parent": "galaxy_world",
+   "blend": "lighter",
+   "z": 1,
+   "anchor": "@core",
+   "visible": [
+    -4.0,
+    null
+   ],
+   "tracks": {
+    "scale": [
+     [
+      -4.0,
+      1.5,
+      "outCubic"
+     ],
+     [
+      -2.5,
+      1.0
+     ]
+    ]
+   },
+   "loop_after": {
+    "t": -2.5,
+    "loop": "galaxy_core_glow"
+   },
+   "note": "после 2.10 — цикл galaxy_core_glow (фаза 0 = scale 1, alpha 1)"
+  },
+  {
+   "id": "arm_marks",
+   "sprite": "galaxy_arm_marks",
+   "parent": "galaxy_world",
+   "blend": "lighter",
+   "z": 0.5,
+   "anchor": "@core_file",
+   "visible": [
+    -4.0,
+    null
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      -4.0,
+      0.75
+     ]
+    ]
+   },
+   "prebake": "disk",
+   "note": "НЕ отдельный слой кадра: один раз при входе в поток нарисовать в offscreen-холст disk (lighter, alpha 0.75) и дальше рисовать один disk_lit source-over — экономит полноэкранный lighter"
+  },
+  {
+   "id": "hud_galaxy",
+   "sprite": "code:galaxy_hud",
+   "parent": "ui",
+   "blend": "source-over",
+   "z": 0,
+   "anchor": [
+    540,
+    960
+   ],
+   "visible": [
+    -3.0,
+    null
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      -3.0,
+      0,
+      "outQuad"
+     ],
+     [
+      -2.5,
+      1
+     ]
+    ]
+   },
+   "note": "кнопка «Галактика», счётчик, подпись рукава — код"
+  },
+  {
+   "id": "point_done_N",
+   "sprite": "galaxy_point_done",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 8,
+   "anchor": "@road[N]",
+   "visible": [
+    -1.25,
+    null
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      -1.25,
+      0,
+      "outQuad"
+     ],
+     [
+      -0.9,
+      1
+     ]
+    ],
+    "scale": [
+     [
+      -1.25,
+      1.3,
+      "outBack"
+     ],
+     [
+      -0.9,
+      1.0
+     ]
+    ]
+   },
+   "loop_after": {
+    "t": -0.9,
+    "loop": "galaxy_point_done"
+   },
+   "note": "новая звезда; после 3.70 — цикл мерцания galaxy_point_done"
+  },
+  {
+   "id": "marker",
+   "sprite": "galaxy_marker_system",
+   "parent": "galaxy_world",
+   "blend": null,
+   "z": 31,
+   "visible": [
+    -1.0,
+    null
+   ],
+   "tracks": {
+    "u": [
+     [
+      -1.0,
+      0,
+      "inOutSine"
+     ],
+     [
+      -0.88,
+      -0.04,
+      "inOutCubic"
+     ],
+     [
+      -0.2,
+      1.05,
+      "inOutSine"
+     ],
+     [
+      -0.08,
+      0.985,
+      "inOutSine"
+     ],
+     [
+      0.02,
+      1.0
+     ]
+    ],
+    "scale": [
+     [
+      -1.0,
+      1.0,
+      "inOutSine"
+     ],
+     [
+      -0.88,
+      0.88,
+      "outCubic"
+     ],
+     [
+      -0.55,
+      1.06,
+      "inOutSine"
+     ],
+     [
+      -0.2,
+      1.0,
+      "outQuad"
+     ],
+     [
+      -0.14,
+      1.18,
+      "inOutSine"
+     ],
+     [
+      -0.04,
+      0.94,
+      "inOutSine"
+     ],
+     [
+      0.06,
+      1.0
+     ]
+    ],
+    "rot": [
+     [
+      -1.0,
+      0,
+      "inOutSine"
+     ],
+     [
+      -0.88,
+      4,
+      "inOutSine"
+     ],
+     [
+      -0.65,
+      -6,
+      "inOutSine"
+     ],
+     [
+      -0.3,
+      -4,
+      "outQuad"
+     ],
+     [
+      -0.14,
+      5,
+      "inOutSine"
+     ],
+     [
+      0.0,
+      0
+     ]
+    ]
+   },
+   "path": {
+    "type": "arm",
+    "from": "N",
+    "to": "N+1"
+   },
+   "note": "замах назад (u -0.04), разгон по рукаву, перелёт 5 % и упругий возврат; наклон по скорости"
+  },
+  {
+   "id": "arrive_ring",
+   "sprite": "galaxy_point_pulse",
+   "parent": "galaxy_world",
+   "blend": "lighter",
+   "z": 29,
+   "anchor": "@road[N+1]",
+   "visible": [
+    -0.2,
+    0.2
+   ],
+   "tracks": {
+    "scale": [
+     [
+      -0.2,
+      0.6,
+      "outCubic"
+     ],
+     [
+      0.2,
+      1.6
+     ]
+    ],
+    "alpha": [
+     [
+      -0.2,
+      1,
+      "inQuad"
+     ],
+     [
+      0.2,
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "point_current_N1_in",
+   "sprite": "galaxy_point_current",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 9,
+   "anchor": "@road[N+1]",
+   "visible": [
+    -0.2,
+    null
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      -0.2,
+      0,
+      "outQuad"
+     ],
+     [
+      -0.08,
+      1
+     ]
+    ],
+    "scale": [
+     [
+      -0.2,
+      1.25,
+      "outBack"
+     ],
+     [
+      0.0,
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "pulse_N1",
+   "sprite": "galaxy_point_pulse",
+   "parent": "galaxy_world",
+   "blend": "lighter",
+   "z": 10,
+   "anchor": "@road[N+1]",
+   "visible": [
+    0.2,
+    null
+   ],
+   "tracks": {},
+   "loop_after": {
+    "t": 0.2,
+    "loop": "galaxy_point_pulse"
+   },
+   "note": "цикл пульса на новой текущей точке с 4.80"
+  },
+  {
+   "id": "point_locked_N2_out",
+   "sprite": "galaxy_point_locked",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 8,
+   "anchor": "@road[N+2]",
+   "visible": [
+    -4.0,
+    0.05
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      -0.1,
+      1,
+      "linear"
+     ],
+     [
+      0.05,
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "point_next_N2_in",
+   "sprite": "galaxy_point_next",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 8,
+   "anchor": "@road[N+2]",
+   "visible": [
+    -0.1,
+    null
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      -0.1,
+      0,
+      "linear"
+     ],
+     [
+      0.0,
+      1
+     ]
+    ],
+    "scale": [
+     [
+      -0.1,
+      0.6,
+      "outBack"
+     ],
+     [
+      0.15,
+      1.0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "bubble_N2_open",
+   "sprite": "group:reward_bubble@N+2",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 30,
+   "anchor": "@bubble[N+2]",
+   "visible": [
+    0.0,
+    null
+   ],
+   "tracks": {
+    "scale": [
+     [
+      0.0,
+      0,
+      "outBack"
+     ],
+     [
+      0.35,
+      1
+     ]
+    ],
+    "alpha": [
+     [
+      0.0,
+      0,
+      "linear"
+     ],
+     [
+      0.1,
+      1
+     ]
+    ]
+   },
+   "children": {
+    "icon": {
+     "sprite": "reward_icon_*",
+     "tracks": {
+      "scale": [
+       [
+        0.15,
+        0,
+        "outBack"
+       ],
+       [
+        0.45,
+        1
+       ]
+      ]
+     }
+    },
+    "pointer": {
+     "sprite": "galaxy_reward_pointer",
+     "tracks": {
+      "alpha": [
+       [
+        0.25,
+        0,
+        "linear"
+       ],
+       [
+        0.4,
+        1
+       ]
+      ]
+     }
+    }
+   },
+   "note": "медальон следующей награды раскрывается у N+2"
+  },
+  {
+   "id": "card",
+   "sprite": "ui_galaxy_card",
+   "parent": "ui",
+   "blend": "source-over",
+   "z": 40,
+   "anchor": "code:card_rest",
+   "visible": [
+    0.15,
+    null
+   ],
+   "tracks": {
+    "y": [
+     [
+      0.15,
+      320,
+      "outBack"
+     ],
+     [
+      0.55,
+      0
+     ]
+    ],
+    "alpha": [
+     [
+      0.15,
+      0,
+      "outQuad"
+     ],
+     [
+      0.35,
+      1
+     ]
+    ]
+   },
+   "children": {
+    "icon": {
+     "sprite": "reward_icon_*_160",
+     "tracks": {
+      "scale": [
+       [
+        0.45,
+        0,
+        "outBack"
+       ],
+       [
+        0.75,
+        1
+       ]
+      ]
+     }
+    }
+   },
+   "note": "карточка «Родилась звезда · N» выезжает снизу; y — смещение от позиции покоя в px"
+  },
+  {
+   "id": "btn_next",
+   "sprite": "code:btn_next",
+   "parent": "ui",
+   "blend": "source-over",
+   "z": 41,
+   "anchor": "code:btn_rest",
+   "visible": [
+    1.1,
+    null
+   ],
+   "tracks": {
+    "scale": [
+     [
+      1.1,
+      0.6,
+      "outBack"
+     ],
+     [
+      1.4,
+      1.0
+     ]
+    ],
+    "alpha": [
+     [
+      1.1,
+      0,
+      "linear"
+     ],
+     [
+      1.2,
+      1
+     ]
+    ]
+   },
+   "note": "кнопка «ДАЛЬШЕ»; клик принимать с button_ready"
+  }
+ ],
+ "particles": [],
+ "shakes": [],
+ "cameras": {},
+ "events": [
+  {
+   "name": "card_in",
+   "t": 0.15,
+   "gameplay": false,
+   "note": "карточка награды выезжает"
+  },
+  {
+   "name": "button_ready",
+   "t": 1.4,
+   "gameplay": true,
+   "note": "кнопка «ДАЛЬШЕ» принимает тап"
+  }
+ ],
+ "playback": "клипы — окна мастер-таймлайна galaxy_flow; слои и частицы, начатые в клипе, доигрывают по своим ключам (рекомендуется играть мастер целиком). Событие на границе окна принадлежит клипу, который им заканчивается."
+}

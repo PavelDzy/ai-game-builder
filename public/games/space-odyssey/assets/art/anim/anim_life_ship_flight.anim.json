@@ -1,0 +1,328 @@
+{
+ "format": "artlab.layer_timeline/1",
+ "type": "fx",
+ "key": "life_ship_flight",
+ "duration_s": 1.15,
+ "loop": false,
+ "ref_px": 128,
+ "usage": "life_ship -> play(o = точка вылета, to = точка прибытия). В galaxy_flow: старт в t = 3.45, o = @road[N], to = @road[N+1] (слой galaxy_world, камера потока) -> arrive 4.40 = marker_arrived. Пыль «+N ✦» — код по arrive.",
+ "layers": [
+  {
+   "id": "launch",
+   "sprite": "mut_dup_spark_key",
+   "blend": "lighter",
+   "z": 0,
+   "tracks": {
+    "scale": [
+     [
+      0,
+      0.6,
+      "outCubic"
+     ],
+     [
+      0.3,
+      1.8
+     ]
+    ],
+    "alpha": [
+     [
+      0,
+      1,
+      "linear"
+     ],
+     [
+      0.08,
+      1,
+      "inQuad"
+     ],
+     [
+      0.3,
+      0
+     ]
+    ]
+   },
+   "tint": "#B98CFF",
+   "k": false
+  },
+  {
+   "id": "arrive",
+   "sprite": "mut_dup_spark_key",
+   "blend": "lighter",
+   "z": 7,
+   "tracks": {
+    "scale": [
+     [
+      0.92,
+      0.6,
+      "outCubic"
+     ],
+     [
+      1.15,
+      2.2
+     ]
+    ],
+    "rot": [
+     [
+      0.92,
+      0,
+      "outCubic"
+     ],
+     [
+      1.15,
+      90
+     ]
+    ],
+    "alpha": [
+     [
+      0.92,
+      1,
+      "linear"
+     ],
+     [
+      0.98,
+      1,
+      "inQuad"
+     ],
+     [
+      1.15,
+      0
+     ]
+    ]
+   },
+   "at": "@to",
+   "k": false,
+   "visible": [
+    0.92,
+    1.15
+   ]
+  }
+ ],
+ "flyers": [
+  {
+   "id": "ship",
+   "from": "@o",
+   "to": "@to",
+   "blend": "source-over",
+   "z": 6,
+   "items": [
+    {
+     "sprite": "life_ship",
+     "t0": 0,
+     "dur": 0.95,
+     "ease": "inOutCubic",
+     "bend": 0.22,
+     "orient": true,
+     "orient_offset_deg": 90,
+     "tracks_u": {
+      "scale": [
+       [
+        0,
+        0.3,
+        "outBack"
+       ],
+       [
+        0.15,
+        0.6,
+        "linear"
+       ],
+       [
+        0.85,
+        0.6,
+        "inQuad"
+       ],
+       [
+        1,
+        0.4
+       ]
+      ],
+      "alpha": [
+       [
+        0,
+        1,
+        "linear"
+       ],
+       [
+        0.9,
+        1,
+        "linear"
+       ],
+       [
+        1,
+        0.6
+       ]
+      ]
+     }
+    }
+   ],
+   "trail": {
+    "sprite": "life_ship_trail",
+    "back_px": 44,
+    "blend": "lighter",
+    "tracks_u": {
+     "alpha": [
+      [
+       0,
+       0,
+       "linear"
+      ],
+      [
+       0.1,
+       1,
+       "linear"
+      ],
+      [
+       0.85,
+       1,
+       "linear"
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "sx": [
+      [
+       0,
+       0.3,
+       "outCubic"
+      ],
+      [
+       0.4,
+       1.25,
+       "linear"
+      ],
+      [
+       1,
+       0.6
+      ]
+     ]
+    },
+    "tracks": {
+     "sx": [
+      [
+       0.0,
+       1.0,
+       "inOutSine"
+      ],
+      [
+       0.0625,
+       0.82,
+       "inOutSine"
+      ],
+      [
+       0.125,
+       1.0,
+       "inOutSine"
+      ],
+      [
+       0.1875,
+       0.82,
+       "inOutSine"
+      ],
+      [
+       0.25,
+       1.0,
+       "inOutSine"
+      ],
+      [
+       0.3125,
+       0.82,
+       "inOutSine"
+      ],
+      [
+       0.375,
+       1.0,
+       "inOutSine"
+      ],
+      [
+       0.4375,
+       0.82,
+       "inOutSine"
+      ],
+      [
+       0.5,
+       1.0,
+       "inOutSine"
+      ],
+      [
+       0.5625,
+       0.82,
+       "inOutSine"
+      ],
+      [
+       0.625,
+       1.0,
+       "inOutSine"
+      ],
+      [
+       0.6875,
+       0.82,
+       "inOutSine"
+      ],
+      [
+       0.75,
+       1.0,
+       "inOutSine"
+      ],
+      [
+       0.8125,
+       0.82,
+       "inOutSine"
+      ],
+      [
+       0.875,
+       1.0,
+       "inOutSine"
+      ],
+      [
+       0.9375,
+       0.82,
+       "inOutSine"
+      ],
+      [
+       1.0,
+       1.0,
+       "inOutSine"
+      ],
+      [
+       1.0625,
+       0.82,
+       "inOutSine"
+      ],
+      [
+       1.125,
+       1.0,
+       "inOutSine"
+      ],
+      [
+       1.1875,
+       0.82,
+       "inOutSine"
+      ]
+     ]
+    }
+   }
+  }
+ ],
+ "host": {},
+ "events": [
+  {
+   "name": "launch",
+   "t": 0,
+   "gameplay": false,
+   "note": "звук старта"
+  },
+  {
+   "name": "arrive",
+   "t": 0.95,
+   "gameplay": true,
+   "note": "корабль у цели: «+N ✦»"
+  },
+  {
+   "name": "done",
+   "t": 1.15,
+   "gameplay": false,
+   "note": ""
+  }
+ ]
+}

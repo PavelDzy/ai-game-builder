@@ -1,0 +1,8290 @@
+{
+ "_comment": "solar_relay неон v1 (art-director, 2026-11-01). Координаты — px кадра 1080×1920; прототип 360×800 → масштаб 1/3 (рисовать drawImage(img, x,y,w,h, dx,dy, w*s, h*s), s = canvasCssWidth/1080 × DPR). Кадры без trim, pivot — доля кадра. Glow запечён — shadowBlur для спрайтов не нужен. nine = [left, top, right, bottom] для 9-slice. Кнопка покупки = ui_btn_frame* (330×210) + ui_icon_* (96) + текст кодом; ALIAS ui_btn_<x> указывает на иконку.",
+ "version": 7,
+ "frame": [
+  1080,
+  1920
+ ],
+ "orbit": {
+  "center": [
+   540,
+   640
+  ],
+  "radius": 354
+ },
+ "galaxy": {
+  "_comment": "Галактика (T-114). Координаты — кадр 1080×1920 (файлы фона 1080×2400: y + 240). road — 12 точек рукава Ориона на гребне рукава с шагом 135 px по дуге (замена предварительных galaxy.json: те были до 39 px от гребня и тесно у ядра — спрайты 96–144 px перекрывались). Путь между точками — кривая рукава: (x, y) = core + R(pa)·(r·cos t·axis_ratio, r·sin t), r = arm_a·e^(arm_b·t), t между road_t соседних точек.",
+  "core": [
+   540,
+   960
+  ],
+  "road": [
+   [
+    713,
+    1037
+   ],
+   [
+    678,
+    1165
+   ],
+   [
+    578,
+    1252
+   ],
+   [
+    445,
+    1259
+   ],
+   [
+    327,
+    1196
+   ],
+   [
+    239,
+    1095
+   ],
+   [
+    183,
+    972
+   ],
+   [
+    157,
+    840
+   ],
+   [
+    161,
+    705
+   ],
+   [
+    196,
+    575
+   ],
+   [
+    263,
+    458
+   ],
+   [
+    359,
+    364
+   ]
+  ],
+  "road_t": [
+   0.5566,
+   1.1446,
+   1.7143,
+   2.2259,
+   2.6475,
+   3.0003,
+   3.3104,
+   3.5956,
+   3.8664,
+   4.13,
+   4.3908,
+   4.6484
+  ],
+  "road_step_px": 135,
+  "arm_a": 191.143,
+  "arm_b": 0.2543,
+  "pa_rad": -0.24435,
+  "axis_ratio": 0.8,
+  "layers": [
+   "galaxy_stars_far (непрозрачный, параллакс 0.3)",
+   "galaxy_disk (source-over)",
+   "galaxy_core_glow ('lighter', центр = core)",
+   "galaxy_arm_marks ('lighter', необяз.)",
+   "путь galaxy_path_lit/_dim",
+   "точки",
+   "galaxy_marker_system"
+  ],
+  "flat": "galaxy_bg = stars_far + disk + core_glow одним кадром (без параллакса)",
+  "point_sprites": {
+   "done": "galaxy_point_done (+ _done_b мерцание)",
+   "current": "galaxy_point_current + galaxy_point_pulse + galaxy_marker_system",
+   "next": "galaxy_point_next + galaxy_reward_bubble (к ядру на 100 px) + reward_icon_* 72 + galaxy_reward_pointer",
+   "locked": "galaxy_point_locked",
+   "big (точка 12)": "galaxy_point_big_*"
+  },
+  "path_tokens": {
+   "lit": "#FFCA5B",
+   "dim": "#6A8AB8",
+   "lit_width": 6,
+   "dim_dot_r": 3.2,
+   "step": 32,
+   "_note": "если путь рисует код: lit — штрих 44 / пробел 20 px, ширина 6, shadowBlur 10; dim — точки r 3.2 через 32 px"
+  }
+ },
+ "life": {
+  "_comment": "T-122 «Живые планеты + Древо жизни» (ключи — заявка game-designer REQ-solar_relay-gd-005; отличия — в alias и notes). Слои стадий нарисованы в единицах кадра планеты 96 с телом r = 30 и НЕ знают облика: код кладёт их в прямоугольник облика с поправкой fit[NN]: размер = rect·s, центр = центр rect + (ox, oy)·rect. Кадр слоя 128 (орбита) / 600 (карточка) = весь rect облика.",
+  "fit": {
+   "planet_01": {
+    "s": 1.0,
+    "ox": 0.0,
+    "oy": 0.0
+   },
+   "planet_02": {
+    "s": 0.8333,
+    "ox": 0.0,
+    "oy": 0.0
+   },
+   "planet_03": {
+    "s": 0.8667,
+    "ox": -0.020833333333333332,
+    "oy": 0.010416666666666666
+   },
+   "planet_04": {
+    "s": 1.1,
+    "ox": 0.0,
+    "oy": 0.0
+   },
+   "planet_05": {
+    "s": 0.9667,
+    "ox": 0.0,
+    "oy": 0.0
+   },
+   "planet_06": {
+    "s": 1.0333,
+    "ox": 0.0,
+    "oy": 0.0
+   },
+   "planet_07": {
+    "s": 0.6333,
+    "ox": 0.0,
+    "oy": 0.0
+   },
+   "planet_08": {
+    "s": 0.9667,
+    "ox": 0.0,
+    "oy": 0.0
+   }
+  },
+  "front": {
+   "planet_02": {
+    "orbit": "planet_02_front",
+    "card": "life_card_front_02"
+   },
+   "planet_03": {
+    "orbit": "planet_03_front",
+    "card": "life_card_front_03"
+   },
+   "planet_07": {
+    "orbit": "planet_07_front",
+    "card": "life_card_front_07"
+   },
+   "planet_08": {
+    "orbit": "planet_08_front",
+    "card": "life_card_front_08"
+   }
+  },
+  "orbit_draw_order": [
+   "planet_NN",
+   "life_stage_<стадия> (fit)",
+   "planet_NN_front (если есть)",
+   "life_aura_<редкость>_NN (rect×112/96, по центру облика)",
+   "life_stage_chip_<стадия> 44–48 над планетой (dx +0.38·rect, dy −0.43·rect)"
+  ],
+  "orbit_stage": {
+   "rock": null,
+   "terra": "life_stage_terra",
+   "microbes": "life_stage_microbes",
+   "plants": "life_stage_plants",
+   "animals": "life_stage_animals",
+   "mind": [
+    "life_stage_mind_01",
+    "life_stage_mind_02",
+    "life_stage_mind_03",
+    "life_stage_mind_04"
+   ]
+  },
+  "orbit_stage_layers": {
+   "rock": [],
+   "terra": [
+    [
+     "heat",
+     0.35
+    ],
+    [
+     "ocean",
+     0.75
+    ],
+    [
+     "clouds",
+     0.35
+    ],
+    [
+     "atmo",
+     0.8
+    ]
+   ],
+   "microbes": [
+    [
+     "ocean",
+     1.0
+    ],
+    [
+     "bio",
+     1.0
+    ],
+    [
+     "clouds",
+     0.55
+    ],
+    [
+     "atmo",
+     0.9
+    ]
+   ],
+   "plants": [
+    [
+     "ocean",
+     1.0
+    ],
+    [
+     "green",
+     1.0
+    ],
+    [
+     "bio",
+     0.4
+    ],
+    [
+     "clouds",
+     0.8
+    ],
+    [
+     "atmo",
+     1.0
+    ]
+   ],
+   "animals": [
+    [
+     "ocean",
+     1.0
+    ],
+    [
+     "green",
+     1.0
+    ],
+    [
+     "fauna",
+     1.0
+    ],
+    [
+     "clouds",
+     0.75
+    ],
+    [
+     "atmo",
+     1.0
+    ]
+   ],
+   "mind": [
+    [
+     "ocean",
+     1.0
+    ],
+    [
+     "green",
+     1.0
+    ],
+    [
+     "fauna",
+     0.6
+    ],
+    [
+     "city",
+     1.0
+    ],
+    [
+     "clouds",
+     0.6
+    ],
+    [
+     "atmo",
+     1.0
+    ]
+   ]
+  },
+  "orbit_layers_note": "life_ov_* (кадр 128) — те же слои по отдельности: можно показывать шкалы и на орбите (heat α = Тепло/5, ocean α = Вода/5, clouds+atmo α = Воздух/5) вместо готового life_stage_terra; на 48–56 px читается силуэт: тёмно-синие моря → зелень → огни + пояс станций",
+  "card": {
+   "disk": {
+    "center": [
+     540,
+     520
+    ],
+    "size": 600
+   },
+   "draw_order": [
+    "life_card_base_NN",
+    "life_layer_heat (α = Тепло/5 × (1 − 0.6·Вода/5))",
+    "life_layer_water (α = Вода/5)",
+    "life_card_stage_<стадия> (mind — 4 кадра)",
+    "life_layer_air (α = Воздух/5)",
+    "life_card_front_NN (если есть)"
+   ],
+   "all_layers_fit": true,
+   "inhabitants": "tree_species_<id>_72 по дуге радиуса 315 вокруг диска (кодом)",
+   "layout_y": {
+    "header": [
+     42,
+     186
+    ],
+    "stage_row": [
+     860,
+     960
+    ],
+    "scale_rows_top": [
+     1000,
+     1160,
+     1320
+    ],
+    "evolve_top": 1500
+   }
+  },
+  "tree": {
+   "canvas": [
+    1080,
+    3150
+   ],
+   "bg": "tree_bg_v2",
+   "rows": [
+    0,
+    16
+   ],
+   "node_xy": "x = 540 + col·216; y = 3000 − row·175 (= h − 150 − row·175, ui_layout.json treeCanvas T-164; ствол tree_bg_v2 нарисован под него)",
+   "bg_legacy": {
+    "key": "tree_bg",
+    "canvas": [
+     1080,
+     2600
+    ],
+    "node_xy": "y = 2450 − row·175",
+    "_note": "старый холст строк 0–13; не использовать с Древом II"
+   },
+   "node_frame": {
+    "small": 168,
+    "big": 216,
+    "big_ids": [
+     "photo",
+     "nerve",
+     "mind",
+     "ship"
+    ]
+   },
+   "species_icon": 120,
+   "species_locked": "tree_species_<id>_off (готовый силуэт, без ctx.filter)",
+   "branch_color": {
+    "trunk": "#A6FF3D",
+    "sea": "#5AB8FF",
+    "land": "#FF9A4A",
+    "sky": "#3DFFD0",
+    "mind": "#B98CFF",
+    "evo": "#FFC94A"
+   },
+   "branch_plate": {
+    "trunk": "tree_branch_plate_trunk",
+    "sea": "tree_branch_plate_sea",
+    "land": "tree_branch_plate_land",
+    "sky": "tree_branch_plate_sky",
+    "mind": "tree_branch_plate_mind",
+    "evo": "tree_branch_plate_evo"
+   },
+   "gate_frame": {
+    "id": "gate",
+    "frame": "tree_frame_gate",
+    "locked": "tree_node_frame_locked",
+    "_note": "T-165: узел gate (последний вид) — золотая рамка 168 вместо owned/available; закрытый — обычная locked"
+   },
+   "tree2_note": "T-165 Древо II: холст 1080×3150, строки 0–16, фон tree_bg_v2 (ствол/ветви под раскладку life.json вкл. evo col 1, delta/canopy/nexus col −1)",
+   "edge": {
+    "lit": "#A6FF3D",
+    "lit_width": 6,
+    "lit_blur": 10,
+    "dim": "#3A5A8A",
+    "dim_dot_r": 4,
+    "dim_step": 26,
+    "_note": "рёбра — кодом (кривая: x по smoothstep, y линейно) с shadowBlur; tree_edge_lit/_dim — если тайлить спрайтом"
+   }
+  },
+  "mutations": {
+   "icon": 120,
+   "frame": 168,
+   "frame_by_rarity": {
+    "common": "mut_frame_common",
+    "uncommon": "mut_frame_uncommon",
+    "rare": "mut_frame_rare",
+    "legendary": "mut_frame_legendary"
+   },
+   "legendary_frames": [
+    "mut_frame_legendary",
+    "mut_frame_legendary_02",
+    "mut_frame_legendary_03",
+    "mut_frame_legendary_04"
+   ],
+   "rarity_color": {
+    "common": "#5AB8FF",
+    "uncommon": "#B98CFF",
+    "rare": "#FFD23F",
+    "legendary": "радуга по кругу"
+   },
+   "aura": {
+    "common": [
+     "life_aura_common_01",
+     "life_aura_common_02",
+     "life_aura_common_03",
+     "life_aura_common_04"
+    ],
+    "uncommon": [
+     "life_aura_uncommon_01",
+     "life_aura_uncommon_02",
+     "life_aura_uncommon_03",
+     "life_aura_uncommon_04"
+    ],
+    "rare": [
+     "life_aura_rare_01",
+     "life_aura_rare_02",
+     "life_aura_rare_03",
+     "life_aura_rare_04"
+    ],
+    "legendary": [
+     "life_aura_legendary_01",
+     "life_aura_legendary_02",
+     "life_aura_legendary_03",
+     "life_aura_legendary_04"
+    ]
+   },
+   "locked": "mut_icon_unknown"
+  },
+  "colors": {
+   "biomass": "#A6FF3D",
+   "microbe": "#3DFFD0",
+   "sea": "#5AB8FF",
+   "land": "#FF9A4A",
+   "mind": "#B98CFF",
+   "heat": "#FF6A1A",
+   "water": "#3B8BFF",
+   "air": "#BFF6FF",
+   "city": "#FFE3A0",
+   "text_on_bio": "#EAFFD0",
+   "stroke_on_bio": "#040E03"
+  },
+  "not_drawn_frames": "кадровые анимации заявки (life_stage_burst 8 кадров, life_scale_step_burst 6, life_terra_done 10, tree_buy_flash 6, mut_reveal 10, mut_dup_spark 4, bio_pop 6, life_ship_flight 8, пульс узла available 6) — у animation-director (REQ-20261101-003); выданы ключи-источники *_key, до кадров — твины anim_hints"
+ },
+ "atlases": {
+  "atlas_game": "atlas_game.webp",
+  "atlas_ui": "atlas_ui.webp",
+  "atlas_meta": "atlas_meta.webp",
+  "atlas_menu": "atlas_menu.webp",
+  "atlas_nova": "atlas_nova.webp",
+  "atlas_galaxy": "atlas_galaxy.webp",
+  "atlas_novafx": "atlas_novafx.webp",
+  "atlas_galaxy_ui": "atlas_galaxy_ui.webp",
+  "atlas_life": "atlas_life.webp",
+  "atlas_life_card_a": "atlas_life_card_a.webp",
+  "atlas_life_card_b": "atlas_life_card_b.webp",
+  "atlas_life_card_c": "atlas_life_card_c.webp",
+  "atlas_life_ui": "atlas_life_ui.webp",
+  "atlas_life_tree": "atlas_life_tree.webp",
+  "atlas_life_fx": "atlas_life_fx.webp",
+  "atlas_colony": "atlas_colony.webp",
+  "atlas_v2": "atlas_v2.webp"
+ },
+ "assets": {
+  "sun_body": {
+   "atlas": "atlas_game",
+   "x": 2,
+   "y": 2,
+   "w": 320,
+   "h": 320,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    320,
+    320
+   ],
+   "note": "тело с тёмной тарелкой под число (Ø196 тёмного центра); не вращать"
+  },
+  "sun_corona": {
+   "atlas": "atlas_game",
+   "x": 326,
+   "y": 2,
+   "w": 320,
+   "h": 320,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    320,
+    320
+   ],
+   "note": "корона отдельным слоем: вращать медленно (≈6°/с), масштаб-пульс 1.0–1.04"
+  },
+  "sun_flash": {
+   "atlas": "atlas_game",
+   "x": 650,
+   "y": 2,
+   "w": 320,
+   "h": 320,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    320,
+    320
+   ],
+   "note": "зачисление: показывать 120–200 мс поверх/вместо sun_idle, затем alpha → 0"
+  },
+  "sun_idle": {
+   "atlas": "atlas_game",
+   "x": 2,
+   "y": 326,
+   "w": 320,
+   "h": 320,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    320,
+    320
+   ],
+   "note": "тело + корона одним кадром (если код без слоёв)"
+  },
+  "fx_resonance": {
+   "atlas": "atlas_game",
+   "x": 326,
+   "y": 326,
+   "w": 160,
+   "h": 160,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    160,
+    160
+   ],
+   "note": "удачный резонанс ×2: scale 0.6→1.2 и alpha 1→0 за 250–300 мс; число «×2» рисует код рядом, не поверх"
+  },
+  "fx_ring": {
+   "atlas": "atlas_game",
+   "x": 490,
+   "y": 326,
+   "w": 160,
+   "h": 160,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    160,
+    160
+   ],
+   "note": "кольцевая волна: scale 0.3→1.4, alpha 1→0, 300–400 мс"
+  },
+  "fx_ring_gold": {
+   "atlas": "atlas_game",
+   "x": 654,
+   "y": 326,
+   "w": 160,
+   "h": 160,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    160,
+    160
+   ],
+   "note": "кольцевая волна: scale 0.3→1.4, alpha 1→0, 300–400 мс"
+  },
+  "fx_ring_red": {
+   "atlas": "atlas_game",
+   "x": 818,
+   "y": 326,
+   "w": 160,
+   "h": 160,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    160,
+    160
+   ],
+   "note": "кольцевая волна: scale 0.3→1.4, alpha 1→0, 300–400 мс; красная — пас сбит"
+  },
+  "fx_sparks": {
+   "atlas": "atlas_game",
+   "x": 2,
+   "y": 650,
+   "w": 160,
+   "h": 160,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    160,
+    160
+   ],
+   "note": "искры передачи/зачисления; поворачивать случайно"
+  },
+  "gate": {
+   "atlas": "atlas_game",
+   "x": 166,
+   "y": 650,
+   "w": 240,
+   "h": 110,
+   "pivot": [
+    0.5,
+    0.32727272727272727
+   ],
+   "display": [
+    240,
+    110
+   ],
+   "note": "солнечный шлюз; pivot = верхняя точка орбиты (R=354), дуги совпадают с орбитой 1080-кадра; шевроны указывают к Солнцу"
+  },
+  "planet_01": {
+   "atlas": "atlas_game",
+   "x": 410,
+   "y": 650,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    84,
+    84
+   ],
+   "note": "кадр 96 = тело ~64–88 + glow; на 20+ планетах рисовать 48–56 px"
+  },
+  "planet_01_shadow": {
+   "atlas": "atlas_game",
+   "x": 510,
+   "y": 650,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    84,
+    84
+   ],
+   "note": "силуэт закрытой планеты (коллекция); v2 светлее (заявка ux-ui)"
+  },
+  "planet_02": {
+   "atlas": "atlas_game",
+   "x": 610,
+   "y": 650,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    84,
+    84
+   ],
+   "note": "кадр 96 = тело ~64–88 + glow; на 20+ планетах рисовать 48–56 px"
+  },
+  "planet_02_shadow": {
+   "atlas": "atlas_game",
+   "x": 710,
+   "y": 650,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    84,
+    84
+   ],
+   "note": "силуэт закрытой планеты (коллекция); v2 светлее (заявка ux-ui)"
+  },
+  "planet_03": {
+   "atlas": "atlas_game",
+   "x": 810,
+   "y": 650,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    84,
+    84
+   ],
+   "note": "кадр 96 = тело ~64–88 + glow; на 20+ планетах рисовать 48–56 px"
+  },
+  "planet_03_shadow": {
+   "atlas": "atlas_game",
+   "x": 910,
+   "y": 650,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    84,
+    84
+   ],
+   "note": "силуэт закрытой планеты (коллекция); v2 светлее (заявка ux-ui)"
+  },
+  "planet_04": {
+   "atlas": "atlas_game",
+   "x": 2,
+   "y": 814,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    84,
+    84
+   ],
+   "note": "кадр 96 = тело ~64–88 + glow; на 20+ планетах рисовать 48–56 px"
+  },
+  "planet_04_shadow": {
+   "atlas": "atlas_game",
+   "x": 102,
+   "y": 814,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    84,
+    84
+   ],
+   "note": "силуэт закрытой планеты (коллекция); v2 светлее (заявка ux-ui)"
+  },
+  "planet_05": {
+   "atlas": "atlas_game",
+   "x": 202,
+   "y": 814,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    84,
+    84
+   ],
+   "note": "кадр 96 = тело ~64–88 + glow; на 20+ планетах рисовать 48–56 px"
+  },
+  "planet_05_shadow": {
+   "atlas": "atlas_game",
+   "x": 302,
+   "y": 814,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    84,
+    84
+   ],
+   "note": "силуэт закрытой планеты (коллекция); v2 светлее (заявка ux-ui)"
+  },
+  "planet_06": {
+   "atlas": "atlas_game",
+   "x": 402,
+   "y": 814,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    84,
+    84
+   ],
+   "note": "кадр 96 = тело ~64–88 + glow; на 20+ планетах рисовать 48–56 px"
+  },
+  "planet_06_shadow": {
+   "atlas": "atlas_game",
+   "x": 502,
+   "y": 814,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    84,
+    84
+   ],
+   "note": "силуэт закрытой планеты (коллекция); v2 светлее (заявка ux-ui)"
+  },
+  "planet_07": {
+   "atlas": "atlas_game",
+   "x": 602,
+   "y": 814,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    84,
+    84
+   ],
+   "note": "кадр 96 = тело ~64–88 + glow; на 20+ планетах рисовать 48–56 px"
+  },
+  "planet_07_shadow": {
+   "atlas": "atlas_game",
+   "x": 702,
+   "y": 814,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    84,
+    84
+   ],
+   "note": "силуэт закрытой планеты (коллекция); v2 светлее (заявка ux-ui)"
+  },
+  "planet_08": {
+   "atlas": "atlas_game",
+   "x": 802,
+   "y": 814,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    84,
+    84
+   ],
+   "note": "кадр 96 = тело ~64–88 + glow; на 20+ планетах рисовать 48–56 px"
+  },
+  "planet_08_shadow": {
+   "atlas": "atlas_game",
+   "x": 902,
+   "y": 814,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    84,
+    84
+   ],
+   "note": "силуэт закрытой планеты (коллекция); v2 светлее (заявка ux-ui)"
+  },
+  "pulse": {
+   "atlas": "atlas_game",
+   "x": 2,
+   "y": 914,
+   "w": 48,
+   "h": 48,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    48,
+    48
+   ],
+   "note": "ядро импульса; хвост — отдельный кадр *_trail"
+  },
+  "pulse2": {
+   "atlas": "atlas_game",
+   "x": 54,
+   "y": 914,
+   "w": 48,
+   "h": 48,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    48,
+    48
+   ],
+   "note": "ядро импульса; хвост — отдельный кадр *_trail"
+  },
+  "satellite_small": {
+   "atlas": "atlas_game",
+   "x": 106,
+   "y": 914,
+   "w": 48,
+   "h": 48,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    42,
+    42
+   ],
+   "note": "спутник для мелкого показа (~42 px @1080 = 14 px в мире 360): контур 2.6–3 px, тёмная подложка"
+  },
+  "satellite": {
+   "atlas": "atlas_game",
+   "x": 158,
+   "y": 914,
+   "w": 44,
+   "h": 44,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    40,
+    40
+   ],
+   "note": "кадр 40; цвет = зона спутника (зелёный)"
+  },
+  "pulse2_trail": {
+   "atlas": "atlas_game",
+   "x": 206,
+   "y": 914,
+   "w": 120,
+   "h": 36,
+   "pivot": [
+    0.9,
+    0.5
+   ],
+   "display": [
+    120,
+    36
+   ],
+   "note": "голова справа: рисовать под ядром, rotate(угол движения), pivot = центр ядра"
+  },
+  "pulse_trail": {
+   "atlas": "atlas_game",
+   "x": 330,
+   "y": 914,
+   "w": 120,
+   "h": 36,
+   "pivot": [
+    0.9,
+    0.5
+   ],
+   "display": [
+    120,
+    36
+   ],
+   "note": "голова справа: рисовать под ядром, rotate(угол движения), pivot = центр ядра"
+  },
+  "ui_btn_frame": {
+   "atlas": "atlas_ui",
+   "x": 2,
+   "y": 2,
+   "w": 330,
+   "h": 210,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    330,
+    210
+   ],
+   "nine": [
+    36,
+    36,
+    36,
+    36
+   ],
+   "note": "кнопка покупки, доступна; рамка внутри кадра с полем 8 px под glow; текст/иконка/цена — код"
+  },
+  "ui_btn_frame_nova": {
+   "atlas": "atlas_ui",
+   "x": 336,
+   "y": 2,
+   "w": 330,
+   "h": 210,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    330,
+    210
+   ],
+   "nine": [
+    36,
+    36,
+    36,
+    36
+   ],
+   "note": "Сверхновая (престиж); рамка внутри кадра с полем 8 px под glow; текст/иконка/цена — код"
+  },
+  "ui_btn_frame_off": {
+   "atlas": "atlas_ui",
+   "x": 670,
+   "y": 2,
+   "w": 330,
+   "h": 210,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    330,
+    210
+   ],
+   "nine": [
+    36,
+    36,
+    36,
+    36
+   ],
+   "note": "не хватает Энергии; рамка внутри кадра с полем 8 px под glow; текст/иконка/цена — код"
+  },
+  "ui_tab_active": {
+   "atlas": "atlas_ui",
+   "x": 1004,
+   "y": 2,
+   "w": 360,
+   "h": 160,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    360,
+    160
+   ],
+   "note": "подложка активной вкладки (под иконкой и подписью)"
+  },
+  "ui_tabbar": {
+   "atlas": "atlas_ui",
+   "x": 2,
+   "y": 216,
+   "w": 1080,
+   "h": 160,
+   "pivot": [
+    0.5,
+    0
+   ],
+   "display": [
+    1080,
+    160
+   ],
+   "nine": [
+    0,
+    12,
+    0,
+    12
+   ],
+   "note": "полоса нижней навигации, 3 секции по 360"
+  },
+  "ui_hud_plate": {
+   "atlas": "atlas_ui",
+   "x": 1086,
+   "y": 216,
+   "w": 360,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    360,
+    96
+   ],
+   "nine": [
+    24,
+    24,
+    24,
+    24
+   ],
+   "note": "плашка валюты: иконка 72 слева (x≈52), число жёлтым справа; тело непрозрачно, без glow под числом"
+  },
+  "ui_icon_back": {
+   "atlas": "atlas_ui",
+   "x": 1450,
+   "y": 216,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "назад «‹» (мета-экраны), в ui_hud_plate"
+  },
+  "ui_icon_burger": {
+   "atlas": "atlas_ui",
+   "x": 1550,
+   "y": 216,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "☰ меню, обычное; ставить в ui_hud_plate 108×96"
+  },
+  "ui_icon_burger_active": {
+   "atlas": "atlas_ui",
+   "x": 1650,
+   "y": 216,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "☰ меню открыто (gold = «закрыть»)"
+  },
+  "ui_icon_help": {
+   "atlas": "atlas_ui",
+   "x": 1750,
+   "y": 216,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "пункт меню «Эпохи и помощь»"
+  },
+  "ui_icon_home": {
+   "atlas": "atlas_ui",
+   "x": 1850,
+   "y": 216,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "пункт меню «Главное меню»"
+  },
+  "ui_icon_nova": {
+   "atlas": "atlas_ui",
+   "x": 1950,
+   "y": 216,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "Сверхновая (престиж)"
+  },
+  "ui_icon_planet": {
+   "atlas": "atlas_ui",
+   "x": 2,
+   "y": 380,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "покупка: новая планета (+)"
+  },
+  "ui_icon_pulse2": {
+   "atlas": "atlas_ui",
+   "x": 102,
+   "y": 380,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "покупка: Второй импульс"
+  },
+  "ui_icon_restart": {
+   "atlas": "atlas_ui",
+   "x": 202,
+   "y": 380,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "пункт меню «Заново» (красный = опасное действие)"
+  },
+  "ui_icon_satellite": {
+   "atlas": "atlas_ui",
+   "x": 302,
+   "y": 380,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "покупка: Спутник (авто-резонанс)"
+  },
+  "ui_icon_wind": {
+   "atlas": "atlas_ui",
+   "x": 402,
+   "y": 380,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "покупка: Солнечный ветер (ускорение импульса)"
+  },
+  "ui_tab_collection": {
+   "atlas": "atlas_ui",
+   "x": 502,
+   "y": 380,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "вкладка collection, активна"
+  },
+  "ui_tab_collection_off": {
+   "atlas": "atlas_ui",
+   "x": 602,
+   "y": 380,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "вкладка collection, неактивна"
+  },
+  "ui_tab_quests": {
+   "atlas": "atlas_ui",
+   "x": 702,
+   "y": 380,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "вкладка quests, активна"
+  },
+  "ui_tab_quests_off": {
+   "atlas": "atlas_ui",
+   "x": 802,
+   "y": 380,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "вкладка quests, неактивна"
+  },
+  "ui_tab_starmap": {
+   "atlas": "atlas_ui",
+   "x": 902,
+   "y": 380,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "вкладка starmap, активна"
+  },
+  "ui_tab_starmap_off": {
+   "atlas": "atlas_ui",
+   "x": 1002,
+   "y": 380,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "вкладка starmap, неактивна"
+  },
+  "ui_tab_system": {
+   "atlas": "atlas_ui",
+   "x": 1102,
+   "y": 380,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "вкладка system, активна"
+  },
+  "ui_tab_system_off": {
+   "atlas": "atlas_ui",
+   "x": 1202,
+   "y": 380,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "вкладка system, неактивна"
+  },
+  "ui_bar_frame": {
+   "atlas": "atlas_ui",
+   "x": 2,
+   "y": 480,
+   "w": 984,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    984,
+    72
+   ],
+   "nine": [
+    20,
+    20,
+    20,
+    20
+   ],
+   "note": "рамка «до сверхновой»; заливка ui_bar_fill внутри x=16..968, y=16..56"
+  },
+  "ui_hud_energy": {
+   "atlas": "atlas_ui",
+   "x": 990,
+   "y": 480,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "валюта Энергия"
+  },
+  "ui_hud_stardust": {
+   "atlas": "atlas_ui",
+   "x": 1066,
+   "y": 480,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "валюта Звёздная пыль"
+  },
+  "ui_icon_lock": {
+   "atlas": "atlas_ui",
+   "x": 1142,
+   "y": 480,
+   "w": 64,
+   "h": 64,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    64,
+    64
+   ],
+   "note": "замок: закрытая плитка/пункт/карточка"
+  },
+  "ui_icon_lock_off": {
+   "atlas": "atlas_ui",
+   "x": 1210,
+   "y": 480,
+   "w": 64,
+   "h": 64,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    64,
+    64
+   ],
+   "note": "замок на потухшей плитке (_off)"
+  },
+  "ui_badge_done": {
+   "atlas": "atlas_ui",
+   "x": 1278,
+   "y": 480,
+   "w": 48,
+   "h": 48,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    48,
+    48
+   ],
+   "note": "«готово»: зелёная галочка в круге; правый-верхний угол плитки/таба/☰ (как ui_badge_dot); масштаб 36/40/48 — читается (тёмная галочка на светлом диске)"
+  },
+  "ui_icon_timer": {
+   "atlas": "atlas_ui",
+   "x": 1330,
+   "y": 480,
+   "w": 48,
+   "h": 48,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    48,
+    48
+   ],
+   "note": "песочные часы (янтарь ветки «Эволюция»): чип «ускорение», мини-строка плитки, таймер Эволюции; вместо глифа ⏱"
+  },
+  "ui_bar_fill": {
+   "atlas": "atlas_ui",
+   "x": 2,
+   "y": 556,
+   "w": 960,
+   "h": 40,
+   "pivot": [
+    0,
+    0.5
+   ],
+   "display": [
+    952,
+    40
+   ],
+   "nine": [
+    16,
+    0,
+    16,
+    0
+   ],
+   "note": "заливка бара: рисовать drawImage с обрезкой по ширине (source w = 960*p)"
+  },
+  "ui_badge_dot": {
+   "atlas": "atlas_ui",
+   "x": 966,
+   "y": 556,
+   "w": 36,
+   "h": 36,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    36,
+    36
+   ],
+   "note": "«есть новое»: правый-верхний угол иконки, перекрывая край"
+  },
+  "ui_modal": {
+   "atlas": "atlas_meta",
+   "x": 2,
+   "y": 2,
+   "w": 900,
+   "h": 900,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    900,
+    900
+   ],
+   "note": "окно «Пока тебя не было»: заголовок — в гребне y≈32..72 и ниже линии y=150; кнопка ui_btn_collect внизу"
+  },
+  "card_planet_locked": {
+   "atlas": "atlas_meta",
+   "x": 906,
+   "y": 2,
+   "w": 300,
+   "h": 360,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    300,
+    360
+   ],
+   "note": "закрытая: planet_NN_shadow по центру + условие открытия в плашке"
+  },
+  "card_planet_open": {
+   "atlas": "atlas_meta",
+   "x": 1210,
+   "y": 2,
+   "w": 300,
+   "h": 360,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    300,
+    360
+   ],
+   "note": "открытая карточка: планета 168×168 по центру (y≈160), имя в плашке y≈310"
+  },
+  "ui_btn_collect": {
+   "atlas": "atlas_meta",
+   "x": 1514,
+   "y": 2,
+   "w": 420,
+   "h": 150,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    420,
+    150
+   ],
+   "note": "главная CTA «Забрать»: тёмный текст #1A0A03 по золоту; нажатие — сдвиг вниз 6 px"
+  },
+  "ui_btn_danger": {
+   "atlas": "atlas_meta",
+   "x": 2,
+   "y": 906,
+   "w": 660,
+   "h": 150,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    660,
+    150
+   ],
+   "nine": [
+    30,
+    30,
+    30,
+    30
+   ],
+   "note": "«Сбросить»: красный контур без заливки, вес ниже «Отмены» (ui_btn_secondary)"
+  },
+  "ui_btn_secondary": {
+   "atlas": "atlas_meta",
+   "x": 666,
+   "y": 906,
+   "w": 420,
+   "h": 150,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    420,
+    150
+   ],
+   "nine": [
+    30,
+    30,
+    30,
+    30
+   ],
+   "note": "вторичная кнопка (спокойнее CTA)"
+  },
+  "ui_quest_row": {
+   "atlas": "atlas_meta",
+   "x": 2,
+   "y": 1060,
+   "w": 984,
+   "h": 150,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    984,
+    150
+   ],
+   "note": "задание-созвездие: иконка слева (hex x=72), текст x=150..760, прогресс ниже текста, награда в плашке справа (x≈782..982)"
+  },
+  "ui_quest_row_done": {
+   "atlas": "atlas_meta",
+   "x": 990,
+   "y": 1060,
+   "w": 984,
+   "h": 150,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    984,
+    150
+   ],
+   "note": "задание выполнено (✓ = получено); награда забрана"
+  },
+  "ui_menu_row_active": {
+   "atlas": "atlas_meta",
+   "x": 2,
+   "y": 1214,
+   "w": 820,
+   "h": 124,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    820,
+    124
+   ],
+   "nine": [
+    20,
+    20,
+    20,
+    20
+   ],
+   "note": "подсветка текущего пункта меню (cyan + линия слева)"
+  },
+  "ui_slot_claim_active": {
+   "atlas": "atlas_meta",
+   "x": 826,
+   "y": 1214,
+   "w": 212,
+   "h": 122,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    212,
+    122
+   ],
+   "nine": [
+    30,
+    30,
+    30,
+    30
+   ],
+   "note": "слот «+N» в ui_quest_row — награду можно забрать (золото, текст #1A0A03)"
+  },
+  "map_node_bought": {
+   "atlas": "atlas_meta",
+   "x": 1042,
+   "y": 1214,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "куплен; линии созвездия рисует код"
+  },
+  "map_node_locked": {
+   "atlas": "atlas_meta",
+   "x": 1166,
+   "y": 1214,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "узел закрыт (нет связи с купленным); линии созвездия рисует код"
+  },
+  "map_node_open": {
+   "atlas": "atlas_meta",
+   "x": 1290,
+   "y": 1214,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "доступен к покупке; линии созвездия рисует код"
+  },
+  "ui_reward_stardust": {
+   "atlas": "atlas_meta",
+   "x": 1414,
+   "y": 1214,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "награда: капсула Звёздной пыли (число рядом — код)"
+  },
+  "ui_panel_menu": {
+   "atlas": "atlas_menu",
+   "x": 2,
+   "y": 2,
+   "w": 900,
+   "h": 1180,
+   "pivot": [
+    0.5,
+    0
+   ],
+   "display": [
+    900,
+    1180
+   ],
+   "nine": [
+    48,
+    48,
+    48,
+    48
+   ],
+   "note": "панель ☰ и подтверждения; тянется по высоте/ширине 9-slice 48; скобы в углах"
+  },
+  "logo_title": {
+   "atlas": "atlas_menu",
+   "x": 2,
+   "y": 1186,
+   "w": 900,
+   "h": 300,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    900,
+    300
+   ],
+   "note": "логотип «Солнечная эстафета» (Russo One, золото/cyan), центр y≈1186 в меню"
+  },
+  "ui_btn_play": {
+   "atlas": "atlas_menu",
+   "x": 906,
+   "y": 1186,
+   "w": 720,
+   "h": 168,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    720,
+    168
+   ],
+   "nine": [
+    40,
+    36,
+    40,
+    36
+   ],
+   "note": "главная CTA «Играть/Продолжить»; текст Russo 64, цвет --color-text-on-gold #1A0A03, центр y≈80 (без толщи)"
+  },
+  "ui_btn_play_pressed": {
+   "atlas": "atlas_menu",
+   "x": 2,
+   "y": 1490,
+   "w": 720,
+   "h": 168,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    720,
+    168
+   ],
+   "nine": [
+    40,
+    36,
+    40,
+    36
+   ],
+   "note": "нажата (сдвиг 4 px, темнее); текст Russo 64, цвет --color-text-on-gold #1A0A03, центр y≈80 (без толщи)"
+  },
+  "sun_nova_01": {
+   "atlas": "atlas_nova",
+   "x": 2,
+   "y": 2,
+   "w": 800,
+   "h": 800,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    800,
+    800
+   ],
+   "note": "сверхновая, ключевой кадр 1/4 (сжатие, вспышка, волна, рассеяние)"
+  },
+  "sun_nova_02": {
+   "atlas": "atlas_nova",
+   "x": 806,
+   "y": 2,
+   "w": 800,
+   "h": 800,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    800,
+    800
+   ],
+   "note": "сверхновая, ключевой кадр 2/4 (сжатие, вспышка, волна, рассеяние)"
+  },
+  "sun_nova_03": {
+   "atlas": "atlas_nova",
+   "x": 2,
+   "y": 806,
+   "w": 800,
+   "h": 800,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    800,
+    800
+   ],
+   "note": "сверхновая, ключевой кадр 3/4 (сжатие, вспышка, волна, рассеяние)"
+  },
+  "sun_nova_04": {
+   "atlas": "atlas_nova",
+   "x": 806,
+   "y": 806,
+   "w": 800,
+   "h": 800,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    800,
+    800
+   ],
+   "note": "сверхновая, ключевой кадр 4/4 (сжатие, вспышка, волна, рассеяние)"
+  },
+  "galaxy_core_glow": {
+   "atlas": "atlas_galaxy",
+   "x": 2,
+   "y": 2,
+   "w": 512,
+   "h": 512,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    512,
+    512
+   ],
+   "note": "ядро аддитивно ('lighter'), центр = ядро (540,960 кадра); пульс scale 1↔1.06, 3 с"
+  },
+  "galaxy_birth_ring": {
+   "atlas": "atlas_galaxy",
+   "x": 518,
+   "y": 2,
+   "w": 384,
+   "h": 384,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    384,
+    384
+   ],
+   "note": "слой: волна рождения, scale 0.2→1.2, alpha 1→0, 0.5 с"
+  },
+  "galaxy_star_birth_01": {
+   "atlas": "atlas_galaxy",
+   "x": 906,
+   "y": 2,
+   "w": 384,
+   "h": 384,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    384,
+    384
+   ],
+   "note": "рождение 1/4: облако сжимается (вращать −40°/с, scale 1.2→0.6), 0.5 с"
+  },
+  "galaxy_star_birth_02": {
+   "atlas": "atlas_galaxy",
+   "x": 1294,
+   "y": 2,
+   "w": 384,
+   "h": 384,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    384,
+    384
+   ],
+   "note": "рождение 2/4: зажигание (scale 0.3→1), 0.15 с"
+  },
+  "galaxy_star_birth_03": {
+   "atlas": "atlas_galaxy",
+   "x": 2,
+   "y": 518,
+   "w": 384,
+   "h": 384,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    384,
+    384
+   ],
+   "note": "рождение 3/4: вспышка-лучи + кольцо (пик), 0.25 с"
+  },
+  "galaxy_star_birth_04": {
+   "atlas": "atlas_galaxy",
+   "x": 390,
+   "y": 518,
+   "w": 384,
+   "h": 384,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    384,
+    384
+   ],
+   "note": "рождение 4/4: оседает → crossfade в galaxy_point_done (×0.6), 0.6 с"
+  },
+  "galaxy_point_big_current": {
+   "atlas": "atlas_galaxy",
+   "x": 778,
+   "y": 518,
+   "w": 216,
+   "h": 216,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    216,
+    216
+   ],
+   "note": "финал рукава, текущая"
+  },
+  "galaxy_point_big_next": {
+   "atlas": "atlas_galaxy",
+   "x": 998,
+   "y": 518,
+   "w": 180,
+   "h": 180,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    180,
+    180
+   ],
+   "note": "финал рукава, следующая"
+  },
+  "reward_icon_bg_160": {
+   "atlas": "atlas_galaxy",
+   "x": 1182,
+   "y": 518,
+   "w": 160,
+   "h": 160,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    160,
+    160
+   ],
+   "note": "награда: фон системы (картинка-туманность в рамке); 160×160 (карточка награды)"
+  },
+  "reward_icon_dust_160": {
+   "atlas": "atlas_galaxy",
+   "x": 1346,
+   "y": 518,
+   "w": 160,
+   "h": 160,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    160,
+    160
+   ],
+   "note": "награда: Звёздная пыль (тот же символ ✦, что ui_hud_stardust); «+N» — код; 160×160 (карточка награды)"
+  },
+  "reward_icon_orbit_160": {
+   "atlas": "atlas_galaxy",
+   "x": 1510,
+   "y": 518,
+   "w": 160,
+   "h": 160,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    160,
+    160
+   ],
+   "note": "награда: цвет орбиты (тип); сам цвет — чип кода (#FF3BD4/#3BFF9A/#FFC83B); 160×160 (карточка награды)"
+  },
+  "reward_icon_sun_160": {
+   "atlas": "atlas_galaxy",
+   "x": 1674,
+   "y": 518,
+   "w": 160,
+   "h": 160,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    160,
+    160
+   ],
+   "note": "награда: облик Солнца (Солнце + искра «новое»); 160×160 (карточка награды)"
+  },
+  "reward_icon_unknown_160": {
+   "atlas": "atlas_galaxy",
+   "x": 1838,
+   "y": 518,
+   "w": 160,
+   "h": 160,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    160,
+    160
+   ],
+   "note": "награда N+2 и дальше: скрыта («?»), единый закрытый вид; 160×160 (карточка награды)"
+  },
+  "galaxy_point_big_done": {
+   "atlas": "atlas_galaxy",
+   "x": 2,
+   "y": 906,
+   "w": 144,
+   "h": 144,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    144,
+    144
+   ],
+   "note": "финал рукава, пройден (×1.5 + корона)"
+  },
+  "galaxy_point_big_locked": {
+   "atlas": "atlas_galaxy",
+   "x": 150,
+   "y": 906,
+   "w": 144,
+   "h": 144,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    144,
+    144
+   ],
+   "note": "финал рукава, закрыт"
+  },
+  "galaxy_point_current": {
+   "atlas": "atlas_galaxy",
+   "x": 298,
+   "y": 906,
+   "w": 144,
+   "h": 144,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    144,
+    144
+   ],
+   "note": "текущая: пустое гнездо (gold) + маджента-засечки (Сверхновая); пульс — galaxy_point_pulse поверх; маркер «вы здесь» — в центре"
+  },
+  "galaxy_point_pulse": {
+   "atlas": "atlas_galaxy",
+   "x": 446,
+   "y": 906,
+   "w": 144,
+   "h": 144,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    144,
+    144
+   ],
+   "note": "кольцо пульса текущей точки: scale 0.6→1.15, alpha 1→0, 1.2 с, цикл"
+  },
+  "galaxy_reward_bubble": {
+   "atlas": "atlas_galaxy",
+   "x": 594,
+   "y": 906,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    128,
+    128
+   ],
+   "note": "медальон награды следующей точки: reward_icon_* 72×72 по центру; ставить к ядру от точки на 100 px (снаружи рукава у края экрана нет места) + galaxy_reward_pointer от медальона к точке"
+  },
+  "galaxy_point_next": {
+   "atlas": "atlas_galaxy",
+   "x": 726,
+   "y": 906,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "следующая: тусклое cyan-гнездо; награда — galaxy_reward_bubble + reward_icon_* над точкой"
+  },
+  "galaxy_marker_system": {
+   "atlas": "atlas_galaxy",
+   "x": 850,
+   "y": 906,
+   "w": 112,
+   "h": 112,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    112,
+    112
+   ],
+   "note": "«ваша система» (вы здесь): в центре гнезда текущей точки; едет по пути к N+1; idle — планету/орбиту код может покачивать ±4°"
+  },
+  "galaxy_point_done": {
+   "atlas": "atlas_galaxy",
+   "x": 966,
+   "y": 906,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "точка пройдена: зажжённая звезда (тёплая — звёзды = солнца игрока); мерцание — чередовать с _done_b 8 fps или alpha-твин"
+  },
+  "galaxy_point_done_b": {
+   "atlas": "atlas_galaxy",
+   "x": 1066,
+   "y": 906,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "пик мерцания (длиннее лучи, ярче)"
+  },
+  "galaxy_point_locked": {
+   "atlas": "atlas_galaxy",
+   "x": 1166,
+   "y": 906,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "закрыта: тёмный ромб; тип награды (если нужен) — reward_icon_unknown мелко"
+  },
+  "reward_icon_bg": {
+   "atlas": "atlas_galaxy",
+   "x": 1266,
+   "y": 906,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "награда: фон системы (картинка-туманность в рамке); 96×96"
+  },
+  "reward_icon_dust": {
+   "atlas": "atlas_galaxy",
+   "x": 1366,
+   "y": 906,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "награда: Звёздная пыль (тот же символ ✦, что ui_hud_stardust); «+N» — код; 96×96"
+  },
+  "reward_icon_orbit": {
+   "atlas": "atlas_galaxy",
+   "x": 1466,
+   "y": 906,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "награда: цвет орбиты (тип); сам цвет — чип кода (#FF3BD4/#3BFF9A/#FFC83B); 96×96"
+  },
+  "reward_icon_sun": {
+   "atlas": "atlas_galaxy",
+   "x": 1566,
+   "y": 906,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "награда: облик Солнца (Солнце + искра «новое»); 96×96"
+  },
+  "reward_icon_unknown": {
+   "atlas": "atlas_galaxy",
+   "x": 1666,
+   "y": 906,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "награда N+2 и дальше: скрыта («?»), единый закрытый вид; 96×96"
+  },
+  "galaxy_spark": {
+   "atlas": "atlas_galaxy",
+   "x": 1766,
+   "y": 906,
+   "w": 64,
+   "h": 64,
+   "pivot": [
+    0.71875,
+    0.5
+   ],
+   "display": [
+    64,
+    64
+   ],
+   "note": "искра к точке: голова (pivot) справа, повернуть по направлению полёта"
+  },
+  "galaxy_spark_b": {
+   "atlas": "atlas_galaxy",
+   "x": 1834,
+   "y": 906,
+   "w": 64,
+   "h": 64,
+   "pivot": [
+    0.71875,
+    0.5
+   ],
+   "display": [
+    64,
+    64
+   ],
+   "note": "искра, маджента (пыль Сверхновой) — вперемешку с galaxy_spark"
+  },
+  "galaxy_reward_pointer": {
+   "atlas": "atlas_galaxy",
+   "x": 1902,
+   "y": 906,
+   "w": 40,
+   "h": 32,
+   "pivot": [
+    0.5,
+    0.8125
+   ],
+   "display": [
+    40,
+    32
+   ],
+   "note": "хвостик медальона: pivot = кончик (низ); ставить на кромку медальона и поворачивать к точке (0° = вниз)"
+  },
+  "galaxy_path_dim": {
+   "atlas": "atlas_galaxy",
+   "x": 1946,
+   "y": 906,
+   "w": 64,
+   "h": 24,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    64,
+    24
+   ],
+   "note": "будущий путь: тусклые точки, тайл по длине (шаг 64)"
+  },
+  "galaxy_path_lit": {
+   "atlas": "atlas_galaxy",
+   "x": 2,
+   "y": 1054,
+   "w": 64,
+   "h": 24,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    64,
+    24
+   ],
+   "note": "пройденный путь: золотой штрих, тайл по длине (шаг 64) вдоль сегмента"
+  },
+  "nova_flash_core": {
+   "atlas": "atlas_novafx",
+   "x": 2,
+   "y": 2,
+   "w": 512,
+   "h": 512,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    512,
+    512
+   ],
+   "note": "ядро вспышки из Солнца: scale 0.4→2.2 за 0.35 с, 'lighter'; центр = центр Солнца (540,640 кадра)"
+  },
+  "sun_skin_amber_body": {
+   "atlas": "atlas_novafx",
+   "x": 518,
+   "y": 2,
+   "w": 320,
+   "h": 320,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    320,
+    320
+   ],
+   "note": "облик Солнца «Янтарное»: тело (замена sun_body, тарелка под число — тёмная); 320×320 как sun_*"
+  },
+  "sun_skin_amber_corona": {
+   "atlas": "atlas_novafx",
+   "x": 842,
+   "y": 2,
+   "w": 320,
+   "h": 320,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    320,
+    320
+   ],
+   "note": "облик Солнца «Янтарное»: корона (замена sun_corona, вращать как обычно); 320×320 как sun_*"
+  },
+  "sun_skin_blue_body": {
+   "atlas": "atlas_novafx",
+   "x": 1166,
+   "y": 2,
+   "w": 320,
+   "h": 320,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    320,
+    320
+   ],
+   "note": "облик Солнца «Голубой гигант»: тело (замена sun_body, тарелка под число — тёмная); 320×320 как sun_*"
+  },
+  "sun_skin_blue_corona": {
+   "atlas": "atlas_novafx",
+   "x": 1490,
+   "y": 2,
+   "w": 320,
+   "h": 320,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    320,
+    320
+   ],
+   "note": "облик Солнца «Голубой гигант»: корона (замена sun_corona, вращать как обычно); 320×320 как sun_*"
+  },
+  "nova_flare": {
+   "atlas": "atlas_novafx",
+   "x": 2,
+   "y": 518,
+   "w": 1080,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    1080,
+    128
+   ],
+   "note": "анаморфный блик через весь экран в пик вспышки: scaleX 0.3→1.3, alpha 0→1→0, 0.5 с"
+  },
+  "nova_debris_01": {
+   "atlas": "atlas_novafx",
+   "x": 1086,
+   "y": 518,
+   "w": 64,
+   "h": 64,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    64,
+    64
+   ],
+   "note": "частица вспышки: осколок Солнца; 20–40 шт, разлёт 600–1200 px/с"
+  },
+  "nova_debris_02": {
+   "atlas": "atlas_novafx",
+   "x": 1154,
+   "y": 518,
+   "w": 64,
+   "h": 64,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    64,
+    64
+   ],
+   "note": "частица вспышки: уголёк; 20–40 шт, разлёт 600–1200 px/с"
+  },
+  "nova_debris_03": {
+   "atlas": "atlas_novafx",
+   "x": 1222,
+   "y": 518,
+   "w": 64,
+   "h": 64,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    64,
+    64
+   ],
+   "note": "частица вспышки: штрих (поворот по скорости); 20–40 шт, разлёт 600–1200 px/с"
+  },
+  "nova_debris_04": {
+   "atlas": "atlas_novafx",
+   "x": 1290,
+   "y": 518,
+   "w": 64,
+   "h": 64,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    64,
+    64
+   ],
+   "note": "частица вспышки: звёздочка пыли; 20–40 шт, разлёт 600–1200 px/с"
+  },
+  "reward_preview_bg_dust_lane": {
+   "atlas": "atlas_galaxy_ui",
+   "x": 2,
+   "y": 2,
+   "w": 360,
+   "h": 640,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    360,
+    640
+   ],
+   "note": "превью фона bg_dust_lane для карточки награды (рамка запечена)"
+  },
+  "reward_preview_bg_galactic_core": {
+   "atlas": "atlas_galaxy_ui",
+   "x": 366,
+   "y": 2,
+   "w": 360,
+   "h": 640,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    360,
+    640
+   ],
+   "note": "превью фона bg_galactic_core для карточки награды (рамка запечена)"
+  },
+  "reward_preview_bg_orion_nebula": {
+   "atlas": "atlas_galaxy_ui",
+   "x": 730,
+   "y": 2,
+   "w": 360,
+   "h": 640,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    360,
+    640
+   ],
+   "note": "превью фона bg_orion_nebula для карточки награды (рамка запечена)"
+  },
+  "ui_galaxy_card": {
+   "atlas": "atlas_galaxy_ui",
+   "x": 1094,
+   "y": 2,
+   "w": 900,
+   "h": 420,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    900,
+    420
+   ],
+   "nine": [
+    48,
+    48,
+    48,
+    48
+   ],
+   "note": "карточка «Родилась звезда!» / «Следующая точка»: маджента-кант сверху; иконка 160 слева (x 40..200), текст 48/38 по центру, превью 256 справа в ui_galaxy_slot; 9-slice 48"
+  },
+  "ui_badge_arm_done": {
+   "atlas": "atlas_galaxy_ui",
+   "x": 2,
+   "y": 646,
+   "w": 900,
+   "h": 300,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    900,
+    300
+   ],
+   "note": "баннер «Рукав пройден!»: текст Russo 56 #FFE27A с тёмной обводкой по центру ленты (y≈140); появление scale 0.6→1.08→1 + звёзды по очереди"
+  },
+  "ui_galaxy_slot": {
+   "atlas": "atlas_galaxy_ui",
+   "x": 906,
+   "y": 646,
+   "w": 280,
+   "h": 280,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    280,
+    280
+   ],
+   "nine": [
+    24,
+    24,
+    24,
+    24
+   ],
+   "note": "рамка под превью награды (256) или иконку 160; 9-slice 24"
+  },
+  "reward_preview_sun_amber": {
+   "atlas": "atlas_galaxy_ui",
+   "x": 1190,
+   "y": 646,
+   "w": 256,
+   "h": 256,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    256,
+    256
+   ],
+   "note": "превью облика «Янтарное» для карточки награды"
+  },
+  "reward_preview_sun_blue_giant": {
+   "atlas": "atlas_galaxy_ui",
+   "x": 1450,
+   "y": 646,
+   "w": 256,
+   "h": 256,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    256,
+    256
+   ],
+   "note": "превью облика «Голубой гигант» для карточки награды"
+  },
+  "ui_icon_galaxy": {
+   "atlas": "atlas_galaxy_ui",
+   "x": 1710,
+   "y": 646,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "пункт ☰ «Галактика»: спираль + ядро"
+  },
+  "ui_icon_galaxy_off": {
+   "atlas": "atlas_galaxy_ui",
+   "x": 1810,
+   "y": 646,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "«Галактика» приглушена (Эпоха < 4) + ui_icon_lock"
+  },
+  "ui_icon_observatory": {
+   "atlas": "atlas_galaxy_ui",
+   "x": 1910,
+   "y": 646,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "пункт ☰ «Обсерватория» (бывш. Звёздная карта): купол + телескоп"
+  },
+  "ui_icon_observatory_off": {
+   "atlas": "atlas_galaxy_ui",
+   "x": 2,
+   "y": 950,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "«Обсерватория» приглушена"
+  },
+  "ui_chip_nextreward": {
+   "atlas": "atlas_galaxy_ui",
+   "x": 102,
+   "y": 950,
+   "w": 648,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    648,
+    72
+   ],
+   "nine": [
+    20,
+    20,
+    20,
+    20
+   ],
+   "note": "строка под плиткой «Сверхновая»: reward_icon_* 56 слева, текст 36 кодом; 9-slice 20"
+  },
+  "life_ov_atmo": {
+   "atlas": "atlas_life",
+   "x": 2,
+   "y": 2,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "оверлей стадии — атмосфера-ореол: светлый край и наружный ореол (терраформ «Воздух»). Единицы кадра планеты 96: тело r=30. Рисовать в прямоугольник облика × manifest.life.fit[NN].s"
+  },
+  "life_ov_bio": {
+   "atlas": "atlas_life",
+   "x": 134,
+   "y": 2,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "оверлей стадии — микробы: бирюзовая биолюминесценция мелководья. Единицы кадра планеты 96: тело r=30. Рисовать в прямоугольник облика × manifest.life.fit[NN].s"
+  },
+  "life_ov_city": {
+   "atlas": "atlas_life",
+   "x": 266,
+   "y": 2,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "оверлей стадии — разум: огни городов на ночной стороне + сеть + пояс станций. Единицы кадра планеты 96: тело r=30. Рисовать в прямоугольник облика × manifest.life.fit[NN].s"
+  },
+  "life_ov_city_01": {
+   "atlas": "atlas_life",
+   "x": 398,
+   "y": 2,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "оверлей «разум», кадр мерцания 1/4 (4 fps, цикл)"
+  },
+  "life_ov_city_02": {
+   "atlas": "atlas_life",
+   "x": 530,
+   "y": 2,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "оверлей «разум», кадр мерцания 2/4 (4 fps, цикл)"
+  },
+  "life_ov_city_03": {
+   "atlas": "atlas_life",
+   "x": 662,
+   "y": 2,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "оверлей «разум», кадр мерцания 3/4 (4 fps, цикл)"
+  },
+  "life_ov_city_04": {
+   "atlas": "atlas_life",
+   "x": 794,
+   "y": 2,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "оверлей «разум», кадр мерцания 4/4 (4 fps, цикл)"
+  },
+  "life_ov_clouds": {
+   "atlas": "atlas_life",
+   "x": 926,
+   "y": 2,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "оверлей стадии — облака: полосы, освещены с левого верха (терраформ «Воздух» ≥ 50 %). Единицы кадра планеты 96: тело r=30. Рисовать в прямоугольник облика × manifest.life.fit[NN].s"
+  },
+  "life_ov_fauna": {
+   "atlas": "atlas_life",
+   "x": 1058,
+   "y": 2,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "оверлей стадии — животные: светлые реки + стада-огоньки + тёплая кромка берегов. Единицы кадра планеты 96: тело r=30. Рисовать в прямоугольник облика × manifest.life.fit[NN].s"
+  },
+  "life_ov_green": {
+   "atlas": "atlas_life",
+   "x": 1190,
+   "y": 2,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "оверлей стадии — растения: материки зелёные + лайм-кромка, ночью биолюминесценция. Единицы кадра планеты 96: тело r=30. Рисовать в прямоугольник облика × manifest.life.fit[NN].s"
+  },
+  "life_ov_heat": {
+   "atlas": "atlas_life",
+   "x": 2,
+   "y": 134,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "оверлей стадии — лава/тепло: магма-трещины + очаги (терраформ «Тепло»; гаснет по мере роста Воды). Единицы кадра планеты 96: тело r=30. Рисовать в прямоугольник облика × manifest.life.fit[NN].s"
+  },
+  "life_ov_ocean": {
+   "atlas": "atlas_life",
+   "x": 134,
+   "y": 134,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "оверлей стадии — океаны: тёмно-синяя вода + берег cyan + блик (терраформ «Вода»). Единицы кадра планеты 96: тело r=30. Рисовать в прямоугольник облика × manifest.life.fit[NN].s"
+  },
+  "life_stage_animals": {
+   "atlas": "atlas_life",
+   "x": 266,
+   "y": 134,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "стадия «Животные» на орбите (поверх planet_NN, кадр 128 = прямоугольник облика 96). Рисовать в прямоугольник облика × manifest.life.fit[NN] (s, ox, oy), затем planet_NN_front/life_card_front_NN."
+  },
+  "life_stage_microbes": {
+   "atlas": "atlas_life",
+   "x": 398,
+   "y": 134,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "стадия «Микробы» на орбите (поверх planet_NN, кадр 128 = прямоугольник облика 96). Рисовать в прямоугольник облика × manifest.life.fit[NN] (s, ox, oy), затем planet_NN_front/life_card_front_NN."
+  },
+  "life_stage_mind_01": {
+   "atlas": "atlas_life",
+   "x": 530,
+   "y": 134,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "стадия «Разум» на орбите (поверх planet_NN, кадр 128 = прямоугольник облика 96). Рисовать в прямоугольник облика × manifest.life.fit[NN] (s, ox, oy), затем planet_NN_front/life_card_front_NN. Кадр 1/4, 4 fps."
+  },
+  "life_stage_mind_02": {
+   "atlas": "atlas_life",
+   "x": 662,
+   "y": 134,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "стадия «Разум» на орбите (поверх planet_NN, кадр 128 = прямоугольник облика 96). Рисовать в прямоугольник облика × manifest.life.fit[NN] (s, ox, oy), затем planet_NN_front/life_card_front_NN. Кадр 2/4, 4 fps."
+  },
+  "life_stage_mind_03": {
+   "atlas": "atlas_life",
+   "x": 794,
+   "y": 134,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "стадия «Разум» на орбите (поверх planet_NN, кадр 128 = прямоугольник облика 96). Рисовать в прямоугольник облика × manifest.life.fit[NN] (s, ox, oy), затем planet_NN_front/life_card_front_NN. Кадр 3/4, 4 fps."
+  },
+  "life_stage_mind_04": {
+   "atlas": "atlas_life",
+   "x": 926,
+   "y": 134,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "стадия «Разум» на орбите (поверх planet_NN, кадр 128 = прямоугольник облика 96). Рисовать в прямоугольник облика × manifest.life.fit[NN] (s, ox, oy), затем planet_NN_front/life_card_front_NN. Кадр 4/4, 4 fps."
+  },
+  "life_stage_plants": {
+   "atlas": "atlas_life",
+   "x": 1058,
+   "y": 134,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "стадия «Растения» на орбите (поверх planet_NN, кадр 128 = прямоугольник облика 96). Рисовать в прямоугольник облика × manifest.life.fit[NN] (s, ox, oy), затем planet_NN_front/life_card_front_NN."
+  },
+  "life_stage_terra": {
+   "atlas": "atlas_life",
+   "x": 1190,
+   "y": 134,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "стадия «Терраформ» на орбите (поверх planet_NN, кадр 128 = прямоугольник облика 96). Рисовать в прямоугольник облика × manifest.life.fit[NN] (s, ox, oy), затем planet_NN_front/life_card_front_NN."
+  },
+  "life_aura_common_01": {
+   "atlas": "atlas_life",
+   "x": 2,
+   "y": 266,
+   "w": 112,
+   "h": 112,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    112,
+    112
+   ],
+   "note": "аура мутации (common), кадр 1/4, 6 fps, цикл; кадр 112 рисовать в прямоугольник планеты ×112/96, поверх слоёв стадии и переднего кольца"
+  },
+  "life_aura_common_02": {
+   "atlas": "atlas_life",
+   "x": 118,
+   "y": 266,
+   "w": 112,
+   "h": 112,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    112,
+    112
+   ],
+   "note": "аура мутации (common), кадр 2/4, 6 fps, цикл; кадр 112 рисовать в прямоугольник планеты ×112/96, поверх слоёв стадии и переднего кольца"
+  },
+  "life_aura_common_03": {
+   "atlas": "atlas_life",
+   "x": 234,
+   "y": 266,
+   "w": 112,
+   "h": 112,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    112,
+    112
+   ],
+   "note": "аура мутации (common), кадр 3/4, 6 fps, цикл; кадр 112 рисовать в прямоугольник планеты ×112/96, поверх слоёв стадии и переднего кольца"
+  },
+  "life_aura_common_04": {
+   "atlas": "atlas_life",
+   "x": 350,
+   "y": 266,
+   "w": 112,
+   "h": 112,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    112,
+    112
+   ],
+   "note": "аура мутации (common), кадр 4/4, 6 fps, цикл; кадр 112 рисовать в прямоугольник планеты ×112/96, поверх слоёв стадии и переднего кольца"
+  },
+  "life_aura_legendary_01": {
+   "atlas": "atlas_life",
+   "x": 466,
+   "y": 266,
+   "w": 112,
+   "h": 112,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    112,
+    112
+   ],
+   "note": "аура мутации (legendary), кадр 1/4, 6 fps, цикл; кадр 112 рисовать в прямоугольник планеты ×112/96, поверх слоёв стадии и переднего кольца"
+  },
+  "life_aura_legendary_02": {
+   "atlas": "atlas_life",
+   "x": 582,
+   "y": 266,
+   "w": 112,
+   "h": 112,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    112,
+    112
+   ],
+   "note": "аура мутации (legendary), кадр 2/4, 6 fps, цикл; кадр 112 рисовать в прямоугольник планеты ×112/96, поверх слоёв стадии и переднего кольца"
+  },
+  "life_aura_legendary_03": {
+   "atlas": "atlas_life",
+   "x": 698,
+   "y": 266,
+   "w": 112,
+   "h": 112,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    112,
+    112
+   ],
+   "note": "аура мутации (legendary), кадр 3/4, 6 fps, цикл; кадр 112 рисовать в прямоугольник планеты ×112/96, поверх слоёв стадии и переднего кольца"
+  },
+  "life_aura_legendary_04": {
+   "atlas": "atlas_life",
+   "x": 814,
+   "y": 266,
+   "w": 112,
+   "h": 112,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    112,
+    112
+   ],
+   "note": "аура мутации (legendary), кадр 4/4, 6 fps, цикл; кадр 112 рисовать в прямоугольник планеты ×112/96, поверх слоёв стадии и переднего кольца"
+  },
+  "life_aura_rare_01": {
+   "atlas": "atlas_life",
+   "x": 930,
+   "y": 266,
+   "w": 112,
+   "h": 112,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    112,
+    112
+   ],
+   "note": "аура мутации (rare), кадр 1/4, 6 fps, цикл; кадр 112 рисовать в прямоугольник планеты ×112/96, поверх слоёв стадии и переднего кольца"
+  },
+  "life_aura_rare_02": {
+   "atlas": "atlas_life",
+   "x": 1046,
+   "y": 266,
+   "w": 112,
+   "h": 112,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    112,
+    112
+   ],
+   "note": "аура мутации (rare), кадр 2/4, 6 fps, цикл; кадр 112 рисовать в прямоугольник планеты ×112/96, поверх слоёв стадии и переднего кольца"
+  },
+  "life_aura_rare_03": {
+   "atlas": "atlas_life",
+   "x": 1162,
+   "y": 266,
+   "w": 112,
+   "h": 112,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    112,
+    112
+   ],
+   "note": "аура мутации (rare), кадр 3/4, 6 fps, цикл; кадр 112 рисовать в прямоугольник планеты ×112/96, поверх слоёв стадии и переднего кольца"
+  },
+  "life_aura_rare_04": {
+   "atlas": "atlas_life",
+   "x": 1278,
+   "y": 266,
+   "w": 112,
+   "h": 112,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    112,
+    112
+   ],
+   "note": "аура мутации (rare), кадр 4/4, 6 fps, цикл; кадр 112 рисовать в прямоугольник планеты ×112/96, поверх слоёв стадии и переднего кольца"
+  },
+  "life_aura_uncommon_01": {
+   "atlas": "atlas_life",
+   "x": 2,
+   "y": 382,
+   "w": 112,
+   "h": 112,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    112,
+    112
+   ],
+   "note": "аура мутации (uncommon), кадр 1/4, 6 fps, цикл; кадр 112 рисовать в прямоугольник планеты ×112/96, поверх слоёв стадии и переднего кольца"
+  },
+  "life_aura_uncommon_02": {
+   "atlas": "atlas_life",
+   "x": 118,
+   "y": 382,
+   "w": 112,
+   "h": 112,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    112,
+    112
+   ],
+   "note": "аура мутации (uncommon), кадр 2/4, 6 fps, цикл; кадр 112 рисовать в прямоугольник планеты ×112/96, поверх слоёв стадии и переднего кольца"
+  },
+  "life_aura_uncommon_03": {
+   "atlas": "atlas_life",
+   "x": 234,
+   "y": 382,
+   "w": 112,
+   "h": 112,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    112,
+    112
+   ],
+   "note": "аура мутации (uncommon), кадр 3/4, 6 fps, цикл; кадр 112 рисовать в прямоугольник планеты ×112/96, поверх слоёв стадии и переднего кольца"
+  },
+  "life_aura_uncommon_04": {
+   "atlas": "atlas_life",
+   "x": 350,
+   "y": 382,
+   "w": 112,
+   "h": 112,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    112,
+    112
+   ],
+   "note": "аура мутации (uncommon), кадр 4/4, 6 fps, цикл; кадр 112 рисовать в прямоугольник планеты ×112/96, поверх слоёв стадии и переднего кольца"
+  },
+  "bio_pop_key": {
+   "atlas": "atlas_life",
+   "x": 466,
+   "y": 382,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "ключ-источник для animation-director (кадры делает он, REQ-…-003); до кадров код может играть твином: «+N Б» у планеты: scale 0.5→1.2, alpha→0, 250 мс; число — код"
+  },
+  "life_dormant": {
+   "atlas": "atlas_life",
+   "x": 566,
+   "y": 382,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "«Спит»: вуаль поверх planet_NN + «z z» (планета вне орбиты; в списке/сетке)"
+  },
+  "planet_02_front": {
+   "atlas": "atlas_life",
+   "x": 666,
+   "y": 382,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "передняя половина кольца/орбиты облика — рисовать ПОСЛЕ слоёв стадии, тот же прямоугольник, что planet_NN"
+  },
+  "planet_03_front": {
+   "atlas": "atlas_life",
+   "x": 766,
+   "y": 382,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "передняя половина кольца/орбиты облика — рисовать ПОСЛЕ слоёв стадии, тот же прямоугольник, что planet_NN"
+  },
+  "planet_07_front": {
+   "atlas": "atlas_life",
+   "x": 866,
+   "y": 382,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "передняя половина кольца/орбиты облика — рисовать ПОСЛЕ слоёв стадии, тот же прямоугольник, что planet_NN"
+  },
+  "planet_08_front": {
+   "atlas": "atlas_life",
+   "x": 966,
+   "y": 382,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    124,
+    124
+   ],
+   "note": "передняя половина кольца/орбиты облика — рисовать ПОСЛЕ слоёв стадии, тот же прямоугольник, что planet_NN"
+  },
+  "life_stage_chip_animals": {
+   "atlas": "atlas_life",
+   "x": 1066,
+   "y": 382,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "значок стадии «Животные» 72: строка «Стадия», список планет, трек стадий; над планетой на орбите — 44–48 (центр на 0.62×размера планеты выше её центра); будущая стадия = alpha 0.35"
+  },
+  "life_stage_chip_microbes": {
+   "atlas": "atlas_life",
+   "x": 1142,
+   "y": 382,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "значок стадии «Микробы» 72: строка «Стадия», список планет, трек стадий; над планетой на орбите — 44–48 (центр на 0.62×размера планеты выше её центра); будущая стадия = alpha 0.35"
+  },
+  "life_stage_chip_mind": {
+   "atlas": "atlas_life",
+   "x": 1218,
+   "y": 382,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "значок стадии «Разум» 72: строка «Стадия», список планет, трек стадий; над планетой на орбите — 44–48 (центр на 0.62×размера планеты выше её центра); будущая стадия = alpha 0.35"
+  },
+  "life_stage_chip_plants": {
+   "atlas": "atlas_life",
+   "x": 1294,
+   "y": 382,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "значок стадии «Растения» 72: строка «Стадия», список планет, трек стадий; над планетой на орбите — 44–48 (центр на 0.62×размера планеты выше её центра); будущая стадия = alpha 0.35"
+  },
+  "life_stage_chip_rock": {
+   "atlas": "atlas_life",
+   "x": 2,
+   "y": 498,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "значок стадии «Камень» 72: строка «Стадия», список планет, трек стадий; над планетой на орбите — 44–48 (центр на 0.62×размера планеты выше её центра); будущая стадия = alpha 0.35"
+  },
+  "life_stage_chip_terra": {
+   "atlas": "atlas_life",
+   "x": 78,
+   "y": 498,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "значок стадии «Терраформ» 72: строка «Стадия», список планет, трек стадий; над планетой на орбите — 44–48 (центр на 0.62×размера планеты выше её центра); будущая стадия = alpha 0.35"
+  },
+  "life_drop": {
+   "atlas": "atlas_life",
+   "x": 154,
+   "y": 498,
+   "w": 64,
+   "h": 64,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    64,
+    64
+   ],
+   "note": "«капля жизни»: летит с планеты в узел древа / к HUD Биомассы (дуга 500 мс)"
+  },
+  "mut_dup_spark_key": {
+   "atlas": "atlas_life",
+   "x": 222,
+   "y": 498,
+   "w": 64,
+   "h": 64,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    64,
+    64
+   ],
+   "note": "ключ-источник для animation-director (кадры делает он, REQ-…-003); до кадров код может играть твином: «повтор → Биомасса»: искра"
+  },
+  "life_badge_ready": {
+   "atlas": "atlas_life",
+   "x": 290,
+   "y": 498,
+   "w": 36,
+   "h": 36,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    36,
+    36
+   ],
+   "note": "точка «можно улучшить / хватает Биомассы» (лайм) на плитке и ☰; пульс scale 1↔1.15"
+  },
+  "bio_spore_01": {
+   "atlas": "atlas_life",
+   "x": 330,
+   "y": 498,
+   "w": 32,
+   "h": 32,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    32,
+    32
+   ],
+   "note": "спора Биомассы вид 1/4: летят с живой планеты к счётчику при ручном Резонансе (6–10 шт)"
+  },
+  "bio_spore_02": {
+   "atlas": "atlas_life",
+   "x": 366,
+   "y": 498,
+   "w": 32,
+   "h": 32,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    32,
+    32
+   ],
+   "note": "спора Биомассы вид 2/4: летят с живой планеты к счётчику при ручном Резонансе (6–10 шт)"
+  },
+  "bio_spore_03": {
+   "atlas": "atlas_life",
+   "x": 402,
+   "y": 498,
+   "w": 32,
+   "h": 32,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    32,
+    32
+   ],
+   "note": "спора Биомассы вид 3/4: летят с живой планеты к счётчику при ручном Резонансе (6–10 шт)"
+  },
+  "bio_spore_04": {
+   "atlas": "atlas_life",
+   "x": 438,
+   "y": 498,
+   "w": 32,
+   "h": 32,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    32,
+    32
+   ],
+   "note": "спора Биомассы вид 4/4: летят с живой планеты к счётчику при ручном Резонансе (6–10 шт)"
+  },
+  "life_card_base_01": {
+   "atlas": "atlas_life_card_a",
+   "x": 2,
+   "y": 2,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "крупный облик planet_01 для карточки планеты (600), тот же рисунок ×6.25"
+  },
+  "life_card_base_02": {
+   "atlas": "atlas_life_card_a",
+   "x": 606,
+   "y": 2,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "крупный облик planet_02 для карточки планеты (600), тот же рисунок ×6.25"
+  },
+  "life_card_base_03": {
+   "atlas": "atlas_life_card_a",
+   "x": 1210,
+   "y": 2,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "крупный облик planet_03 для карточки планеты (600), тот же рисунок ×6.25"
+  },
+  "life_card_base_04": {
+   "atlas": "atlas_life_card_a",
+   "x": 2,
+   "y": 606,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "крупный облик planet_04 для карточки планеты (600), тот же рисунок ×6.25"
+  },
+  "life_card_base_05": {
+   "atlas": "atlas_life_card_a",
+   "x": 606,
+   "y": 606,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "крупный облик planet_05 для карточки планеты (600), тот же рисунок ×6.25"
+  },
+  "life_card_base_06": {
+   "atlas": "atlas_life_card_a",
+   "x": 1210,
+   "y": 606,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "крупный облик planet_06 для карточки планеты (600), тот же рисунок ×6.25"
+  },
+  "life_card_base_07": {
+   "atlas": "atlas_life_card_a",
+   "x": 2,
+   "y": 1210,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "крупный облик planet_07 для карточки планеты (600), тот же рисунок ×6.25"
+  },
+  "life_card_base_08": {
+   "atlas": "atlas_life_card_a",
+   "x": 606,
+   "y": 1210,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "крупный облик planet_08 для карточки планеты (600), тот же рисунок ×6.25"
+  },
+  "life_card_front_02": {
+   "atlas": "atlas_life_card_b",
+   "x": 2,
+   "y": 2,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "передняя половина кольца для карточки (600) — после всех слоёв"
+  },
+  "life_card_front_03": {
+   "atlas": "atlas_life_card_b",
+   "x": 606,
+   "y": 2,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "передняя половина кольца для карточки (600) — после всех слоёв"
+  },
+  "life_card_front_07": {
+   "atlas": "atlas_life_card_b",
+   "x": 1210,
+   "y": 2,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "передняя половина кольца для карточки (600) — после всех слоёв"
+  },
+  "life_card_front_08": {
+   "atlas": "atlas_life_card_b",
+   "x": 2,
+   "y": 606,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "передняя половина кольца для карточки (600) — после всех слоёв"
+  },
+  "life_card_stage_microbes": {
+   "atlas": "atlas_life_card_b",
+   "x": 606,
+   "y": 606,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "стадия «Микробы» в карточке 600 (только «жизнь»; вода/воздух/тепло — life_layer_*). Рисовать в прямоугольник облика × manifest.life.fit[NN] (s, ox, oy), затем planet_NN_front/life_card_front_NN."
+  },
+  "life_card_stage_terra": {
+   "atlas": "atlas_life_card_b",
+   "x": 1210,
+   "y": 606,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "стадия «Терраформ» в карточке 600 (только «жизнь»; вода/воздух/тепло — life_layer_*). Рисовать в прямоугольник облика × manifest.life.fit[NN] (s, ox, oy), затем planet_NN_front/life_card_front_NN."
+  },
+  "life_layer_air": {
+   "atlas": "atlas_life_card_b",
+   "x": 2,
+   "y": 1210,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "слой «Воздух» 600 (облака + ореол): alpha = уровень/5; рисовать ПОСЛЕ life_card_stage_*. Рисовать в прямоугольник облика × manifest.life.fit[NN] (s, ox, oy), затем planet_NN_front/life_card_front_NN."
+  },
+  "life_layer_heat": {
+   "atlas": "atlas_life_card_b",
+   "x": 606,
+   "y": 1210,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "слой «Тепло» 600: alpha = уровень/5 × (1 − 0.6·Вода/5). Рисовать в прямоугольник облика × manifest.life.fit[NN] (s, ox, oy), затем planet_NN_front/life_card_front_NN."
+  },
+  "life_layer_water": {
+   "atlas": "atlas_life_card_b",
+   "x": 1210,
+   "y": 1210,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "слой «Вода» 600: alpha = уровень/5. Рисовать в прямоугольник облика × manifest.life.fit[NN] (s, ox, oy), затем planet_NN_front/life_card_front_NN."
+  },
+  "life_card_stage_animals": {
+   "atlas": "atlas_life_card_c",
+   "x": 2,
+   "y": 2,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "стадия «Животные» в карточке 600 (только «жизнь»; вода/воздух/тепло — life_layer_*). Рисовать в прямоугольник облика × manifest.life.fit[NN] (s, ox, oy), затем planet_NN_front/life_card_front_NN."
+  },
+  "life_card_stage_mind_01": {
+   "atlas": "atlas_life_card_c",
+   "x": 606,
+   "y": 2,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "стадия «Разум» в карточке 600 (только «жизнь»; вода/воздух/тепло — life_layer_*). Рисовать в прямоугольник облика × manifest.life.fit[NN] (s, ox, oy), затем planet_NN_front/life_card_front_NN. Кадр 1/4, 4 fps."
+  },
+  "life_card_stage_mind_02": {
+   "atlas": "atlas_life_card_c",
+   "x": 1210,
+   "y": 2,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "стадия «Разум» в карточке 600 (только «жизнь»; вода/воздух/тепло — life_layer_*). Рисовать в прямоугольник облика × manifest.life.fit[NN] (s, ox, oy), затем planet_NN_front/life_card_front_NN. Кадр 2/4, 4 fps."
+  },
+  "life_card_stage_mind_03": {
+   "atlas": "atlas_life_card_c",
+   "x": 2,
+   "y": 606,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "стадия «Разум» в карточке 600 (только «жизнь»; вода/воздух/тепло — life_layer_*). Рисовать в прямоугольник облика × manifest.life.fit[NN] (s, ox, oy), затем planet_NN_front/life_card_front_NN. Кадр 3/4, 4 fps."
+  },
+  "life_card_stage_mind_04": {
+   "atlas": "atlas_life_card_c",
+   "x": 606,
+   "y": 606,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "стадия «Разум» в карточке 600 (только «жизнь»; вода/воздух/тепло — life_layer_*). Рисовать в прямоугольник облика × manifest.life.fit[NN] (s, ox, oy), затем planet_NN_front/life_card_front_NN. Кадр 4/4, 4 fps."
+  },
+  "life_card_stage_plants": {
+   "atlas": "atlas_life_card_c",
+   "x": 1210,
+   "y": 606,
+   "w": 600,
+   "h": 600,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    600,
+    600
+   ],
+   "note": "стадия «Растения» в карточке 600 (только «жизнь»; вода/воздух/тепло — life_layer_*). Рисовать в прямоугольник облика × manifest.life.fit[NN] (s, ox, oy), затем planet_NN_front/life_card_front_NN."
+  },
+  "life_btn_evolve": {
+   "atlas": "atlas_life_ui",
+   "x": 2,
+   "y": 2,
+   "w": 984,
+   "h": 180,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    984,
+    180
+   ],
+   "nine": [
+    44,
+    44,
+    44,
+    44
+   ],
+   "note": "«Эволюция: <стадия>» normal (лайм; золото «_max» = «Высшая стадия»): текст Russo 48, цена справа; 9-slice 44"
+  },
+  "life_btn_evolve_disabled": {
+   "atlas": "atlas_life_ui",
+   "x": 990,
+   "y": 2,
+   "w": 984,
+   "h": 180,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    984,
+    180
+   ],
+   "nine": [
+    44,
+    44,
+    44,
+    44
+   ],
+   "note": "«Эволюция: <стадия>» _disabled (лайм; золото «_max» = «Высшая стадия»): текст Russo 48, цена справа; 9-slice 44"
+  },
+  "life_btn_evolve_max": {
+   "atlas": "atlas_life_ui",
+   "x": 2,
+   "y": 186,
+   "w": 984,
+   "h": 180,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    984,
+    180
+   ],
+   "nine": [
+    44,
+    44,
+    44,
+    44
+   ],
+   "note": "«Эволюция: <стадия>» _max (лайм; золото «_max» = «Высшая стадия»): текст Russo 48, цена справа; 9-slice 44"
+  },
+  "life_btn_evolve_pressed": {
+   "atlas": "atlas_life_ui",
+   "x": 990,
+   "y": 186,
+   "w": 984,
+   "h": 180,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    984,
+    180
+   ],
+   "nine": [
+    44,
+    44,
+    44,
+    44
+   ],
+   "note": "«Эволюция: <стадия>» _pressed (лайм; золото «_max» = «Высшая стадия»): текст Russo 48, цена справа; 9-slice 44"
+  },
+  "life_offline_mind": {
+   "atlas": "atlas_life_ui",
+   "x": 2,
+   "y": 370,
+   "w": 160,
+   "h": 160,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    160,
+    160
+   ],
+   "note": "«Разум принёс ✦» в карточке «Пока вас не было»"
+  },
+  "life_planet_chip": {
+   "atlas": "atlas_life_ui",
+   "x": 166,
+   "y": 370,
+   "w": 150,
+   "h": 150,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    150,
+    150
+   ],
+   "note": "ячейка выбора планеты (обычная): planet_NN 96 по центру + слой стадии, life_stage_chip_* 36 в правом нижнем углу"
+  },
+  "life_planet_chip_dormant": {
+   "atlas": "atlas_life_ui",
+   "x": 320,
+   "y": 370,
+   "w": 150,
+   "h": 150,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    150,
+    150
+   ],
+   "note": "ячейка выбора планеты (_dormant): planet_NN 96 по центру + слой стадии, life_stage_chip_* 36 в правом нижнем углу"
+  },
+  "life_planet_chip_selected": {
+   "atlas": "atlas_life_ui",
+   "x": 474,
+   "y": 370,
+   "w": 150,
+   "h": 150,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    150,
+    150
+   ],
+   "note": "ячейка выбора планеты (_selected): planet_NN 96 по центру + слой стадии, life_stage_chip_* 36 в правом нижнем углу"
+  },
+  "life_scale_row": {
+   "atlas": "atlas_life_ui",
+   "x": 628,
+   "y": 370,
+   "w": 984,
+   "h": 150,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    984,
+    150
+   ],
+   "nine": [
+    32,
+    32,
+    32,
+    32
+   ],
+   "note": "ряд шкалы: иконка life_icon_* 96 (x 24..120), 5 делений life_scale_pip_* 48 (x 150..470, шаг 64), уровень/эффект 36, кнопка life_btn_scale справа (x 704..968); 9-slice 32"
+  },
+  "life_arrow_next": {
+   "atlas": "atlas_life_ui",
+   "x": 1616,
+   "y": 370,
+   "w": 144,
+   "h": 144,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    144,
+    144
+   ],
+   "note": "▶ следующая планета"
+  },
+  "life_arrow_prev": {
+   "atlas": "atlas_life_ui",
+   "x": 1764,
+   "y": 370,
+   "w": 144,
+   "h": 144,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    144,
+    144
+   ],
+   "note": "◀ предыдущая планета (144 = зона нажатия)"
+  },
+  "life_btn_scale": {
+   "atlas": "atlas_life_ui",
+   "x": 2,
+   "y": 534,
+   "w": 264,
+   "h": 132,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    264,
+    132
+   ],
+   "nine": [
+    28,
+    28,
+    28,
+    28
+   ],
+   "note": "кнопка «+ цена» normal: life_icon_biomass_48 или ui_hud_energy 40 + число Russo 40; 9-slice 28"
+  },
+  "life_btn_scale_disabled": {
+   "atlas": "atlas_life_ui",
+   "x": 270,
+   "y": 534,
+   "w": 264,
+   "h": 132,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    264,
+    132
+   ],
+   "nine": [
+    28,
+    28,
+    28,
+    28
+   ],
+   "note": "кнопка «+ цена» _disabled: life_icon_biomass_48 или ui_hud_energy 40 + число Russo 40; 9-slice 28"
+  },
+  "life_btn_scale_pressed": {
+   "atlas": "atlas_life_ui",
+   "x": 538,
+   "y": 534,
+   "w": 264,
+   "h": 132,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    264,
+    132
+   ],
+   "nine": [
+    28,
+    28,
+    28,
+    28
+   ],
+   "note": "кнопка «+ цена» _pressed: life_icon_biomass_48 или ui_hud_energy 40 + число Russo 40; 9-slice 28"
+  },
+  "life_ship": {
+   "atlas": "atlas_life_ui",
+   "x": 806,
+   "y": 534,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    128,
+    128
+   ],
+   "note": "корабль Разума: карточка, узел ship, у Солнца при Сверхновой; нос вверх, rotate по курсу"
+  },
+  "life_stage_row": {
+   "atlas": "atlas_life_ui",
+   "x": 938,
+   "y": 534,
+   "w": 984,
+   "h": 110,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    984,
+    110
+   ],
+   "nine": [
+    26,
+    26,
+    26,
+    26
+   ],
+   "note": "строка «Стадия: Растения · передача ×1.2» (y 860..960): life_stage_chip_* 72 слева, текст 40, множитель Russo 48 золото справа; 9-slice 26"
+  },
+  "life_icon_air": {
+   "atlas": "atlas_life_ui",
+   "x": 1926,
+   "y": 534,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "Воздух (слои атмосферы над горизонтом, светло-бирюзовый); не путать с ui_icon_wind"
+  },
+  "life_icon_biomass": {
+   "atlas": "atlas_life_ui",
+   "x": 2,
+   "y": 670,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "Биомасса (лайм-капля-клетка в шестиграннике); Энергия = золото-молния, Пыль = маджента-✦"
+  },
+  "life_icon_heat": {
+   "atlas": "atlas_life_ui",
+   "x": 102,
+   "y": 670,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "Тепло (пламя, оранжевый) — шкала, кнопка, тост"
+  },
+  "life_icon_water": {
+   "atlas": "atlas_life_ui",
+   "x": 202,
+   "y": 670,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "Вода (капля, синий)"
+  },
+  "ui_icon_life": {
+   "atlas": "atlas_life_ui",
+   "x": 302,
+   "y": 670,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "плитка «Жизнь» и пункт ☰ «Живые планеты»"
+  },
+  "ui_icon_life_off": {
+   "atlas": "atlas_life_ui",
+   "x": 402,
+   "y": 670,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "«Жизнь» закрыта (подпись «после 1-й Сверхновой»)"
+  },
+  "ui_icon_mutation": {
+   "atlas": "atlas_life_ui",
+   "x": 502,
+   "y": 670,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "вкладка «Мутации» (двойная спираль)"
+  },
+  "ui_icon_mutation_off": {
+   "atlas": "atlas_life_ui",
+   "x": 602,
+   "y": 670,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "вкладка «Мутации» неактивна"
+  },
+  "ui_icon_tree": {
+   "atlas": "atlas_life_ui",
+   "x": 702,
+   "y": 670,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "пункт ☰ «Древо жизни»"
+  },
+  "ui_icon_tree_off": {
+   "atlas": "atlas_life_ui",
+   "x": 802,
+   "y": 670,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "«Древо жизни» закрыто (до 1-й Сверхновой) + ui_icon_lock"
+  },
+  "ui_hud_biomass": {
+   "atlas": "atlas_life_ui",
+   "x": 902,
+   "y": 670,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "Биомасса в HUD-плашке ui_hud_plate (72, как ui_hud_energy)"
+  },
+  "life_ship_trail": {
+   "atlas": "atlas_life_ui",
+   "x": 978,
+   "y": 670,
+   "w": 128,
+   "h": 64,
+   "pivot": [
+    1.0,
+    0.5
+   ],
+   "display": [
+    128,
+    64
+   ],
+   "note": "шлейф корабля: голова справа (pivot 1, 0.5) — к корме корабля; rotate по курсу"
+  },
+  "life_tile_hint": {
+   "atlas": "atlas_life_ui",
+   "x": 1110,
+   "y": 670,
+   "w": 312,
+   "h": 60,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    312,
+    60
+   ],
+   "nine": [
+    16,
+    16,
+    16,
+    16
+   ],
+   "note": "плашка-подпись на плитке «Жизнь» («Тепло: 120»), текст 36; 9-slice 16"
+  },
+  "life_icon_biomass_48": {
+   "atlas": "atlas_life_ui",
+   "x": 1426,
+   "y": 670,
+   "w": 48,
+   "h": 48,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    48,
+    48
+   ],
+   "note": "Биомасса для HUD-счётчика и цены (48)"
+  },
+  "life_scale_pip_off": {
+   "atlas": "atlas_life_ui",
+   "x": 1478,
+   "y": 670,
+   "w": 48,
+   "h": 48,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    48,
+    48
+   ],
+   "note": "деление шкалы (off); на шкале Тепла/Воды/Воздуха — одинаковый лайм-цвет «прогресс жизни» (🔴), цвет ресурса даёт иконка"
+  },
+  "life_scale_pip_on": {
+   "atlas": "atlas_life_ui",
+   "x": 1530,
+   "y": 670,
+   "w": 48,
+   "h": 48,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    48,
+    48
+   ],
+   "note": "деление шкалы (on); на шкале Тепла/Воды/Воздуха — одинаковый лайм-цвет «прогресс жизни» (🔴), цвет ресурса даёт иконка"
+  },
+  "tree_card": {
+   "atlas": "atlas_life_tree",
+   "x": 2,
+   "y": 2,
+   "w": 900,
+   "h": 360,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    900,
+    360
+   ],
+   "nine": [
+    48,
+    48,
+    48,
+    48
+   ],
+   "note": "карточка выбранного узла (выезжает снизу): узел 168 слева (x 40..208), имя 48 + эффект 36, кнопка справа; 9-slice 48"
+  },
+  "tree_grow_01": {
+   "atlas": "atlas_life_tree",
+   "x": 906,
+   "y": 2,
+   "w": 192,
+   "h": 256,
+   "pivot": [
+    0.5,
+    0.78
+   ],
+   "display": [
+    192,
+    256
+   ],
+   "note": "рост дерева, ключевая поза 1/4 (семя → росток → деревце → дерево с плодами); pivot земли (0.5, 0.78) общий"
+  },
+  "tree_grow_02": {
+   "atlas": "atlas_life_tree",
+   "x": 1102,
+   "y": 2,
+   "w": 192,
+   "h": 256,
+   "pivot": [
+    0.5,
+    0.78
+   ],
+   "display": [
+    192,
+    256
+   ],
+   "note": "рост дерева, ключевая поза 2/4 (семя → росток → деревце → дерево с плодами); pivot земли (0.5, 0.78) общий"
+  },
+  "tree_grow_03": {
+   "atlas": "atlas_life_tree",
+   "x": 1298,
+   "y": 2,
+   "w": 192,
+   "h": 256,
+   "pivot": [
+    0.5,
+    0.78
+   ],
+   "display": [
+    192,
+    256
+   ],
+   "note": "рост дерева, ключевая поза 3/4 (семя → росток → деревце → дерево с плодами); pivot земли (0.5, 0.78) общий"
+  },
+  "tree_grow_04": {
+   "atlas": "atlas_life_tree",
+   "x": 1494,
+   "y": 2,
+   "w": 192,
+   "h": 256,
+   "pivot": [
+    0.5,
+    0.78
+   ],
+   "display": [
+    192,
+    256
+   ],
+   "note": "рост дерева, ключевая поза 4/4 (семя → росток → деревце → дерево с плодами); pivot земли (0.5, 0.78) общий"
+  },
+  "tree_title_ribbon": {
+   "atlas": "atlas_life_tree",
+   "x": 2,
+   "y": 366,
+   "w": 900,
+   "h": 240,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    900,
+    240
+   ],
+   "note": "лента-заголовок «ДРЕВО ЖИЗНИ» (шапка Древа): текст Russo 52 #EAFFD0 с тёмной обводкой 6, центр ленты y≈128 кадра 240"
+  },
+  "tree_node_frame_big_available": {
+   "atlas": "atlas_life_tree",
+   "x": 906,
+   "y": 366,
+   "w": 216,
+   "h": 216,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    216,
+    216
+   ],
+   "note": "веха стадии (photo, nerve, mind, ship) 216: доступен — хватает Биомассы (cyan + засечки; пульс alpha 0.75↔1, 8 fps по заявке — кодом); иконка 120 (или 150) по центру"
+  },
+  "tree_node_frame_big_locked": {
+   "atlas": "atlas_life_tree",
+   "x": 1126,
+   "y": 366,
+   "w": 216,
+   "h": 216,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    216,
+    216
+   ],
+   "note": "веха стадии (photo, nerve, mind, ship) 216: закрыт (тёмный; внутри tree_species_*_off); иконка 120 (или 150) по центру"
+  },
+  "tree_node_frame_big_owned": {
+   "atlas": "atlas_life_tree",
+   "x": 1346,
+   "y": 366,
+   "w": 216,
+   "h": 216,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    216,
+    216
+   ],
+   "note": "веха стадии (photo, nerve, mind, ship) 216: открыт (лайм, светится); иконка 120 (или 150) по центру"
+  },
+  "mut_frame_common": {
+   "atlas": "atlas_life_tree",
+   "x": 1566,
+   "y": 366,
+   "w": 168,
+   "h": 168,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    168,
+    168
+   ],
+   "note": "рамка редкости «common» 168: круг (обычн.) → шестигранник (необычн.) → золотая розетка (редк.) → радужная (легенд.)"
+  },
+  "mut_frame_legendary": {
+   "atlas": "atlas_life_tree",
+   "x": 1738,
+   "y": 366,
+   "w": 168,
+   "h": 168,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    168,
+    168
+   ],
+   "note": "рамка редкости «legendary» 168: круг (обычн.) → шестигранник (необычн.) → золотая розетка (редк.) → радужная (легенд.)"
+  },
+  "mut_frame_legendary_02": {
+   "atlas": "atlas_life_tree",
+   "x": 2,
+   "y": 610,
+   "w": 168,
+   "h": 168,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    168,
+    168
+   ],
+   "note": "легендарная рамка, кадр мерцания 2/4 (кадр 1 = mut_frame_legendary), 6 fps"
+  },
+  "mut_frame_legendary_03": {
+   "atlas": "atlas_life_tree",
+   "x": 174,
+   "y": 610,
+   "w": 168,
+   "h": 168,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    168,
+    168
+   ],
+   "note": "легендарная рамка, кадр мерцания 3/4 (кадр 1 = mut_frame_legendary), 6 fps"
+  },
+  "mut_frame_legendary_04": {
+   "atlas": "atlas_life_tree",
+   "x": 346,
+   "y": 610,
+   "w": 168,
+   "h": 168,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    168,
+    168
+   ],
+   "note": "легендарная рамка, кадр мерцания 4/4 (кадр 1 = mut_frame_legendary), 6 fps"
+  },
+  "mut_frame_rare": {
+   "atlas": "atlas_life_tree",
+   "x": 518,
+   "y": 610,
+   "w": 168,
+   "h": 168,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    168,
+    168
+   ],
+   "note": "рамка редкости «rare» 168: круг (обычн.) → шестигранник (необычн.) → золотая розетка (редк.) → радужная (легенд.)"
+  },
+  "mut_frame_uncommon": {
+   "atlas": "atlas_life_tree",
+   "x": 690,
+   "y": 610,
+   "w": 168,
+   "h": 168,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    168,
+    168
+   ],
+   "note": "рамка редкости «uncommon» 168: круг (обычн.) → шестигранник (необычн.) → золотая розетка (редк.) → радужная (легенд.)"
+  },
+  "tree_frame_gate": {
+   "atlas": "atlas_life_tree",
+   "x": 862,
+   "y": 610,
+   "w": 168,
+   "h": 168,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    168,
+    168
+   ],
+   "note": "золотая рамка узла gate (последний вид, маркер Знаков) 168: вместо tree_node_frame_owned/available; закрытый gate — обычная tree_node_frame_locked; иконка tree_species_gate 120 по центру"
+  },
+  "tree_node_frame_available": {
+   "atlas": "atlas_life_tree",
+   "x": 1034,
+   "y": 610,
+   "w": 168,
+   "h": 168,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    168,
+    168
+   ],
+   "note": "рамка узла 168: доступен — хватает Биомассы (cyan + засечки; пульс alpha 0.75↔1, 8 fps по заявке — кодом); иконка вида 120 по центру; зона нажатия ≥ 168"
+  },
+  "tree_node_frame_locked": {
+   "atlas": "atlas_life_tree",
+   "x": 1206,
+   "y": 610,
+   "w": 168,
+   "h": 168,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    168,
+    168
+   ],
+   "note": "рамка узла 168: закрыт (тёмный; внутри tree_species_*_off); иконка вида 120 по центру; зона нажатия ≥ 168"
+  },
+  "tree_node_frame_owned": {
+   "atlas": "atlas_life_tree",
+   "x": 1378,
+   "y": 610,
+   "w": 168,
+   "h": 168,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    168,
+    168
+   ],
+   "note": "рамка узла 168: открыт (лайм, светится); иконка вида 120 по центру; зона нажатия ≥ 168"
+  },
+  "tree_node_frame_select": {
+   "atlas": "atlas_life_tree",
+   "x": 1550,
+   "y": 610,
+   "w": 168,
+   "h": 168,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    168,
+    168
+   ],
+   "note": "рамка узла 168: выделение выбранного узла (золото, rotate 20°/с); иконка вида 120 по центру; зона нажатия ≥ 168"
+  },
+  "mut_icon_biolum": {
+   "atlas": "atlas_life_tree",
+   "x": 1722,
+   "y": 610,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "мутация «Биолюминесценция» (rare) 120, внутри mut_frame_rare"
+  },
+  "mut_icon_chimera": {
+   "atlas": "atlas_life_tree",
+   "x": 1846,
+   "y": 610,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "мутация «Химера» (rare) 120, внутри mut_frame_rare"
+  },
+  "mut_icon_crystal": {
+   "atlas": "atlas_life_tree",
+   "x": 2,
+   "y": 782,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "мутация «Кристаллы» (uncommon) 120, внутри mut_frame_uncommon"
+  },
+  "mut_icon_fur": {
+   "atlas": "atlas_life_tree",
+   "x": 126,
+   "y": 782,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "мутация «Мех» (uncommon) 120, внутри mut_frame_uncommon"
+  },
+  "mut_icon_glow": {
+   "atlas": "atlas_life_tree",
+   "x": 250,
+   "y": 782,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "мутация «Свечение» (common) 120, внутри mut_frame_common"
+  },
+  "mut_icon_hive": {
+   "atlas": "atlas_life_tree",
+   "x": 374,
+   "y": 782,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "мутация «Улей» (rare) 120, внутри mut_frame_rare"
+  },
+  "mut_icon_shell": {
+   "atlas": "atlas_life_tree",
+   "x": 498,
+   "y": 782,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "мутация «Панцирь» (uncommon) 120, внутри mut_frame_uncommon"
+  },
+  "mut_icon_spiny": {
+   "atlas": "atlas_life_tree",
+   "x": 622,
+   "y": 782,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "мутация «Иглы» (common) 120, внутри mut_frame_common"
+  },
+  "mut_icon_spots": {
+   "atlas": "atlas_life_tree",
+   "x": 746,
+   "y": 782,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "мутация «Пятна» (common) 120, внутри mut_frame_common"
+  },
+  "mut_icon_starborn": {
+   "atlas": "atlas_life_tree",
+   "x": 870,
+   "y": 782,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "мутация «Звёздорождённые» (legendary) 120, внутри mut_frame_legendary"
+  },
+  "mut_icon_stripes": {
+   "atlas": "atlas_life_tree",
+   "x": 994,
+   "y": 782,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "мутация «Полосы» (common) 120, внутри mut_frame_common"
+  },
+  "mut_icon_unknown": {
+   "atlas": "atlas_life_tree",
+   "x": 1118,
+   "y": 782,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "мутация не открыта («???»): единый закрытый вид"
+  },
+  "mut_icon_wings": {
+   "atlas": "atlas_life_tree",
+   "x": 1242,
+   "y": 782,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "мутация «Крылья» (uncommon) 120, внутри mut_frame_uncommon"
+  },
+  "tree_species_algae": {
+   "atlas": "atlas_life_tree",
+   "x": 1366,
+   "y": 782,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Водоросли» (ветка sea) 120; закрытый — tree_species_algae_off; мини — tree_species_algae_72"
+  },
+  "tree_species_algae_off": {
+   "atlas": "atlas_life_tree",
+   "x": 1490,
+   "y": 782,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Водоросли» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_aurora": {
+   "atlas": "atlas_life_tree",
+   "x": 1614,
+   "y": 782,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Сияние» (ветка land) 120; закрытый — tree_species_aurora_off; мини — tree_species_aurora_72"
+  },
+  "tree_species_aurora_off": {
+   "atlas": "atlas_life_tree",
+   "x": 1738,
+   "y": 782,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Сияние» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_beasts": {
+   "atlas": "atlas_life_tree",
+   "x": 1862,
+   "y": 782,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Звери» (ветка land) 120; закрытый — tree_species_beasts_off; мини — tree_species_beasts_72"
+  },
+  "tree_species_beasts_off": {
+   "atlas": "atlas_life_tree",
+   "x": 2,
+   "y": 906,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Звери» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_birds": {
+   "atlas": "atlas_life_tree",
+   "x": 126,
+   "y": 906,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Птицы» (ветка sky) 120; закрытый — tree_species_birds_off; мини — tree_species_birds_72"
+  },
+  "tree_species_birds_off": {
+   "atlas": "atlas_life_tree",
+   "x": 250,
+   "y": 906,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Птицы» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_canopy": {
+   "atlas": "atlas_life_tree",
+   "x": 374,
+   "y": 906,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Подводный лес» (ветка sea) 120; закрытый — tree_species_canopy_off; мини — tree_species_canopy_72"
+  },
+  "tree_species_canopy_off": {
+   "atlas": "atlas_life_tree",
+   "x": 498,
+   "y": 906,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Подводный лес» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_cell": {
+   "atlas": "atlas_life_tree",
+   "x": 622,
+   "y": 906,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Клетка» (ветка trunk) 120; закрытый — tree_species_cell_off; мини — tree_species_cell_72"
+  },
+  "tree_species_cell_off": {
+   "atlas": "atlas_life_tree",
+   "x": 746,
+   "y": 906,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Клетка» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_city": {
+   "atlas": "atlas_life_tree",
+   "x": 870,
+   "y": 906,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Города» (ветка mind) 120; закрытый — tree_species_city_off; мини — tree_species_city_72"
+  },
+  "tree_species_city_off": {
+   "atlas": "atlas_life_tree",
+   "x": 994,
+   "y": 906,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Города» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_civ": {
+   "atlas": "atlas_life_tree",
+   "x": 1118,
+   "y": 906,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Цивилизация» (ветка mind) 120; закрытый — tree_species_civ_off; мини — tree_species_civ_72"
+  },
+  "tree_species_civ_off": {
+   "atlas": "atlas_life_tree",
+   "x": 1242,
+   "y": 906,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Цивилизация» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_delta": {
+   "atlas": "atlas_life_tree",
+   "x": 1366,
+   "y": 906,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Дельта» (ветка sea) 120; закрытый — tree_species_delta_off; мини — tree_species_delta_72"
+  },
+  "tree_species_delta_off": {
+   "atlas": "atlas_life_tree",
+   "x": 1490,
+   "y": 906,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Дельта» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_dyson": {
+   "atlas": "atlas_life_tree",
+   "x": 1614,
+   "y": 906,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Сфера Дайсона» (ветка mind) 120; закрытый — tree_species_dyson_off; мини — tree_species_dyson_72"
+  },
+  "tree_species_dyson_off": {
+   "atlas": "atlas_life_tree",
+   "x": 1738,
+   "y": 906,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Сфера Дайсона» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_evo1": {
+   "atlas": "atlas_life_tree",
+   "x": 1862,
+   "y": 906,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Эволюция I» (ветка evo) 120; закрытый — tree_species_evo1_off; мини — tree_species_evo1_72"
+  },
+  "tree_species_evo1_off": {
+   "atlas": "atlas_life_tree",
+   "x": 2,
+   "y": 1030,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Эволюция I» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_evo2": {
+   "atlas": "atlas_life_tree",
+   "x": 126,
+   "y": 1030,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Эволюция II» (ветка evo) 120; закрытый — tree_species_evo2_off; мини — tree_species_evo2_72"
+  },
+  "tree_species_evo2_off": {
+   "atlas": "atlas_life_tree",
+   "x": 250,
+   "y": 1030,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Эволюция II» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_evo3": {
+   "atlas": "atlas_life_tree",
+   "x": 374,
+   "y": 1030,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Эволюция III» (ветка evo) 120; закрытый — tree_species_evo3_off; мини — tree_species_evo3_72"
+  },
+  "tree_species_evo3_off": {
+   "atlas": "atlas_life_tree",
+   "x": 498,
+   "y": 1030,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Эволюция III» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_evo4": {
+   "atlas": "atlas_life_tree",
+   "x": 622,
+   "y": 1030,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Эволюция IV» (ветка evo) 120; закрытый — tree_species_evo4_off; мини — tree_species_evo4_72"
+  },
+  "tree_species_evo4_off": {
+   "atlas": "atlas_life_tree",
+   "x": 746,
+   "y": 1030,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Эволюция IV» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_evo5": {
+   "atlas": "atlas_life_tree",
+   "x": 870,
+   "y": 1030,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Эволюция V» (ветка evo) 120; закрытый — tree_species_evo5_off; мини — tree_species_evo5_72"
+  },
+  "tree_species_evo5_off": {
+   "atlas": "atlas_life_tree",
+   "x": 994,
+   "y": 1030,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Эволюция V» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_fire": {
+   "atlas": "atlas_life_tree",
+   "x": 1118,
+   "y": 1030,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Огонь» (ветка mind) 120; закрытый — tree_species_fire_off; мини — tree_species_fire_72"
+  },
+  "tree_species_fire_off": {
+   "atlas": "atlas_life_tree",
+   "x": 1242,
+   "y": 1030,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Огонь» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_fish": {
+   "atlas": "atlas_life_tree",
+   "x": 1366,
+   "y": 1030,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Рыбы» (ветка sea) 120; закрытый — tree_species_fish_off; мини — tree_species_fish_72"
+  },
+  "tree_species_fish_off": {
+   "atlas": "atlas_life_tree",
+   "x": 1490,
+   "y": 1030,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Рыбы» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_forest": {
+   "atlas": "atlas_life_tree",
+   "x": 1614,
+   "y": 1030,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Леса» (ветка land) 120; закрытый — tree_species_forest_off; мини — tree_species_forest_72"
+  },
+  "tree_species_forest_off": {
+   "atlas": "atlas_life_tree",
+   "x": 1738,
+   "y": 1030,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Леса» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_gate": {
+   "atlas": "atlas_life_tree",
+   "x": 1862,
+   "y": 1030,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Звёздные врата» (ветка mind) 120; закрытый — tree_species_gate_off; мини — tree_species_gate_72"
+  },
+  "tree_species_gate_off": {
+   "atlas": "atlas_life_tree",
+   "x": 2,
+   "y": 1154,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Звёздные врата» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_insects": {
+   "atlas": "atlas_life_tree",
+   "x": 126,
+   "y": 1154,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Насекомые» (ветка sky) 120; закрытый — tree_species_insects_off; мини — tree_species_insects_72"
+  },
+  "tree_species_insects_off": {
+   "atlas": "atlas_life_tree",
+   "x": 250,
+   "y": 1154,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Насекомые» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_meta": {
+   "atlas": "atlas_life_tree",
+   "x": 374,
+   "y": 1154,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Метаболизм» (ветка trunk) 120; закрытый — tree_species_meta_off; мини — tree_species_meta_72"
+  },
+  "tree_species_meta_off": {
+   "atlas": "atlas_life_tree",
+   "x": 498,
+   "y": 1154,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Метаболизм» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_mind": {
+   "atlas": "atlas_life_tree",
+   "x": 622,
+   "y": 1154,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Разум» (ветка trunk) 120; закрытый — tree_species_mind_off; мини — tree_species_mind_72"
+  },
+  "tree_species_mind_off": {
+   "atlas": "atlas_life_tree",
+   "x": 746,
+   "y": 1154,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Разум» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_moss": {
+   "atlas": "atlas_life_tree",
+   "x": 870,
+   "y": 1154,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Мхи» (ветка land) 120; закрытый — tree_species_moss_off; мини — tree_species_moss_72"
+  },
+  "tree_species_moss_off": {
+   "atlas": "atlas_life_tree",
+   "x": 994,
+   "y": 1154,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Мхи» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_multi": {
+   "atlas": "atlas_life_tree",
+   "x": 1118,
+   "y": 1154,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Многоклеточность» (ветка trunk) 120; закрытый — tree_species_multi_off; мини — tree_species_multi_72"
+  },
+  "tree_species_multi_off": {
+   "atlas": "atlas_life_tree",
+   "x": 1242,
+   "y": 1154,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Многоклеточность» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_nerve": {
+   "atlas": "atlas_life_tree",
+   "x": 1366,
+   "y": 1154,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Нервная система» (ветка trunk) 120; закрытый — tree_species_nerve_off; мини — tree_species_nerve_72"
+  },
+  "tree_species_nerve_off": {
+   "atlas": "atlas_life_tree",
+   "x": 1490,
+   "y": 1154,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Нервная система» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_nexus": {
+   "atlas": "atlas_life_tree",
+   "x": 1614,
+   "y": 1154,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Нексус» (ветка sea) 120; закрытый — tree_species_nexus_off; мини — tree_species_nexus_72"
+  },
+  "tree_species_nexus_off": {
+   "atlas": "atlas_life_tree",
+   "x": 1738,
+   "y": 1154,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Нексус» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_photo": {
+   "atlas": "atlas_life_tree",
+   "x": 1862,
+   "y": 1154,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Фотосинтез» (ветка trunk) 120; закрытый — tree_species_photo_off; мини — tree_species_photo_72"
+  },
+  "tree_species_photo_off": {
+   "atlas": "atlas_life_tree",
+   "x": 2,
+   "y": 1278,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Фотосинтез» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_plains": {
+   "atlas": "atlas_life_tree",
+   "x": 126,
+   "y": 1278,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Равнины» (ветка land) 120; закрытый — tree_species_plains_off; мини — tree_species_plains_72"
+  },
+  "tree_species_plains_off": {
+   "atlas": "atlas_life_tree",
+   "x": 250,
+   "y": 1278,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Равнины» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_reef": {
+   "atlas": "atlas_life_tree",
+   "x": 374,
+   "y": 1278,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Риф» (ветка sea) 120; закрытый — tree_species_reef_off; мини — tree_species_reef_72"
+  },
+  "tree_species_reef_off": {
+   "atlas": "atlas_life_tree",
+   "x": 498,
+   "y": 1278,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Риф» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_savanna": {
+   "atlas": "atlas_life_tree",
+   "x": 622,
+   "y": 1278,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Саванна» (ветка land) 120; закрытый — tree_species_savanna_off; мини — tree_species_savanna_72"
+  },
+  "tree_species_savanna_off": {
+   "atlas": "atlas_life_tree",
+   "x": 746,
+   "y": 1278,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Саванна» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_ship": {
+   "atlas": "atlas_life_tree",
+   "x": 870,
+   "y": 1278,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Звёздный корабль» (ветка mind) 120; закрытый — tree_species_ship_off; мини — tree_species_ship_72"
+  },
+  "tree_species_ship_off": {
+   "atlas": "atlas_life_tree",
+   "x": 994,
+   "y": 1278,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Звёздный корабль» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_squid": {
+   "atlas": "atlas_life_tree",
+   "x": 1118,
+   "y": 1278,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Головоногие» (ветка sea) 120; закрытый — tree_species_squid_off; мини — tree_species_squid_72"
+  },
+  "tree_species_squid_off": {
+   "atlas": "atlas_life_tree",
+   "x": 1242,
+   "y": 1278,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Головоногие» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_swarm": {
+   "atlas": "atlas_life_tree",
+   "x": 1366,
+   "y": 1278,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Рой Дайсона» (ветка mind) 120; закрытый — tree_species_swarm_off; мини — tree_species_swarm_72"
+  },
+  "tree_species_swarm_off": {
+   "atlas": "atlas_life_tree",
+   "x": 1490,
+   "y": 1278,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Рой Дайсона» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_tide": {
+   "atlas": "atlas_life_tree",
+   "x": 1614,
+   "y": 1278,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Прилив» (ветка sea) 120; закрытый — tree_species_tide_off; мини — tree_species_tide_72"
+  },
+  "tree_species_tide_off": {
+   "atlas": "atlas_life_tree",
+   "x": 1738,
+   "y": 1278,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Прилив» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_species_tools": {
+   "atlas": "atlas_life_tree",
+   "x": 1862,
+   "y": 1278,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "вид «Орудия» (ветка mind) 120; закрытый — tree_species_tools_off; мини — tree_species_tools_72"
+  },
+  "tree_species_tools_off": {
+   "atlas": "atlas_life_tree",
+   "x": 2,
+   "y": 1402,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«Орудия» закрыт: серо-синий силуэт alpha 0.8 (без ctx.filter — нет в Safari)"
+  },
+  "tree_branch_plate_evo": {
+   "atlas": "atlas_life_tree",
+   "x": 126,
+   "y": 1402,
+   "w": 360,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    360,
+    96
+   ],
+   "nine": [
+    24,
+    24,
+    24,
+    24
+   ],
+   "note": "табличка ветви «Эволюция» (янтарь #FFC94A): текст Exo 2 800 36 кодом по центру; 9-slice 24"
+  },
+  "tree_branch_plate_land": {
+   "atlas": "atlas_life_tree",
+   "x": 490,
+   "y": 1402,
+   "w": 360,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    360,
+    96
+   ],
+   "nine": [
+    24,
+    24,
+    24,
+    24
+   ],
+   "note": "табличка ветви «land»: текст Exo 2 800 36 кодом по центру; 9-slice 24"
+  },
+  "tree_branch_plate_mind": {
+   "atlas": "atlas_life_tree",
+   "x": 854,
+   "y": 1402,
+   "w": 360,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    360,
+    96
+   ],
+   "nine": [
+    24,
+    24,
+    24,
+    24
+   ],
+   "note": "табличка ветви «mind»: текст Exo 2 800 36 кодом по центру; 9-slice 24"
+  },
+  "tree_branch_plate_sea": {
+   "atlas": "atlas_life_tree",
+   "x": 1218,
+   "y": 1402,
+   "w": 360,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    360,
+    96
+   ],
+   "nine": [
+    24,
+    24,
+    24,
+    24
+   ],
+   "note": "табличка ветви «sea»: текст Exo 2 800 36 кодом по центру; 9-slice 24"
+  },
+  "tree_branch_plate_sky": {
+   "atlas": "atlas_life_tree",
+   "x": 1582,
+   "y": 1402,
+   "w": 360,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    360,
+    96
+   ],
+   "nine": [
+    24,
+    24,
+    24,
+    24
+   ],
+   "note": "табличка ветви «sky»: текст Exo 2 800 36 кодом по центру; 9-slice 24"
+  },
+  "tree_branch_plate_trunk": {
+   "atlas": "atlas_life_tree",
+   "x": 2,
+   "y": 1526,
+   "w": 360,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    360,
+    96
+   ],
+   "nine": [
+    24,
+    24,
+    24,
+    24
+   ],
+   "note": "табличка ветви «trunk»: текст Exo 2 800 36 кодом по центру; 9-slice 24"
+  },
+  "tree_species_algae_72": {
+   "atlas": "atlas_life_tree",
+   "x": 366,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Водоросли» мини 72: обитатели по дуге карточки планеты"
+  },
+  "tree_species_aurora_72": {
+   "atlas": "atlas_life_tree",
+   "x": 442,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Сияние» мини 72: обитатели по дуге карточки планеты / орбита"
+  },
+  "tree_species_beasts_72": {
+   "atlas": "atlas_life_tree",
+   "x": 518,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Звери» мини 72: обитатели по дуге карточки планеты"
+  },
+  "tree_species_birds_72": {
+   "atlas": "atlas_life_tree",
+   "x": 594,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Птицы» мини 72: обитатели по дуге карточки планеты"
+  },
+  "tree_species_canopy_72": {
+   "atlas": "atlas_life_tree",
+   "x": 670,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Подводный лес» мини 72: обитатели по дуге карточки планеты / орбита"
+  },
+  "tree_species_cell_72": {
+   "atlas": "atlas_life_tree",
+   "x": 746,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Клетка» мини 72: обитатели по дуге карточки планеты"
+  },
+  "tree_species_city_72": {
+   "atlas": "atlas_life_tree",
+   "x": 822,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Города» мини 72: обитатели по дуге карточки планеты"
+  },
+  "tree_species_civ_72": {
+   "atlas": "atlas_life_tree",
+   "x": 898,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Цивилизация» мини 72: обитатели по дуге карточки планеты"
+  },
+  "tree_species_delta_72": {
+   "atlas": "atlas_life_tree",
+   "x": 974,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Дельта» мини 72: обитатели по дуге карточки планеты / орбита"
+  },
+  "tree_species_dyson_72": {
+   "atlas": "atlas_life_tree",
+   "x": 1050,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Сфера Дайсона» мини 72: обитатели по дуге карточки планеты / орбита"
+  },
+  "tree_species_evo1_72": {
+   "atlas": "atlas_life_tree",
+   "x": 1126,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Эволюция I» мини 72: обитатели по дуге карточки планеты / орбита"
+  },
+  "tree_species_evo2_72": {
+   "atlas": "atlas_life_tree",
+   "x": 1202,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Эволюция II» мини 72: обитатели по дуге карточки планеты / орбита"
+  },
+  "tree_species_evo3_72": {
+   "atlas": "atlas_life_tree",
+   "x": 1278,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Эволюция III» мини 72: обитатели по дуге карточки планеты / орбита"
+  },
+  "tree_species_evo4_72": {
+   "atlas": "atlas_life_tree",
+   "x": 1354,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Эволюция IV» мини 72: обитатели по дуге карточки планеты / орбита"
+  },
+  "tree_species_evo5_72": {
+   "atlas": "atlas_life_tree",
+   "x": 1430,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Эволюция V» мини 72: обитатели по дуге карточки планеты / орбита"
+  },
+  "tree_species_fire_72": {
+   "atlas": "atlas_life_tree",
+   "x": 1506,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Огонь» мини 72: обитатели по дуге карточки планеты"
+  },
+  "tree_species_fish_72": {
+   "atlas": "atlas_life_tree",
+   "x": 1582,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Рыбы» мини 72: обитатели по дуге карточки планеты"
+  },
+  "tree_species_forest_72": {
+   "atlas": "atlas_life_tree",
+   "x": 1658,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Леса» мини 72: обитатели по дуге карточки планеты"
+  },
+  "tree_species_gate_72": {
+   "atlas": "atlas_life_tree",
+   "x": 1734,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Звёздные врата» мини 72: обитатели по дуге карточки планеты / орбита"
+  },
+  "tree_species_insects_72": {
+   "atlas": "atlas_life_tree",
+   "x": 1810,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Насекомые» мини 72: обитатели по дуге карточки планеты"
+  },
+  "tree_species_meta_72": {
+   "atlas": "atlas_life_tree",
+   "x": 1886,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Метаболизм» мини 72: обитатели по дуге карточки планеты"
+  },
+  "tree_species_mind_72": {
+   "atlas": "atlas_life_tree",
+   "x": 1962,
+   "y": 1526,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Разум» мини 72: обитатели по дуге карточки планеты"
+  },
+  "tree_species_moss_72": {
+   "atlas": "atlas_life_tree",
+   "x": 2,
+   "y": 1626,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Мхи» мини 72: обитатели по дуге карточки планеты"
+  },
+  "tree_species_multi_72": {
+   "atlas": "atlas_life_tree",
+   "x": 78,
+   "y": 1626,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Многоклеточность» мини 72: обитатели по дуге карточки планеты"
+  },
+  "tree_species_nerve_72": {
+   "atlas": "atlas_life_tree",
+   "x": 154,
+   "y": 1626,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Нервная система» мини 72: обитатели по дуге карточки планеты"
+  },
+  "tree_species_nexus_72": {
+   "atlas": "atlas_life_tree",
+   "x": 230,
+   "y": 1626,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Нексус» мини 72: обитатели по дуге карточки планеты / орбита"
+  },
+  "tree_species_photo_72": {
+   "atlas": "atlas_life_tree",
+   "x": 306,
+   "y": 1626,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Фотосинтез» мини 72: обитатели по дуге карточки планеты"
+  },
+  "tree_species_plains_72": {
+   "atlas": "atlas_life_tree",
+   "x": 382,
+   "y": 1626,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Равнины» мини 72: обитатели по дуге карточки планеты / орбита"
+  },
+  "tree_species_reef_72": {
+   "atlas": "atlas_life_tree",
+   "x": 458,
+   "y": 1626,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Риф» мини 72: обитатели по дуге карточки планеты / орбита"
+  },
+  "tree_species_savanna_72": {
+   "atlas": "atlas_life_tree",
+   "x": 534,
+   "y": 1626,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Саванна» мини 72: обитатели по дуге карточки планеты / орбита"
+  },
+  "tree_species_ship_72": {
+   "atlas": "atlas_life_tree",
+   "x": 610,
+   "y": 1626,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Звёздный корабль» мини 72: обитатели по дуге карточки планеты"
+  },
+  "tree_species_squid_72": {
+   "atlas": "atlas_life_tree",
+   "x": 686,
+   "y": 1626,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Головоногие» мини 72: обитатели по дуге карточки планеты"
+  },
+  "tree_species_swarm_72": {
+   "atlas": "atlas_life_tree",
+   "x": 762,
+   "y": 1626,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Рой Дайсона» мини 72: обитатели по дуге карточки планеты / орбита"
+  },
+  "tree_species_tide_72": {
+   "atlas": "atlas_life_tree",
+   "x": 838,
+   "y": 1626,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Прилив» мини 72: обитатели по дуге карточки планеты / орбита"
+  },
+  "tree_species_tools_72": {
+   "atlas": "atlas_life_tree",
+   "x": 914,
+   "y": 1626,
+   "w": 72,
+   "h": 72,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    72,
+    72
+   ],
+   "note": "«Орудия» мини 72: обитатели по дуге карточки планеты"
+  },
+  "tree_edge_dim": {
+   "atlas": "atlas_life_tree",
+   "x": 990,
+   "y": 1626,
+   "w": 64,
+   "h": 16,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    64,
+    24
+   ],
+   "note": "связь к закрытому/доступному: точки"
+  },
+  "tree_edge_lit": {
+   "atlas": "atlas_life_tree",
+   "x": 1058,
+   "y": 1626,
+   "w": 64,
+   "h": 16,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    64,
+    24
+   ],
+   "note": "связь к открытому виду: тайлить вдоль ребра (или кодом по tokens.life.edge)"
+  },
+  "life_stage_burst_key": {
+   "atlas": "atlas_life_fx",
+   "x": 2,
+   "y": 2,
+   "w": 512,
+   "h": 512,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    512,
+    512
+   ],
+   "note": "ключ-источник для animation-director (кадры делает он, REQ-…-003); до кадров код может играть твином: «Эволюция»: scale 0.4→1.6, alpha 1→0, 450 мс, 'lighter'; оттенок по стадии"
+  },
+  "life_terra_done_key": {
+   "atlas": "atlas_life_fx",
+   "x": 518,
+   "y": 2,
+   "w": 512,
+   "h": 512,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    512,
+    512
+   ],
+   "note": "ключ-источник для animation-director (кадры делает он, REQ-…-003); до кадров код может играть твином: «Мир готов к жизни»: ударное кольцо scale 0.3→1.4, 600 мс"
+  },
+  "mut_reveal_key": {
+   "atlas": "atlas_life_fx",
+   "x": 1034,
+   "y": 2,
+   "w": 512,
+   "h": 512,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    512,
+    512
+   ],
+   "note": "ключ-источник для animation-director (кадры делает он, REQ-…-003); до кадров код может играть твином: «Новая мутация!»: лучи под иконкой, rotate 30°/с, scale 0.6→1.1, цвет — tint кодом/аниматором"
+  },
+  "life_scale_step_burst_key": {
+   "atlas": "atlas_life_fx",
+   "x": 1550,
+   "y": 2,
+   "w": 256,
+   "h": 256,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    256,
+    256
+   ],
+   "note": "ключ-источник для animation-director (кадры делает он, REQ-…-003); до кадров код может играть твином: уровень шкалы: scale 0.5→1.6, alpha→0, 300 мс"
+  },
+  "tree_buy_flash_key": {
+   "atlas": "atlas_life_fx",
+   "x": 2,
+   "y": 518,
+   "w": 256,
+   "h": 256,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    256,
+    256
+   ],
+   "note": "ключ-источник для animation-director (кадры делает он, REQ-…-003); до кадров код может играть твином: покупка вида: scale 0.5→1.3, alpha→0, 250 мс + bio_spore"
+  },
+  "ui_quick_frame": {
+   "atlas": "atlas_colony",
+   "x": 2,
+   "y": 2,
+   "w": 144,
+   "h": 144,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    144,
+    144
+   ],
+   "nine": [
+    36,
+    36,
+    36,
+    36
+   ],
+   "note": "рамка быстрой кнопки 144×144 (тело 128, фаска 24, cyan); иконка 96 по центру; 9-slice [36,36,36,36]"
+  },
+  "galaxy_marker_here": {
+   "atlas": "atlas_colony",
+   "x": 150,
+   "y": 2,
+   "w": 120,
+   "h": 120,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    120,
+    120
+   ],
+   "note": "«ваша система»: золотое кольцо 120 + 4 шеврона внутрь (N/E/S/W), вокруг звезды-гнезда текущей точки (центр прозрачный); idle — scale 1↔1.04, 1.6 с"
+  },
+  "galaxy_star_colony_empty": {
+   "atlas": "atlas_colony",
+   "x": 274,
+   "y": 2,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "кольцо колонии «не заселена»: серо-голубой пунктир-гнездо r 41 + 4 засечки; центр прозрачный (r < 34) — поверх galaxy_point_done 96, тот же центр"
+  },
+  "galaxy_star_colony_life": {
+   "atlas": "atlas_colony",
+   "x": 374,
+   "y": 2,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "кольцо колонии «есть жизнь» (Микробы+): бирюзовое (#3DFFD0) + лайм-дымка и споры; центр прозрачный"
+  },
+  "galaxy_star_colony_mind_01": {
+   "atlas": "atlas_colony",
+   "x": 474,
+   "y": 2,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "кольцо разумной колонии, кадр 1/4 (4 fps, цикл): фиолетовое (#B98CFF) + тёплые огни-города мерцают; центр прозрачный"
+  },
+  "galaxy_star_colony_mind_02": {
+   "atlas": "atlas_colony",
+   "x": 574,
+   "y": 2,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "кольцо разумной колонии, кадр 2/4 (4 fps, цикл): фиолетовое (#B98CFF) + тёплые огни-города мерцают; центр прозрачный"
+  },
+  "galaxy_star_colony_mind_03": {
+   "atlas": "atlas_colony",
+   "x": 674,
+   "y": 2,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "кольцо разумной колонии, кадр 3/4 (4 fps, цикл): фиолетовое (#B98CFF) + тёплые огни-города мерцают; центр прозрачный"
+  },
+  "galaxy_star_colony_mind_04": {
+   "atlas": "atlas_colony",
+   "x": 774,
+   "y": 2,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "кольцо разумной колонии, кадр 4/4 (4 fps, цикл): фиолетовое (#B98CFF) + тёплые огни-города мерцают; центр прозрачный"
+  },
+  "galaxy_star_colony_terra": {
+   "atlas": "atlas_colony",
+   "x": 874,
+   "y": 2,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "кольцо колонии «Терраформ»: голубое (#5AB8FF) + отсвет воды; центр прозрачный, поверх звезды"
+  },
+  "ui_icon_colony": {
+   "atlas": "atlas_colony",
+   "x": 2,
+   "y": 150,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "«Колонии»: итог Галактики (слева от строки, 96) и пункт ☰ «Галактика» при бейдже"
+  },
+  "ui_icon_colony_off": {
+   "atlas": "atlas_colony",
+   "x": 102,
+   "y": 150,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "«Колонии» нет / закрыто (до первой колонии)"
+  },
+  "ui_icon_restart_red": {
+   "atlas": "atlas_colony",
+   "x": 202,
+   "y": 150,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "«Заново» красная насыщенная с тёмной обводкой — на рамке ui_btn_danger"
+  },
+  "ui_icon_settings": {
+   "atlas": "atlas_colony",
+   "x": 302,
+   "y": 150,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "«Настройки» (шестерёнка, cyan): ☰ и экран Настроек"
+  },
+  "ui_harm_arc": {
+   "atlas": "atlas_v2",
+   "x": 2,
+   "y": 2,
+   "w": 480,
+   "h": 480,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    480,
+    480
+   ],
+   "note": "шкала Гармонии: полное золотое кольцо r 212, толщина 17 при sc 1.243 (рисовать 480·sc/1.243); заряд H — секторный clip от −90° по часовой"
+  },
+  "ui_harm_arc_track": {
+   "atlas": "atlas_v2",
+   "x": 486,
+   "y": 2,
+   "w": 480,
+   "h": 480,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    480,
+    480
+   ],
+   "note": "дорожка шкалы Гармонии (под ui_harm_arc, тот же прямоугольник): тёмная полоса + кромки"
+  },
+  "fx_harm_hit": {
+   "atlas": "atlas_v2",
+   "x": 2,
+   "y": 486,
+   "w": 256,
+   "h": 256,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    256,
+    256
+   ],
+   "note": "вспышка попадания Гармонии 256: scale 0.5→1.25, alpha 1→0, 320 мс, 'lighter'; текст «×m» — рядом"
+  },
+  "ui_role_dome": {
+   "atlas": "atlas_v2",
+   "x": 262,
+   "y": 486,
+   "w": 192,
+   "h": 192,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    192,
+    192
+   ],
+   "note": "Роль «Купол»: сетчатая полусфера над планетой; бирюза #3DFFD0; кадр 192: чип 144×144, крупный показ; при 96 — _96"
+  },
+  "ui_role_forge": {
+   "atlas": "atlas_v2",
+   "x": 458,
+   "y": 486,
+   "w": 192,
+   "h": 192,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    192,
+    192
+   ],
+   "note": "Роль «Горн»: наковальня + пламя + искры; оранжевый #FF9A4A/#FF6A1A; кадр 192: чип 144×144, крупный показ; при 96 — _96"
+  },
+  "ui_style_bio": {
+   "atlas": "atlas_v2",
+   "x": 654,
+   "y": 486,
+   "w": 192,
+   "h": 192,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    192,
+    192
+   ],
+   "note": "Стиль «Биолог»: живая планета в венке из 4 листьев; лайм #A6FF3D; кадр 192: чип 144×144, крупный показ; при 96 — _96"
+  },
+  "ui_style_col": {
+   "atlas": "atlas_v2",
+   "x": 2,
+   "y": 746,
+   "w": 192,
+   "h": 192,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    192,
+    192
+   ],
+   "note": "Стиль «Колонист»: 3 мира, связанных в треугольник; фиолет #B98CFF; кадр 192: чип 144×144, крупный показ; при 96 — _96"
+  },
+  "ui_style_res": {
+   "atlas": "atlas_v2",
+   "x": 198,
+   "y": 746,
+   "w": 192,
+   "h": 192,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    192,
+    192
+   ],
+   "note": "Стиль «Резонатор»: звезда + волны ((✦)) + такты; золото #FFD23F; кадр 192: чип 144×144, крупный показ; при 96 — _96"
+  },
+  "fx_harm_ring": {
+   "atlas": "atlas_v2",
+   "x": 394,
+   "y": 746,
+   "w": 128,
+   "h": 128,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    128,
+    128
+   ],
+   "note": "кольцо ведущего Импульса: r 36, толщина 8 при кадре 128 (рисовать 128·sc по центру Импульса, центр прозрачный); пульс в зоне — scale 1↔1.14, вне зоны — alpha 0.55"
+  },
+  "ui_badge_home": {
+   "atlas": "atlas_v2",
+   "x": 526,
+   "y": 746,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "значок «освоено дома»: планета + домик + ✓; 96 (тост), на углу плитки «Жизнь» 72; непрозрачная шайба — без glow под текстом"
+  },
+  "ui_role_dome_96": {
+   "atlas": "atlas_v2",
+   "x": 626,
+   "y": 746,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "Роль «Купол»: сетчатая полусфера над планетой; бирюза #3DFFD0; родной 96 (строки листа, карточка стиля)"
+  },
+  "ui_role_forge_96": {
+   "atlas": "atlas_v2",
+   "x": 726,
+   "y": 746,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "Роль «Горн»: наковальня + пламя + искры; оранжевый #FF9A4A/#FF6A1A; родной 96 (строки листа, карточка стиля)"
+  },
+  "ui_style_bio_96": {
+   "atlas": "atlas_v2",
+   "x": 826,
+   "y": 746,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "Стиль «Биолог»: живая планета в венке из 4 листьев; лайм #A6FF3D; родной 96 (строки листа, карточка стиля)"
+  },
+  "ui_style_col_96": {
+   "atlas": "atlas_v2",
+   "x": 926,
+   "y": 746,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "Стиль «Колонист»: 3 мира, связанных в треугольник; фиолет #B98CFF; родной 96 (строки листа, карточка стиля)"
+  },
+  "ui_style_res_96": {
+   "atlas": "atlas_v2",
+   "x": 2,
+   "y": 942,
+   "w": 96,
+   "h": 96,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    96,
+    96
+   ],
+   "note": "Стиль «Резонатор»: звезда + волны ((✦)) + такты; золото #FFD23F; родной 96 (строки листа, карточка стиля)"
+  },
+  "ui_harm_arc_head": {
+   "atlas": "atlas_v2",
+   "x": 102,
+   "y": 942,
+   "w": 56,
+   "h": 56,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    56,
+    56
+   ],
+   "note": "круглая голова заряда: центр в точке (cx + R·cos a, cy + R·sin a), R = 171·sc; при H ≥ 0.97 — alpha-пульс"
+  },
+  "bg_cyan": {
+   "image": "bg_cyan.webp",
+   "w": 1080,
+   "h": 2400,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    1080,
+    2400
+   ],
+   "note": "фон 1080×2400 (overscan под 20:9); при кадре 1080×1920 — cover, сдвиг 240 px; светлое пятно — центр орбиты (540, 880) в файле = (540, 640) в 1920-кадре"
+  },
+  "bg_violet": {
+   "image": "bg_violet.webp",
+   "w": 1080,
+   "h": 2400,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    1080,
+    2400
+   ],
+   "note": "фон 1080×2400 (overscan под 20:9); при кадре 1080×1920 — cover, сдвиг 240 px; светлое пятно — центр орбиты (540, 880) в файле = (540, 640) в 1920-кадре"
+  },
+  "bg_magenta": {
+   "image": "bg_magenta.webp",
+   "w": 1080,
+   "h": 2400,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    1080,
+    2400
+   ],
+   "note": "фон 1080×2400 (overscan под 20:9); при кадре 1080×1920 — cover, сдвиг 240 px; светлое пятно — центр орбиты (540, 880) в файле = (540, 640) в 1920-кадре"
+  },
+  "bg_orion_nebula": {
+   "image": "bg_orion_nebula.webp",
+   "w": 1080,
+   "h": 2400,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    1080,
+    2400
+   ],
+   "note": "фон «Туманность Ориона»: розово-маджента облака и голубое скопление вне зоны орбиты; 1080×2400 как bg_*: центр орбиты (540,880) файла, зона r440 не ярче bg_cyan"
+  },
+  "bg_dust_lane": {
+   "image": "bg_dust_lane.webp",
+   "w": 1080,
+   "h": 2400,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    1080,
+    2400
+   ],
+   "note": "фон «Пылевой рукав»: диагональ звёздного света с тёмными волокнами пыли; 1080×2400 как bg_*: центр орбиты (540,880) файла, зона r440 не ярче bg_cyan"
+  },
+  "bg_galactic_core": {
+   "image": "bg_galactic_core.webp",
+   "w": 1080,
+   "h": 2400,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    1080,
+    2400
+   ],
+   "note": "фон «Ядро галактики»: золотое зарево ядра сверху (за HUD), плотные тёплые звёзды; финал рукава; 1080×2400 как bg_*: центр орбиты (540,880) файла, зона r440 не ярче bg_cyan"
+  },
+  "galaxy_bg": {
+   "image": "galaxy_bg.webp",
+   "w": 1080,
+   "h": 2400,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    1080,
+    2400
+   ],
+   "note": "галактика целиком 1080×2400 (cover → 1920, сдвиг 240): ядро (540,1200) файла = (540,960) кадра"
+  },
+  "galaxy_stars_far": {
+   "image": "galaxy_stars_far.webp",
+   "w": 1080,
+   "h": 2400,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    1080,
+    2400
+   ],
+   "note": "дальний слой звёзд, непрозрачный, тайлится по x и y (параллакс при отдалении)"
+  },
+  "tree_bg": {
+   "image": "tree_bg.webp",
+   "w": 1080,
+   "h": 2600,
+   "pivot": [
+    0,
+    0
+   ],
+   "display": [
+    1080,
+    2600
+   ],
+   "note": "холст Древа 1080×2600 (скролл): корни/«первичный океан» внизу, ствол x=540, ветви Море (col −2), Суша (col 2), Небо (col 1), крона Разума вверху; узлы x = 540 + col·216, y = 2450 − row·175"
+  },
+  "tree_bg_v2": {
+   "image": "tree_bg_v2.webp",
+   "w": 1080,
+   "h": 3150,
+   "pivot": [
+    0,
+    0
+   ],
+   "display": [
+    1080,
+    3150
+   ],
+   "note": "холст Древа 1080×3150 (T-164, строки 0–16; скролл): корни внизу, ствол x=540 до врат, ветви Море (col −2/−1), Суша (col 2), Небо и Эволюция (col 1), крона над вратами; узлы x = 540 + col·216, y = 3000 − row·175. Заменяет tree_bg (2600)"
+  },
+  "galaxy_disk": {
+   "image": "galaxy_disk.webp",
+   "w": 1080,
+   "h": 2400,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    1080,
+    2400
+   ],
+   "note": "диск галактики RGBA (рукава, пыль, бар, звёзды рукавов) поверх galaxy_stars_far; source-over",
+   "alpha": true
+  },
+  "galaxy_arm_marks": {
+   "image": "galaxy_arm_marks.webp",
+   "w": 1080,
+   "h": 2400,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    1080,
+    2400
+   ],
+   "note": "подсветка рукава Ориона r 120–560 (cyan); пройденную часть кода показывает клипом по пути; 'lighter'",
+   "alpha": true
+  },
+  "nova_shock_ring": {
+   "image": "nova_shock_ring.webp",
+   "w": 1024,
+   "h": 1024,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    1024,
+    1024
+   ],
+   "note": "ударное кольцо R≈440: scale 0.15→2.6 (до краёв 1920), alpha 1→0, 0.6 с, ease-out; 'lighter'",
+   "alpha": true
+  },
+  "nova_rays": {
+   "image": "nova_rays.webp",
+   "w": 1024,
+   "h": 1024,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    1024,
+    1024
+   ],
+   "note": "лучи (12 главных gold + 24 тонких маджента): rotate +20°/с, scale 0.5→1.8, 'lighter'",
+   "alpha": true
+  },
+  "nova_flash_overlay": {
+   "image": "nova_flash_overlay.webp",
+   "w": 540,
+   "h": 960,
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "display": [
+    1080,
+    1920
+   ],
+   "note": "заливка экрана: рисовать растянутой на 1080×1920 (×2); alpha кода 0→1 (0.25 с) → держать 0.15 с → 0 (0.6 с), под ней проступает галактика",
+   "alpha": true
+  }
+ },
+ "alias": {
+  "sun_idle_pulse": "sun_idle",
+  "sun_supernova": "sun_nova_02",
+  "comet": "pulse2",
+  "comet_trail": "pulse2_trail",
+  "ui_btn_planet": "ui_icon_planet",
+  "ui_btn_wind": "ui_icon_wind",
+  "ui_btn_satellite": "ui_icon_satellite",
+  "ui_btn_pulse2": "ui_icon_pulse2",
+  "ui_btn_nova": "ui_icon_nova",
+  "icon_energy": "ui_hud_energy",
+  "icon_stardust": "ui_hud_stardust",
+  "modal_offline": "ui_modal",
+  "btn_collect": "ui_btn_collect",
+  "ui_btn_next": "ui_btn_play",
+  "galaxy_star_birth": "galaxy_star_birth_03",
+  "sun_skin_amber": "sun_skin_amber_body",
+  "sun_skin_blue": "sun_skin_blue_body",
+  "reward_preview_sun_blue": "reward_preview_sun_blue_giant",
+  "nova_debris": "nova_debris_01",
+  "ui_tab_observatory": "ui_icon_observatory",
+  "life_stage_mind": "life_stage_mind_01",
+  "life_card_stage_mind": "life_card_stage_mind_01",
+  "life_stage_burst": "life_stage_burst_key",
+  "life_scale_step_burst": "life_scale_step_burst_key",
+  "life_terra_done": "life_terra_done_key",
+  "tree_buy_flash": "tree_buy_flash_key",
+  "mut_reveal": "mut_reveal_key",
+  "mut_dup_spark": "mut_dup_spark_key",
+  "bio_pop": "bio_pop_key",
+  "bio_spore": "bio_spore_01",
+  "life_ship_flight": "life_ship",
+  "galaxy_star_colony_mind": "galaxy_star_colony_mind_01",
+  "ui_colony_badge": "ui_badge_dot",
+  "ui_tab_planets": "ui_icon_life",
+  "ui_tab_planets_off": "ui_icon_life_off",
+  "ui_tab_tree": "ui_icon_tree",
+  "ui_tab_tree_off": "ui_icon_tree_off",
+  "ui_tab_mut": "ui_icon_mutation",
+  "ui_tab_mut_off": "ui_icon_mutation_off",
+  "life_btn_scale_normal": "life_btn_scale",
+  "life_btn_evolve_normal": "life_btn_evolve"
+ },
+ "groups": {
+  "planets": [
+   "planet_01",
+   "planet_02",
+   "planet_03",
+   "planet_04",
+   "planet_05",
+   "planet_06",
+   "planet_07",
+   "planet_08"
+  ],
+  "planet_shadows": [
+   "planet_01_shadow",
+   "planet_02_shadow",
+   "planet_03_shadow",
+   "planet_04_shadow",
+   "planet_05_shadow",
+   "planet_06_shadow",
+   "planet_07_shadow",
+   "planet_08_shadow"
+  ],
+  "sun_nova_frames": [
+   "sun_nova_01",
+   "sun_nova_02",
+   "sun_nova_03",
+   "sun_nova_04"
+  ],
+  "bg_by_era": [
+   "bg_cyan",
+   "bg_violet",
+   "bg_magenta"
+  ],
+  "bg_cosmetic": [
+   "bg_orion_nebula",
+   "bg_dust_lane",
+   "bg_galactic_core"
+  ],
+  "galaxy_points": [
+   "galaxy_point_done",
+   "galaxy_point_done_b",
+   "galaxy_point_current",
+   "galaxy_point_pulse",
+   "galaxy_point_next",
+   "galaxy_point_locked",
+   "galaxy_point_big_done",
+   "galaxy_point_big_current",
+   "galaxy_point_big_next",
+   "galaxy_point_big_locked"
+  ],
+  "galaxy_birth_frames": [
+   "galaxy_star_birth_01",
+   "galaxy_star_birth_02",
+   "galaxy_star_birth_03",
+   "galaxy_star_birth_04"
+  ],
+  "nova_debris": [
+   "nova_debris_01",
+   "nova_debris_02",
+   "nova_debris_03",
+   "nova_debris_04"
+  ],
+  "reward_icons": [
+   "reward_icon_dust",
+   "reward_icon_dust_160",
+   "reward_icon_orbit",
+   "reward_icon_orbit_160",
+   "reward_icon_bg",
+   "reward_icon_bg_160",
+   "reward_icon_sun",
+   "reward_icon_sun_160",
+   "reward_icon_unknown",
+   "reward_icon_unknown_160"
+  ],
+  "sun_skins": {
+   "amber": [
+    "sun_skin_amber_body",
+    "sun_skin_amber_corona"
+   ],
+   "blue_giant": [
+    "sun_skin_blue_body",
+    "sun_skin_blue_corona"
+   ]
+  },
+  "reward_by_type": {
+   "dust": "reward_icon_dust",
+   "orbitColor": "reward_icon_orbit",
+   "systemBg": "reward_icon_bg",
+   "sunSkin": "reward_icon_sun",
+   "hidden": "reward_icon_unknown"
+  },
+  "reward_preview": {
+   "orion_nebula": "reward_preview_bg_orion_nebula",
+   "dust_lane": "reward_preview_bg_dust_lane",
+   "galactic_core": "reward_preview_bg_galactic_core",
+   "amber": "reward_preview_sun_amber",
+   "blue_giant": "reward_preview_sun_blue_giant"
+  },
+  "life_stage_chips": {
+   "rock": "life_stage_chip_rock",
+   "terra": "life_stage_chip_terra",
+   "microbes": "life_stage_chip_microbes",
+   "plants": "life_stage_chip_plants",
+   "animals": "life_stage_chip_animals",
+   "mind": "life_stage_chip_mind"
+  },
+  "life_card_bases": [
+   "life_card_base_01",
+   "life_card_base_02",
+   "life_card_base_03",
+   "life_card_base_04",
+   "life_card_base_05",
+   "life_card_base_06",
+   "life_card_base_07",
+   "life_card_base_08"
+  ],
+  "life_stage_mind_frames": [
+   "life_stage_mind_01",
+   "life_stage_mind_02",
+   "life_stage_mind_03",
+   "life_stage_mind_04"
+  ],
+  "life_card_stage_mind_frames": [
+   "life_card_stage_mind_01",
+   "life_card_stage_mind_02",
+   "life_card_stage_mind_03",
+   "life_card_stage_mind_04"
+  ],
+  "life_ov_orbit": [
+   "life_ov_heat",
+   "life_ov_ocean",
+   "life_ov_bio",
+   "life_ov_green",
+   "life_ov_fauna",
+   "life_ov_city",
+   "life_ov_clouds",
+   "life_ov_atmo"
+  ],
+  "bio_spores": [
+   "bio_spore_01",
+   "bio_spore_02",
+   "bio_spore_03",
+   "bio_spore_04"
+  ],
+  "tree_species": {
+   "cell": "tree_species_cell",
+   "meta": "tree_species_meta",
+   "photo": "tree_species_photo",
+   "multi": "tree_species_multi",
+   "nerve": "tree_species_nerve",
+   "mind": "tree_species_mind",
+   "algae": "tree_species_algae",
+   "fish": "tree_species_fish",
+   "squid": "tree_species_squid",
+   "moss": "tree_species_moss",
+   "forest": "tree_species_forest",
+   "beasts": "tree_species_beasts",
+   "insects": "tree_species_insects",
+   "birds": "tree_species_birds",
+   "tools": "tree_species_tools",
+   "fire": "tree_species_fire",
+   "city": "tree_species_city",
+   "civ": "tree_species_civ",
+   "ship": "tree_species_ship",
+   "evo1": "tree_species_evo1",
+   "evo2": "tree_species_evo2",
+   "evo3": "tree_species_evo3",
+   "evo4": "tree_species_evo4",
+   "evo5": "tree_species_evo5",
+   "delta": "tree_species_delta",
+   "reef": "tree_species_reef",
+   "tide": "tree_species_tide",
+   "canopy": "tree_species_canopy",
+   "nexus": "tree_species_nexus",
+   "savanna": "tree_species_savanna",
+   "plains": "tree_species_plains",
+   "aurora": "tree_species_aurora",
+   "dyson": "tree_species_dyson",
+   "swarm": "tree_species_swarm",
+   "gate": "tree_species_gate"
+  },
+  "mut_icons": {
+   "glow": "mut_icon_glow",
+   "spots": "mut_icon_spots",
+   "stripes": "mut_icon_stripes",
+   "spiny": "mut_icon_spiny",
+   "crystal": "mut_icon_crystal",
+   "fur": "mut_icon_fur",
+   "wings": "mut_icon_wings",
+   "shell": "mut_icon_shell",
+   "biolum": "mut_icon_biolum",
+   "chimera": "mut_icon_chimera",
+   "hive": "mut_icon_hive",
+   "starborn": "mut_icon_starborn"
+  },
+  "tree_grow_keys": [
+   "tree_grow_01",
+   "tree_grow_02",
+   "tree_grow_03",
+   "tree_grow_04"
+  ],
+  "galaxy_star_colony_mind_frames": [
+   "galaxy_star_colony_mind_01",
+   "galaxy_star_colony_mind_02",
+   "galaxy_star_colony_mind_03",
+   "galaxy_star_colony_mind_04"
+  ],
+  "colony_ring_by_tier": [
+   "galaxy_star_colony_empty",
+   "galaxy_star_colony_terra",
+   "galaxy_star_colony_life",
+   "galaxy_star_colony_mind_01"
+  ],
+  "v2_styles": {
+   "res": "ui_style_res",
+   "bio": "ui_style_bio",
+   "col": "ui_style_col"
+  },
+  "v2_roles": {
+   "forge": "ui_role_forge",
+   "dome": "ui_role_dome"
+  },
+  "v2_frames": {
+   "style_box_984x1296": "ui_panel_menu",
+   "role_sheet_984x1010": "ui_panel_menu",
+   "style_card_984x312": "ui_btn_secondary",
+   "style_card_active_984x312": "ui_menu_row_active",
+   "role_row_984x168": "ui_btn_secondary",
+   "toast_984x144": "life_stage_row",
+   "chip_144x144": "ui_quick_frame"
+  }
+ },
+ "anim_hints": {
+  "sun_corona": "rotate +6°/с; scale 1.00↔1.04, период 2.4 с (sin)",
+  "sun_flash": "зачисление: alpha 1→0 за 180 мс поверх sun_idle",
+  "sun_nova": "01 (300 мс, scale 1→0.85) → 02 (вспышка 150 мс, scale 0.8→1.4) → 03 (волна 400 мс) → 04 (рассеяние 600 мс, alpha→0); sun_nova_* рисовать 800×800 по центру Солнца",
+  "pulse": "ядро pulse + хвост pulse_trail (pivot у головы), rotate по направлению движения",
+  "fx_resonance": "scale 0.6→1.2, alpha 1→0, 280 мс; «×2» — текстом рядом",
+  "fx_ring*": "scale 0.3→1.4, alpha 1→0, 350 мс",
+  "planet_new": "появление: scale 0→1.1→1 за 300 мс + fx_ring",
+  "nova_supernova_flow": "0.00 тап → sun_nova_01 (сжатие 0.25 с) → пик 0.25–0.6: nova_flash_core scale 0.4→2.2, nova_rays scale 0.5→1.8 rotate +20°/с, nova_flare scaleX 0.3→1.3, nova_shock_ring scale 0.15→2.6 alpha→0, 24 частицы nova_debris_* (все 'lighter'), тряска 6 px 0.3 с; 0.35–0.6 nova_flash_overlay alpha 0→1, держать 0.15 с, → 0 за 0.6 с; под ней galaxy_* (масштаб 1.6→1)",
+  "galaxy_star_birth": "galaxy_spark к точке 0.5 с → 01 (0.5 с, rotate −40°/с) → 02 (0.15 с) → 03 + galaxy_birth_ring (0.25 с) → 04 → crossfade в galaxy_point_done (0.6 с); путь lit дорисовывается",
+  "galaxy_marker": "galaxy_marker_system едет по кривой рукава к N+1 за 1 с (ease-in-out), затем galaxy_point_pulse на N+1",
+  "galaxy_core_glow": "scale 1↔1.06, alpha 0.8↔1, 3 с",
+  "galaxy_point_done": "мерцание: done ↔ done_b 8 fps со случайной фазой (или alpha 0.85↔1)",
+  "life_stage_mind": "life_stage_mind_01..04 по кругу 4 fps (огни мерцают); карточка — life_card_stage_mind_01..04",
+  "life_aura": "life_aura_<редкость>_01..04, 6 fps, цикл; поверх планеты",
+  "life_stage_up": "смена стадии: life_stage_burst_key 'lighter' scale 0.4→1.6 α 1→0 450 мс + crossfade старого слоя в новый 300 мс + значок стадии scale 0.6→1.15→1",
+  "life_scale_up": "уровень шкалы: life_scale_step_burst_key scale 0.5→1.6 α→0 300 мс; слой шкалы α плавно к уровню/5 за 400 мс (планета меняется на глазах)",
+  "bio_spore": "6–10 спор от планеты к HUD Биомассы по дуге 500–700 мс, ease-in; на финише bio_pop_key + «+N Б»",
+  "tree_node_available": "alpha 0.75↔1, 1.2 с (вместо 6 кадров пульса)",
+  "tree_node_select": "rotate 20°/с",
+  "tree_buy": "tree_buy_flash_key scale 0.5→1.3 α→0 250 мс + 8 bio_spore разлёт; рамка locked→owned crossfade 200 мс; ребро lit дорисовывается 300 мс",
+  "mut_reveal": "mut_reveal_key rotate 30°/с scale 0.6→1.1; иконка scale 0→1.15→1 (300 мс) в рамке редкости",
+  "life_ship": "по дуге к точке Галактики с life_ship_trail (pivot у кормы), rotate по курсу; кадровый полёт — animation-director",
+  "tree_grow": "tree_grow_01→04 crossfade по 250 мс, scale 0.9→1 на каждом",
+  "galaxy_star_colony": "кольцо 96 поверх galaxy_point_done (тот же центр, центр кольца прозрачный); tier 0..3 → groups.colony_ring_by_tier; разумная — galaxy_star_colony_mind_01..04 по кругу 4 fps; бейдж — ui_badge_dot 36 в правом-верхнем углу (центр +46, −46)",
+  "harm_arc": "шкала Гармонии: size = 480·sc/1.243 по центру Солнца, до drawSun; ui_harm_arc_track целиком (alpha 1) при Спутниках ≥ 1; ui_harm_arc — clip сектора от −90° до −90° + H·360° по часовой; ui_harm_arc_head (56·sc/1.243) в точке R = 171·sc конца дуги при H > 0.004; H > 0.97 — alpha 0.8↔1, 8 рад/с",
+  "fx_harm_ring": "128·sc по центру ведущего Импульса; вне зоны scale 1, в зоне scale 1↔1.14 (18 рад/с); без Спутника на ближайшем сегменте alpha 0.55",
+  "fx_harm_hit": "256·sc по центру Импульса, 'lighter', scale 0.5→1.25, alpha 1→0, 320 мс; текст ×m на r − 120·sc (рядом, не поверх)",
+  "galaxy_marker_here": "кольцо 120 вокруг звезды «ваша система», центр прозрачный; idle scale 1↔1.04, 1.6 с (sin)"
+ },
+ "tokens": {
+  "color": {
+   "bg": "#04050D",
+   "surface": "#060B18",
+   "surface2": "#0B1428",
+   "scrim": "rgba(4,5,13,0.84)",
+   "neon_cyan": "#2FE0FF",
+   "neon_dim": "#2A3A5C",
+   "magenta": "#FF4FD8",
+   "violet": "#B98CFF",
+   "energy": "#FFD23F",
+   "stardust": "#FF4FD8",
+   "sun": "#FFB338",
+   "sun_hot": "#FFE27A",
+   "sun_deep": "#FF6A1A",
+   "success": "#5CFF8A",
+   "error": "#FF3B5C",
+   "biomass": "#A6FF3D",
+   "life_microbe": "#3DFFD0",
+   "life_mind": "#B98CFF",
+   "life_evo": "#FFC94A",
+   "text_on_bio": "#EAFFD0",
+   "text": "#EAF6FF",
+   "text_muted": "#8CA0C8",
+   "text_off": "#788AA6",
+   "text_on_gold": "#1A0A03",
+   "number_stroke": "#04050D",
+   "number_stroke_sun": "#1A0A03"
+  },
+  "orbit": {
+   "ring": "#2FE0FF",
+   "ring_alpha": 0.55,
+   "ring_width": 4,
+   "ring_glow_blur": 10,
+   "ring_by_bg": {
+    "bg_cyan": "#2FE0FF",
+    "bg_violet": "#9A7BFF",
+    "bg_magenta": "#FF8A3D"
+   }
+  },
+  "zone": {
+   "manual": "#FFD23F",
+   "satellite": "#5CFF8A",
+   "missed": "#FF3B5C",
+   "hit": "#FFF6C2",
+   "width": 12,
+   "alpha_idle": 0.55,
+   "alpha_active": 1.0,
+   "glow_blur": 12,
+   "_note": "ручная зона жёлтая; зона спутника зелёная; сбито — красная (на 400 мс); поймано — вспышка hit + fx_resonance"
+  },
+  "font": {
+   "display": "'Russo One', 'Exo 2', sans-serif",
+   "ui": "'Exo 2', sans-serif",
+   "numbers_feature": "tnum",
+   "_note": "Russo One — числа, заголовки, кнопки; Exo 2 600–800 — подписи, текст"
+  },
+  "size_px_1080": {
+   "number_sun": 92,
+   "number_hud": 48,
+   "button_title": 40,
+   "label": 36,
+   "caption": 36,
+   "min_text": 36,
+   "menu_title": 48,
+   "menu_item": 44,
+   "btn_play": 64
+  },
+  "tap": {
+   "min": 144,
+   "_note": "зона нажатия ≥ 144 px @1080 (48 dp)"
+  },
+  "panel_menu": {
+   "x": 90,
+   "y": 200,
+   "w": 900,
+   "h": 1180,
+   "nine": 48,
+   "row_h": 132,
+   "row_w": 820,
+   "pad_x": 40,
+   "scrim": "rgba(4,5,13,0.72)",
+   "title_color": "#2FE0FF",
+   "danger": "#FF3B5C"
+  },
+  "radius": {
+   "chamfer_btn": 20,
+   "chamfer_panel": 34,
+   "chamfer_small": 12
+  },
+  "glow": {
+   "_note": "glow запечён в спрайты — shadowBlur для спрайтов не использовать; кодом — только орбита/зоны/линии созвездий",
+   "line_blur": 10
+  },
+  "contrast_wcag": {
+   "text/surface": 17.89,
+   "text_muted/surface": 7.46,
+   "text_off/surface": 5.6,
+   "energy/surface": 13.61,
+   "stardust/surface": 6.89,
+   "neon_cyan/surface": 12.38,
+   "success/surface": 15.09,
+   "error/surface": 5.64,
+   "violet/surface": 7.73,
+   "text_on_gold/sun_hot": 15.08,
+   "text_on_gold/sun_deep": 6.73
+  }
+ }
+}

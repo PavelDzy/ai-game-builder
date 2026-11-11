@@ -1,0 +1,109 @@
+{
+ "frames": {
+  "sun_nova_01": {
+   "frame": {
+    "x": 2,
+    "y": 2,
+    "w": 800,
+    "h": 800
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 800,
+    "h": 800
+   },
+   "sourceSize": {
+    "w": 800,
+    "h": 800
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  },
+  "sun_nova_02": {
+   "frame": {
+    "x": 806,
+    "y": 2,
+    "w": 800,
+    "h": 800
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 800,
+    "h": 800
+   },
+   "sourceSize": {
+    "w": 800,
+    "h": 800
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  },
+  "sun_nova_03": {
+   "frame": {
+    "x": 2,
+    "y": 806,
+    "w": 800,
+    "h": 800
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 800,
+    "h": 800
+   },
+   "sourceSize": {
+    "w": 800,
+    "h": 800
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  },
+  "sun_nova_04": {
+   "frame": {
+    "x": 806,
+    "y": 806,
+    "w": 800,
+    "h": 800
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 800,
+    "h": 800
+   },
+   "sourceSize": {
+    "w": 800,
+    "h": 800
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  }
+ },
+ "meta": {
+  "image": "atlas_nova.webp",
+  "size": {
+   "w": 1608,
+   "h": 1608
+  },
+  "scale": "1",
+  "format": "RGBA8888"
+ }
+}

@@ -1,0 +1,31 @@
+{
+ "format": "artlab.layer_timeline/1",
+ "key": "tree_node_available",
+ "type": "tween",
+ "loop": true,
+ "period_s": 1.2,
+ "sprite": "tree_node_frame_available",
+ "alt_sprites": [
+  "tree_node_frame_big_available"
+ ],
+ "blend": "source-over",
+ "tracks": {
+  "alpha": [
+   [
+    0,
+    0.75,
+    "inOutSine"
+   ],
+   [
+    0.6,
+    1,
+    "inOutSine"
+   ],
+   [
+    1.2,
+    0.75
+   ]
+  ]
+ },
+ "note": "твин вместо 6 кадров (подтверждено): α 0.75↔1, 1.2 с; фаза узла = (col·0.17 + row·0.11) mod 1.2 — соседи не мигают хором"
+}

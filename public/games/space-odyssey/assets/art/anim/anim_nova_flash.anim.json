@@ -1,0 +1,895 @@
+{
+ "format": "artlab.layer_timeline/1",
+ "key": "nova_flash",
+ "part_of": "galaxy_flow",
+ "offset_s": 0.0,
+ "duration_s": 0.6,
+ "loop": false,
+ "note": "время ключей — от начала клипа; в мастер-таймлайне t = offset_s + t",
+ "layers": [
+  {
+   "id": "sun_idle_hide",
+   "sprite": "code:sun_idle",
+   "parent": "system",
+   "blend": "source-over",
+   "z": 10,
+   "anchor": "@sun",
+   "tracks": {
+    "alpha": [
+     [
+      0.0,
+      1,
+      "linear"
+     ],
+     [
+      0.06,
+      0
+     ]
+    ]
+   },
+   "note": "sun_idle/sun_body/корона игры: только гасим (alpha-множитель), сам спрайт рисует код"
+  },
+  {
+   "id": "sun_compress",
+   "sprite": "sun_nova_01",
+   "parent": "system",
+   "blend": "source-over",
+   "z": 11,
+   "anchor": "@sun",
+   "visible": [
+    0.0,
+    0.3
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      0.0,
+      0,
+      "linear"
+     ],
+     [
+      0.06,
+      1,
+      "hold"
+     ],
+     [
+      0.25,
+      1,
+      "linear"
+     ],
+     [
+      0.3,
+      0
+     ]
+    ],
+    "scale": [
+     [
+      0.0,
+      1.0,
+      "inCubic"
+     ],
+     [
+      0.25,
+      0.85
+     ]
+    ],
+    "rot": [
+     [
+      0.0,
+      0,
+      "inCubic"
+     ],
+     [
+      0.25,
+      -12
+     ]
+    ]
+   },
+   "note": "антиципация: Солнце сжимается с ускорением и закручивается"
+  },
+  {
+   "id": "implode_ring",
+   "sprite": "nova_shock_ring",
+   "parent": "system",
+   "blend": "lighter",
+   "z": 12,
+   "anchor": "@sun",
+   "visible": [
+    0.04,
+    0.26
+   ],
+   "tracks": {
+    "scale": [
+     [
+      0.04,
+      0.55,
+      "inCubic"
+     ],
+     [
+      0.25,
+      0.12
+     ]
+    ],
+    "alpha": [
+     [
+      0.04,
+      0,
+      "outQuad"
+     ],
+     [
+      0.14,
+      0.7,
+      "linear"
+     ],
+     [
+      0.25,
+      0.9
+     ]
+    ]
+   },
+   "note": "кольцо втягивается в Солнце перед взрывом (имплозия)"
+  },
+  {
+   "id": "flash_core",
+   "sprite": "nova_flash_core",
+   "parent": "system",
+   "blend": "lighter",
+   "z": 13,
+   "anchor": "@sun",
+   "visible": [
+    0.08,
+    0.6
+   ],
+   "tracks": {
+    "scale": [
+     [
+      0.08,
+      0.15,
+      "inQuad"
+     ],
+     [
+      0.25,
+      0.4,
+      "outExpo"
+     ],
+     [
+      0.6,
+      2.2
+     ]
+    ],
+    "alpha": [
+     [
+      0.08,
+      0,
+      "inQuad"
+     ],
+     [
+      0.25,
+      1
+     ]
+    ]
+   },
+   "note": "предсвечение ядра 0.08-0.25, затем взрыв 0.4->2.2"
+  },
+  {
+   "id": "burst_frame",
+   "sprite": "sun_nova_02",
+   "parent": "system",
+   "blend": "source-over",
+   "z": 14,
+   "anchor": "@sun",
+   "visible": [
+    0.25,
+    0.45
+   ],
+   "tracks": {
+    "scale": [
+     [
+      0.25,
+      0.8,
+      "outCubic"
+     ],
+     [
+      0.45,
+      1.4
+     ]
+    ],
+    "alpha": [
+     [
+      0.25,
+      1,
+      "hold"
+     ],
+     [
+      0.33,
+      1,
+      "inQuad"
+     ],
+     [
+      0.45,
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "rays",
+   "sprite": "nova_rays",
+   "parent": "system",
+   "blend": "lighter",
+   "z": 15,
+   "anchor": "@sun",
+   "visible": [
+    0.25,
+    0.6
+   ],
+   "tracks": {
+    "scale": [
+     [
+      0.25,
+      0.5,
+      "outCubic"
+     ],
+     [
+      0.6,
+      1.8
+     ]
+    ],
+    "rot": [
+     [
+      0.25,
+      0,
+      "outCubic"
+     ],
+     [
+      0.6,
+      12
+     ]
+    ],
+    "alpha": [
+     [
+      0.25,
+      0,
+      "outQuad"
+     ],
+     [
+      0.29,
+      1
+     ]
+    ]
+   }
+  },
+  {
+   "id": "flare",
+   "sprite": "nova_flare",
+   "parent": "system",
+   "blend": "lighter",
+   "z": 16,
+   "anchor": "@sun",
+   "visible": [
+    0.26,
+    0.6
+   ],
+   "tracks": {
+    "scaleX": [
+     [
+      0.26,
+      0.3,
+      "outCubic"
+     ],
+     [
+      0.6,
+      1.3
+     ]
+    ],
+    "scaleY": [
+     [
+      0.26,
+      1.0,
+      "linear"
+     ],
+     [
+      0.6,
+      0.7
+     ]
+    ],
+    "alpha": [
+     [
+      0.26,
+      0,
+      "outQuad"
+     ],
+     [
+      0.31,
+      1,
+      "linear"
+     ],
+     [
+      0.6,
+      0.6
+     ]
+    ]
+   }
+  },
+  {
+   "id": "shock_ring",
+   "sprite": "nova_shock_ring",
+   "parent": "system",
+   "blend": "lighter",
+   "z": 17,
+   "anchor": "@sun",
+   "visible": [
+    0.27,
+    0.6
+   ],
+   "tracks": {
+    "scale": [
+     [
+      0.27,
+      0.15,
+      "outCubic"
+     ],
+     [
+      0.6,
+      2.6
+     ]
+    ],
+    "alpha": [
+     [
+      0.27,
+      1,
+      "hold"
+     ],
+     [
+      0.4,
+      1,
+      "inQuad"
+     ],
+     [
+      0.6,
+      0.2
+     ]
+    ]
+   },
+   "note": "ударная волна до краёв экрана за 0.33 с"
+  },
+  {
+   "id": "whiteout_fill",
+   "sprite": "code:fill#E8DCC4",
+   "parent": "overlay",
+   "blend": "source-over",
+   "z": -1,
+   "anchor": [
+    540,
+    960
+   ],
+   "visible": [
+    0.4,
+    1.3
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      0.4,
+      0,
+      "inCubic"
+     ],
+     [
+      0.6,
+      1,
+      "hold"
+     ],
+     [
+      0.72,
+      1,
+      "outQuad"
+     ],
+     [
+      1.3,
+      0
+     ]
+    ]
+   },
+   "note": "fillRect всего видимого кадра цветом #E8DCC4 под overlay: альфа файла overlay 0.81-1.0, без заливки 'белый экран' просвечивает"
+  },
+  {
+   "id": "whiteout",
+   "sprite": "nova_flash_overlay",
+   "parent": "overlay",
+   "blend": "source-over",
+   "z": 0,
+   "anchor": [
+    540,
+    960
+   ],
+   "visible": [
+    0.4,
+    1.3
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      0.4,
+      0,
+      "inCubic"
+     ],
+     [
+      0.6,
+      1,
+      "hold"
+     ],
+     [
+      0.72,
+      1,
+      "outQuad"
+     ],
+     [
+      1.3,
+      0
+     ]
+    ]
+   },
+   "note": "растянуть на весь видимый кадр (display 1080x1920; при высоте 2400 — cover), над system и galaxy, под screen_fx"
+  }
+ ],
+ "particles": [
+  {
+   "id": "nova_debris",
+   "parent": "screen_fx",
+   "blend": "lighter",
+   "origin": "@sun",
+   "items": [
+    {
+     "sprite": "nova_debris_01",
+     "t0": 0.284,
+     "life": 1.128,
+     "angle": 3.3,
+     "v0": 669,
+     "drag": 1.58,
+     "r0": 39,
+     "rot0": 119,
+     "spin": -258,
+     "scale": [
+      1.29,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_02",
+     "t0": 0.265,
+     "life": 1.214,
+     "angle": 19.7,
+     "v0": 1102,
+     "drag": 1.5,
+     "r0": 31,
+     "rot0": 140,
+     "spin": -3,
+     "scale": [
+      1.27,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_03",
+     "t0": 0.267,
+     "life": 0.982,
+     "angle": 32.6,
+     "v0": 1169,
+     "drag": 2.79,
+     "r0": 37,
+     "rot0": null,
+     "spin": 0,
+     "scale": [
+      1.03,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_04",
+     "t0": 0.285,
+     "life": 0.986,
+     "angle": 38.4,
+     "v0": 1059,
+     "drag": 2.19,
+     "r0": 65,
+     "rot0": 186,
+     "spin": 73,
+     "scale": [
+      1.08,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_01",
+     "t0": 0.308,
+     "life": 1.049,
+     "angle": 55.2,
+     "v0": 990,
+     "drag": 2.19,
+     "r0": 45,
+     "rot0": 51,
+     "spin": 38,
+     "scale": [
+      1.22,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_02",
+     "t0": 0.313,
+     "life": 1.134,
+     "angle": 74.9,
+     "v0": 982,
+     "drag": 1.51,
+     "r0": 35,
+     "rot0": 54,
+     "spin": 182,
+     "scale": [
+      0.96,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_03",
+     "t0": 0.289,
+     "life": 0.921,
+     "angle": 96.4,
+     "v0": 1068,
+     "drag": 1.82,
+     "r0": 51,
+     "rot0": null,
+     "spin": 0,
+     "scale": [
+      0.97,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_04",
+     "t0": 0.291,
+     "life": 1.017,
+     "angle": 110.2,
+     "v0": 836,
+     "drag": 2.66,
+     "r0": 44,
+     "rot0": 44,
+     "spin": -178,
+     "scale": [
+      1.26,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_01",
+     "t0": 0.281,
+     "life": 0.988,
+     "angle": 117.5,
+     "v0": 938,
+     "drag": 2.89,
+     "r0": 47,
+     "rot0": 308,
+     "spin": -83,
+     "scale": [
+      1.04,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_02",
+     "t0": 0.286,
+     "life": 1.027,
+     "angle": 138.6,
+     "v0": 928,
+     "drag": 2.48,
+     "r0": 50,
+     "rot0": 303,
+     "spin": 7,
+     "scale": [
+      1.11,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_03",
+     "t0": 0.3,
+     "life": 1.102,
+     "angle": 145.2,
+     "v0": 1154,
+     "drag": 2.87,
+     "r0": 58,
+     "rot0": null,
+     "spin": 0,
+     "scale": [
+      0.97,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_04",
+     "t0": 0.316,
+     "life": 0.985,
+     "angle": 159.0,
+     "v0": 966,
+     "drag": 2.21,
+     "r0": 53,
+     "rot0": 65,
+     "spin": -228,
+     "scale": [
+      1.29,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_01",
+     "t0": 0.27,
+     "life": 1.084,
+     "angle": 186.0,
+     "v0": 840,
+     "drag": 2.92,
+     "r0": 59,
+     "rot0": 348,
+     "spin": 339,
+     "scale": [
+      1.14,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_02",
+     "t0": 0.288,
+     "life": 1.228,
+     "angle": 197.8,
+     "v0": 854,
+     "drag": 2.27,
+     "r0": 36,
+     "rot0": 233,
+     "spin": -339,
+     "scale": [
+      1.05,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_03",
+     "t0": 0.26,
+     "life": 1.126,
+     "angle": 215.9,
+     "v0": 1048,
+     "drag": 2.61,
+     "r0": 33,
+     "rot0": null,
+     "spin": 0,
+     "scale": [
+      1.16,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_04",
+     "t0": 0.298,
+     "life": 1.11,
+     "angle": 224.7,
+     "v0": 1105,
+     "drag": 2.48,
+     "r0": 58,
+     "rot0": 101,
+     "spin": 29,
+     "scale": [
+      1.28,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_01",
+     "t0": 0.274,
+     "life": 1.178,
+     "angle": 238.4,
+     "v0": 645,
+     "drag": 2.23,
+     "r0": 30,
+     "rot0": 77,
+     "spin": -254,
+     "scale": [
+      0.92,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_02",
+     "t0": 0.27,
+     "life": 1.039,
+     "angle": 260.1,
+     "v0": 832,
+     "drag": 2.9,
+     "r0": 46,
+     "rot0": 147,
+     "spin": -158,
+     "scale": [
+      1.1,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_03",
+     "t0": 0.298,
+     "life": 1.148,
+     "angle": 276.8,
+     "v0": 1029,
+     "drag": 1.75,
+     "r0": 59,
+     "rot0": null,
+     "spin": 0,
+     "scale": [
+      1.13,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_04",
+     "t0": 0.296,
+     "life": 1.198,
+     "angle": 287.1,
+     "v0": 1136,
+     "drag": 2.23,
+     "r0": 31,
+     "rot0": 21,
+     "spin": -245,
+     "scale": [
+      1.22,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_01",
+     "t0": 0.269,
+     "life": 1.043,
+     "angle": 302.0,
+     "v0": 1117,
+     "drag": 2.47,
+     "r0": 61,
+     "rot0": 243,
+     "spin": -174,
+     "scale": [
+      1.01,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_02",
+     "t0": 0.283,
+     "life": 1.027,
+     "angle": 321.8,
+     "v0": 1200,
+     "drag": 2.66,
+     "r0": 68,
+     "rot0": 330,
+     "spin": 0,
+     "scale": [
+      1.19,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_03",
+     "t0": 0.299,
+     "life": 1.217,
+     "angle": 335.6,
+     "v0": 1151,
+     "drag": 1.82,
+     "r0": 66,
+     "rot0": null,
+     "spin": 0,
+     "scale": [
+      1.03,
+      0.35
+     ]
+    },
+    {
+     "sprite": "nova_debris_04",
+     "t0": 0.28,
+     "life": 0.876,
+     "angle": 345.0,
+     "v0": 844,
+     "drag": 1.59,
+     "r0": 59,
+     "rot0": 242,
+     "spin": 37,
+     "scale": [
+      0.91,
+      0.35
+     ]
+    }
+   ],
+   "note": "24 осколка над whiteout: на белом не видны, проявляются над галактикой (инерция, затухание по drag)"
+  }
+ ],
+ "shakes": [
+  {
+   "id": "tremble",
+   "target": "system",
+   "t0": 0.08,
+   "t1": 0.25,
+   "amp_px": 1.5,
+   "amp_ease": "none",
+   "freq_hz": [
+    41,
+    37
+   ],
+   "phase": [
+    0.0,
+    1.1
+   ]
+  },
+  {
+   "id": "shock",
+   "target": "system",
+   "t0": 0.25,
+   "t1": 0.6,
+   "amp_px": 6,
+   "amp_ease": "outQuad",
+   "freq_hz": [
+    28,
+    23
+   ],
+   "phase": [
+    0.0,
+    1.3
+   ]
+  }
+ ],
+ "cameras": {
+  "system": {
+   "pivot": "@sun",
+   "tracks": {
+    "scale": [
+     [
+      0.0,
+      1,
+      "linear"
+     ],
+     [
+      0.25,
+      1,
+      "outCubic"
+     ],
+     [
+      0.6,
+      1.05
+     ]
+    ]
+   },
+   "visible": [
+    0.0,
+    0.6
+   ],
+   "note": "контейнер экрана Система (весь экран кроме HUD-оверлея): толчок камеры 1->1.05"
+  }
+ },
+ "events": [
+  {
+   "name": "anticipation_start",
+   "t": 0.0,
+   "gameplay": false,
+   "note": "звук всасывания"
+  },
+  {
+   "name": "burst",
+   "t": 0.25,
+   "gameplay": false,
+   "note": "взрыв: звук удара, вибрация 40 мс"
+  },
+  {
+   "name": "flash_peak",
+   "t": 0.35,
+   "gameplay": false,
+   "note": "пик вспышки (заявка)"
+  },
+  {
+   "name": "whiteout_full",
+   "t": 0.6,
+   "gameplay": true,
+   "note": "экран полностью белый: сменить экран Система -> Галактика, применить сброс престижа"
+  }
+ ],
+ "playback": "клипы — окна мастер-таймлайна galaxy_flow; слои и частицы, начатые в клипе, доигрывают по своим ключам (рекомендуется играть мастер целиком). Событие на границе окна принадлежит клипу, который им заканчивается."
+}

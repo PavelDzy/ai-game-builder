@@ -1,0 +1,493 @@
+{
+ "format": "artlab.layer_timeline/1",
+ "key": "galaxy_zoom",
+ "part_of": "galaxy_flow",
+ "offset_s": 0.6,
+ "duration_s": 1.5,
+ "loop": false,
+ "note": "время ключей — от начала клипа; в мастер-таймлайне t = offset_s + t",
+ "layers": [
+  {
+   "id": "whiteout_fill",
+   "sprite": "code:fill#E8DCC4",
+   "parent": "overlay",
+   "blend": "source-over",
+   "z": -1,
+   "anchor": [
+    540,
+    960
+   ],
+   "visible": [
+    -0.2,
+    0.7
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      -0.2,
+      0,
+      "inCubic"
+     ],
+     [
+      0.0,
+      1,
+      "hold"
+     ],
+     [
+      0.12,
+      1,
+      "outQuad"
+     ],
+     [
+      0.7,
+      0
+     ]
+    ]
+   },
+   "note": "fillRect всего видимого кадра цветом #E8DCC4 под overlay: альфа файла overlay 0.81-1.0, без заливки 'белый экран' просвечивает"
+  },
+  {
+   "id": "whiteout",
+   "sprite": "nova_flash_overlay",
+   "parent": "overlay",
+   "blend": "source-over",
+   "z": 0,
+   "anchor": [
+    540,
+    960
+   ],
+   "visible": [
+    -0.2,
+    0.7
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      -0.2,
+      0,
+      "inCubic"
+     ],
+     [
+      0.0,
+      1,
+      "hold"
+     ],
+     [
+      0.12,
+      1,
+      "outQuad"
+     ],
+     [
+      0.7,
+      0
+     ]
+    ]
+   },
+   "note": "растянуть на весь видимый кадр (display 1080x1920; при высоте 2400 — cover), над system и galaxy, под screen_fx"
+  },
+  {
+   "id": "stars_far",
+   "sprite": "galaxy_stars_far",
+   "parent": "galaxy_far",
+   "blend": "source-over",
+   "z": 0,
+   "anchor": "@core_file",
+   "visible": [
+    0.0,
+    null
+   ],
+   "tracks": {},
+   "note": "непрозрачный, тайлить по x/y; камера galaxy_far (параллакс 0.3)"
+  },
+  {
+   "id": "disk",
+   "sprite": "galaxy_disk",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 0,
+   "anchor": "@core_file",
+   "visible": [
+    0.0,
+    null
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      0.0,
+      1
+     ]
+    ]
+   }
+  },
+  {
+   "id": "core_glow",
+   "sprite": "galaxy_core_glow",
+   "parent": "galaxy_world",
+   "blend": "lighter",
+   "z": 1,
+   "anchor": "@core",
+   "visible": [
+    0.0,
+    null
+   ],
+   "tracks": {
+    "scale": [
+     [
+      0.0,
+      1.5,
+      "outCubic"
+     ],
+     [
+      1.5,
+      1.0
+     ]
+    ]
+   },
+   "loop_after": {
+    "t": 1.5,
+    "loop": "galaxy_core_glow"
+   },
+   "note": "после 2.10 — цикл galaxy_core_glow (фаза 0 = scale 1, alpha 1)"
+  },
+  {
+   "id": "nova_remnant",
+   "sprite": "nova_flash_core",
+   "parent": "galaxy_world",
+   "blend": "lighter",
+   "z": 2,
+   "anchor": "@core",
+   "visible": [
+    0.0,
+    1.0
+   ],
+   "tracks": {
+    "scale": [
+     [
+      0.0,
+      1.6,
+      "outCubic"
+     ],
+     [
+      1.0,
+      0.6
+     ]
+    ],
+    "alpha": [
+     [
+      0.0,
+      1,
+      "inOutSine"
+     ],
+     [
+      1.0,
+      0
+     ]
+    ]
+   },
+   "note": "энергия вспышки стягивается в ядро галактики"
+  },
+  {
+   "id": "arm_marks",
+   "sprite": "galaxy_arm_marks",
+   "parent": "galaxy_world",
+   "blend": "lighter",
+   "z": 0.5,
+   "anchor": "@core_file",
+   "visible": [
+    0.0,
+    null
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      0.0,
+      0.75
+     ]
+    ]
+   },
+   "prebake": "disk",
+   "note": "НЕ отдельный слой кадра: один раз при входе в поток нарисовать в offscreen-холст disk (lighter, alpha 0.75) и дальше рисовать один disk_lit source-over — экономит полноэкранный lighter"
+  },
+  {
+   "id": "hud_galaxy",
+   "sprite": "code:galaxy_hud",
+   "parent": "ui",
+   "blend": "source-over",
+   "z": 0,
+   "anchor": [
+    540,
+    960
+   ],
+   "visible": [
+    1.0,
+    null
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      1.0,
+      0,
+      "outQuad"
+     ],
+     [
+      1.5,
+      1
+     ]
+    ]
+   },
+   "note": "кнопка «Галактика», счётчик, подпись рукава — код"
+  },
+  {
+   "id": "marker_dim",
+   "sprite": "galaxy_marker_system",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 12,
+   "anchor": "@road[N]",
+   "visible": [
+    0.0,
+    3.0
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      1.5,
+      1,
+      "outQuad"
+     ],
+     [
+      1.8,
+      0.5,
+      "hold"
+     ],
+     [
+      2.75,
+      0.5,
+      "outQuad"
+     ],
+     [
+      2.95,
+      1
+     ]
+    ],
+    "scale": [
+     [
+      1.5,
+      1,
+      "outQuad"
+     ],
+     [
+      1.8,
+      0.85,
+      "hold"
+     ],
+     [
+      2.75,
+      0.85,
+      "outBack"
+     ],
+     [
+      2.95,
+      1
+     ]
+    ]
+   },
+   "note": "маркер «вы здесь» на N приглушается на время рождения (под слоями рождения)"
+  },
+  {
+   "id": "point_current_N_out",
+   "sprite": "galaxy_point_current",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 9,
+   "anchor": "@road[N]",
+   "visible": [
+    0.0,
+    2.45
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      2.25,
+      1,
+      "outQuad"
+     ],
+     [
+      2.45,
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "bubble_N1_close",
+   "sprite": "group:reward_bubble@N+1",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 30,
+   "anchor": "@bubble[N+1]",
+   "visible": [
+    0.0,
+    3.2
+   ],
+   "tracks": {
+    "scale": [
+     [
+      2.95,
+      1,
+      "inBack"
+     ],
+     [
+      3.2,
+      0
+     ]
+    ],
+    "alpha": [
+     [
+      3.1,
+      1,
+      "linear"
+     ],
+     [
+      3.2,
+      0
+     ]
+    ]
+   },
+   "note": "медальон над N+1 (galaxy_reward_bubble + reward_icon_* + galaxy_reward_pointer) складывается перед приездом маркера"
+  },
+  {
+   "id": "point_next_N1_out",
+   "sprite": "galaxy_point_next",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 8,
+   "anchor": "@road[N+1]",
+   "visible": [
+    0.0,
+    3.9
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      3.8,
+      1,
+      "linear"
+     ],
+     [
+      3.9,
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "point_locked_N2_out",
+   "sprite": "galaxy_point_locked",
+   "parent": "galaxy_world",
+   "blend": "source-over",
+   "z": 8,
+   "anchor": "@road[N+2]",
+   "visible": [
+    0.0,
+    4.05
+   ],
+   "tracks": {
+    "alpha": [
+     [
+      3.9,
+      1,
+      "linear"
+     ],
+     [
+      4.05,
+      0
+     ]
+    ]
+   }
+  }
+ ],
+ "particles": [],
+ "shakes": [],
+ "cameras": {
+  "system": {
+   "pivot": "@sun",
+   "tracks": {
+    "scale": [
+     [
+      -0.6,
+      1,
+      "linear"
+     ],
+     [
+      -0.35,
+      1,
+      "outCubic"
+     ],
+     [
+      0.0,
+      1.05
+     ]
+    ]
+   },
+   "visible": [
+    -0.6,
+    0.0
+   ],
+   "note": "контейнер экрана Система (весь экран кроме HUD-оверлея): толчок камеры 1->1.05"
+  },
+  "galaxy_world": {
+   "focus_world": "@core",
+   "transform": "screen = (540, focus_y) + R(rot) * (p_world - core) * scale",
+   "tracks": {
+    "scale": [
+     [
+      0.0,
+      1.6,
+      "outCubic"
+     ],
+     [
+      1.5,
+      1.0
+     ]
+    ],
+    "focus_y": [
+     [
+      0.0,
+      640,
+      "outCubic"
+     ],
+     [
+      1.5,
+      960
+     ]
+    ],
+    "rot": [
+     [
+      0.0,
+      -10,
+      "outCubic"
+     ],
+     [
+      1.5,
+      0
+     ]
+    ]
+   },
+   "visible": [
+    0.0,
+    null
+   ],
+   "note": "ядро галактики стартует ровно в центре вспышки (540,640), отъезжает к (540,960); диск доворачивается на 10 deg"
+  }
+ },
+ "events": [
+  {
+   "name": "skip_enabled",
+   "t": 1.4,
+   "gameplay": false,
+   "note": "с этого момента тап = пропуск"
+  }
+ ],
+ "playback": "клипы — окна мастер-таймлайна galaxy_flow; слои и частицы, начатые в клипе, доигрывают по своим ключам (рекомендуется играть мастер целиком). Событие на границе окна принадлежит клипу, который им заканчивается."
+}

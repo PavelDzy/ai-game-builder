@@ -1,0 +1,87 @@
+{
+ "format": "artlab.layer_timeline/1",
+ "type": "fx",
+ "key": "bio_pop",
+ "duration_s": 0.3,
+ "loop": false,
+ "ref_px": 96,
+ "usage": "ручной Резонанс на живой планете, когда споры не летят (лимит частиц) -> play(o = планета). Число «+N Б» — код по count.",
+ "layers": [
+  {
+   "id": "pop",
+   "sprite": "bio_pop_key",
+   "blend": "lighter",
+   "z": 0,
+   "tracks": {
+    "scale": [
+     [
+      0,
+      0.5,
+      "outBack"
+     ],
+     [
+      0.12,
+      1.15,
+      "outQuad"
+     ],
+     [
+      0.3,
+      1.3
+     ]
+    ],
+    "alpha": [
+     [
+      0,
+      1,
+      "linear"
+     ],
+     [
+      0.12,
+      1,
+      "inQuad"
+     ],
+     [
+      0.3,
+      0
+     ]
+    ]
+   }
+  }
+ ],
+ "host": {
+  "text_scale": {
+   "def": 1,
+   "keys": [
+    [
+     0,
+     0.6,
+     "outBack"
+    ],
+    [
+     0.15,
+     1.1,
+     "inOutQuad"
+    ],
+    [
+     0.25,
+     1
+    ]
+   ],
+   "note": "«+N Б» (подъём −56 px за 0.7 с — код)"
+  }
+ },
+ "events": [
+  {
+   "name": "count",
+   "t": 0,
+   "gameplay": true,
+   "note": "показать «+N Б» у планеты (Биомасса уже начислена sim)"
+  },
+  {
+   "name": "done",
+   "t": 0.3,
+   "gameplay": false,
+   "note": ""
+  }
+ ]
+}

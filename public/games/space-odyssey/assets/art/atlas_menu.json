@@ -1,0 +1,109 @@
+{
+ "frames": {
+  "ui_panel_menu": {
+   "frame": {
+    "x": 2,
+    "y": 2,
+    "w": 900,
+    "h": 1180
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 900,
+    "h": 1180
+   },
+   "sourceSize": {
+    "w": 900,
+    "h": 1180
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0
+   }
+  },
+  "logo_title": {
+   "frame": {
+    "x": 2,
+    "y": 1186,
+    "w": 900,
+    "h": 300
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 900,
+    "h": 300
+   },
+   "sourceSize": {
+    "w": 900,
+    "h": 300
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  },
+  "ui_btn_play": {
+   "frame": {
+    "x": 906,
+    "y": 1186,
+    "w": 720,
+    "h": 168
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 720,
+    "h": 168
+   },
+   "sourceSize": {
+    "w": 720,
+    "h": 168
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  },
+  "ui_btn_play_pressed": {
+   "frame": {
+    "x": 2,
+    "y": 1490,
+    "w": 720,
+    "h": 168
+   },
+   "rotated": false,
+   "trimmed": false,
+   "spriteSourceSize": {
+    "x": 0,
+    "y": 0,
+    "w": 720,
+    "h": 168
+   },
+   "sourceSize": {
+    "w": 720,
+    "h": 168
+   },
+   "pivot": {
+    "x": 0.5,
+    "y": 0.5
+   }
+  }
+ },
+ "meta": {
+  "image": "atlas_menu.webp",
+  "size": {
+   "w": 1628,
+   "h": 1660
+  },
+  "scale": "1",
+  "format": "RGBA8888"
+ }
+}
